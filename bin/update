@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+#
+# Update each skill's SKILL.md from its upstream source.
+#
+# Every SKILL.md ends with a "## Source" table containing a "Repo" row that
+# points at the upstream file on GitHub (the normal blob URL you'd open in a
+# browser). This script derives the raw URL, fetches the latest content, and
+# re-appends the local "## Source" table so it survives the update.
+#
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+SKILLS_DIR="$REPO_ROOT/skills"
+
+if ! command -v curl >/dev/null 2>&1; then
+  echo "Error: curl is not installed." >&2
+  echo >&2
+  echo "Install it with Homebrew, then re-run this script:" >&2
+  echo "    brew install curl" >&2
+  exit 1
+fi
+
+# Turn a GitHub "blob" URL into its raw.githubusercontent.com equivalent.
+#   https://github.com/USER/REPO/blob/BRANCH/path  ->
+#   https://raw.githubusercontent.com/USER/REPO/BRANCH/path
+to_raw_url() {
+  printf '%s\n' "$1" | sed -E 's#https://github\.com/([^/]+)/([^/]+)/blob/#https://raw.githubusercontent.com/\1/\2/#'
+}
+
+updated=0
+skipped=0
+
+for skill_file in "$SKILLS_DIR"/*/SKILL.md; do
+  [ -e "$skill_file" ] || continue
+  name="$(basename "$(dirname "$skill_file")")"
+
+  # Pull the GitHub URL out of the "## Source" table (by content, so the
+  # column layout can change freely).
+  repo_url="$(awk '/^## Source/{p=1} p' "$skill_file" \
+    | grep -oE 'https://github\.com/[^ |]+' | head -1)"
+
+  if [ -z "$repo_url" ]; then
+    echo "skip  $name (no Source/Repo URL)"
+    skipped=$((skipped + 1))
+    continue
+  fi
+
+  raw_url="$(to_raw_url "$repo_url")"
+
+  tmp="$(mktemp)"
+  if ! curl -fsSL "$raw_url" -o "$tmp"; then
+    echo "fail  $name (could not fetch $raw_url)"
+    rm -f "$tmp"
+    skipped=$((skipped + 1))
+    continue
+  fi
+
+  # Preserve the local "## Source" section (from the heading to EOF).
+  source_section="$(awk '/^## Source/{p=1} p' "$skill_file")"
+
+  out="$(mktemp)"
+  {
+    # Upstream content, trailing blank lines trimmed.
+    awk 'NF{last=NR} {line[NR]=$0} END{for(i=1;i<=last;i++) print line[i]}' "$tmp"
+    printf '\n'
+    printf '%s\n' "$source_section"
+  } > "$out"
+
+  mv "$out" "$skill_file"
+  rm -f "$tmp"
+  echo "ok    $name"
+  updated=$((updated + 1))
+done
+
+echo
+echo "Updated $updated, skipped $skipped."
