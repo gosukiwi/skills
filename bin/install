@@ -25,6 +25,8 @@ fi
 mkdir -p "$DEST"
 
 echo "Syncing $SRC -> $DEST"
-rsync -av --delete "$SRC" "$DEST"
+# source.json files are repo-only metadata (used by bin/update); the agents
+# only need the skills themselves, so keep them out of the installed folder.
+rsync -av --delete --exclude 'source.json' "$SRC" "$DEST"
 
 echo "Done."

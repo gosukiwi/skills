@@ -1,33 +1,21 @@
-# Skills
+<div align="center">
 
-My personal skill folder, used across all my AI agents and projects.
+# 🧠 Skills
 
-Skills live under `skills/` in this repo and are synced to `~/.agents/skills`,
+**My personal skill library — shared across all my AI agents and projects.**
+
+Skills live under [`skills/`](skills/) and sync to `~/.agents/skills`,
 the shared location my agents read from.
 
-## Layout
+</div>
 
-```
-skills/
-  <skill-name>/
-    SKILL.md
-```
+---
 
-Each skill is a directory containing a `SKILL.md` (plus any supporting files).
+## ✨ Skills
 
-Skills sourced from elsewhere end their `SKILL.md` with a `## Source` table:
-
-```
-## Source
-
-| Name | Description | Repo |
+| Skill | Description | Source |
 | --- | --- | --- |
-| handoff | Compact a conversation into a handoff doc. | https://github.com/<user>/<repo>/blob/<branch>/path/to/SKILL.md |
-```
-
-The `Repo` URL is the normal GitHub page you'd open in a browser, and the
-`Description` is a one-line summary of what the skill does. `bin/update` uses
-the URL to pull in upstream changes (see below).
+| [`handoff`](skills/handoff/SKILL.md) | Compact a conversation into a handoff doc for another agent. | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md) |
 
 ## Install
 
@@ -38,19 +26,39 @@ bin/install
 ```
 
 This mirrors the folder with `rsync --delete`, so files removed from the repo
-are also removed from `~/.agents/skills`. Run it again any time you add, edit,
+are also removed from `~/.agents/skills`. `source.json` sidecars are excluded —
+the agents only need the skills themselves. Run it again any time you add, edit,
 or remove a skill.
 
-### Requirements
+> [!NOTE]
+> Requires `rsync` (preinstalled on macOS). If it's missing: `brew install rsync`.
+> The script checks for it and exits with instructions.
 
-`rsync` must be installed. On macOS:
+## Layout
 
-```sh
-brew install rsync
+```
+skills/
+  <skill-name>/
+    SKILL.md
+    source.json   (only for skills sourced from elsewhere)
 ```
 
-The install script checks for `rsync` and exits with instructions if it's
-missing.
+Each skill is a directory containing a `SKILL.md` (plus any supporting files).
+`SKILL.md` is kept as a pristine mirror of its upstream — no local edits.
+
+Skills sourced from elsewhere carry a `source.json` sidecar that records where
+the `SKILL.md` came from:
+
+```json
+{
+  "description": "Compact a conversation into a handoff doc.",
+  "repo": "https://github.com/<user>/<repo>/blob/<branch>/path/to/SKILL.md"
+}
+```
+
+`repo` is the normal GitHub page you'd open in a browser, and `description` is a
+one-line summary of what the skill does. `bin/update` uses `repo` to pull in
+upstream changes (see below). Skills I wrote myself have no `source.json`.
 
 ## Update
 
@@ -60,14 +68,10 @@ Pull the latest upstream version of each skill:
 bin/update
 ```
 
-For every `skills/*/SKILL.md`, this reads the GitHub URL from the `## Source`
-table, derives the matching raw URL, fetches the latest content, and writes it
-back — re-appending the local `## Source` table so it survives the update.
-Skills without a `## Source` table (i.e. ones I wrote myself) are skipped.
+For every skill that has a `source.json`, this reads its `repo` URL, derives the
+matching raw URL, fetches the latest `SKILL.md`, and replaces the local copy
+only if the content actually changed. Skills without a `source.json` are left
+untouched.
 
-After updating, run `bin/install` to sync the changes to `~/.agents/skills`.
-
-### Requirements
-
-`curl` must be installed (it ships with macOS). The script checks for it and
-exits with instructions if it's missing.
+> [!TIP]
+> After updating, run `bin/install` to sync the changes to `~/.agents/skills`.

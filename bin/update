@@ -2,10 +2,16 @@
 #
 # Update each skill's SKILL.md from its upstream source.
 #
-# Every SKILL.md ends with a "## Source" table containing a "Repo" row that
-# points at the upstream file on GitHub (the normal blob URL you'd open in a
-# browser). This script derives the raw URL, fetches the latest content, and
-# re-appends the local "## Source" table so it survives the update.
+# A skill is tracked by placing a "source.json" next to its SKILL.md:
+#
+#   {
+#     "description": "One-line summary of what the skill does.",
+#     "repo": "https://github.com/USER/REPO/blob/BRANCH/path/to/SKILL.md"
+#   }
+#
+# "repo" is the normal GitHub blob URL you'd open in a browser. This script
+# derives the raw URL, fetches the latest content, and replaces SKILL.md only
+# if it actually changed. Skills without a source.json are left untouched.
 #
 set -euo pipefail
 
@@ -29,19 +35,21 @@ to_raw_url() {
 }
 
 updated=0
+unchanged=0
 skipped=0
 
-for skill_file in "$SKILLS_DIR"/*/SKILL.md; do
-  [ -e "$skill_file" ] || continue
-  name="$(basename "$(dirname "$skill_file")")"
+for source_file in "$SKILLS_DIR"/*/source.json; do
+  [ -e "$source_file" ] || continue
+  skill_dir="$(dirname "$source_file")"
+  name="$(basename "$skill_dir")"
+  skill_file="$skill_dir/SKILL.md"
 
-  # Pull the GitHub URL out of the "## Source" table (by content, so the
-  # column layout can change freely).
-  repo_url="$(awk '/^## Source/{p=1} p' "$skill_file" \
-    | grep -oE 'https://github\.com/[^ |]+' | head -1)"
+  # Pull the GitHub URL out of source.json (flat JSON, dependency-free parse).
+  repo_url="$(grep -oE '"repo"[[:space:]]*:[[:space:]]*"[^"]*"' "$source_file" \
+    | sed -E 's/.*:[[:space:]]*"([^"]*)"/\1/' | head -1)"
 
   if [ -z "$repo_url" ]; then
-    echo "skip  $name (no Source/Repo URL)"
+    echo "skip      $name (source.json has no \"repo\")"
     skipped=$((skipped + 1))
     continue
   fi
@@ -50,28 +58,23 @@ for skill_file in "$SKILLS_DIR"/*/SKILL.md; do
 
   tmp="$(mktemp)"
   if ! curl -fsSL "$raw_url" -o "$tmp"; then
-    echo "fail  $name (could not fetch $raw_url)"
+    echo "fail      $name (could not fetch $raw_url)"
     rm -f "$tmp"
     skipped=$((skipped + 1))
     continue
   fi
 
-  # Preserve the local "## Source" section (from the heading to EOF).
-  source_section="$(awk '/^## Source/{p=1} p' "$skill_file")"
+  if [ -f "$skill_file" ] && cmp -s "$tmp" "$skill_file"; then
+    echo "unchanged $name"
+    rm -f "$tmp"
+    unchanged=$((unchanged + 1))
+    continue
+  fi
 
-  out="$(mktemp)"
-  {
-    # Upstream content, trailing blank lines trimmed.
-    awk 'NF{last=NR} {line[NR]=$0} END{for(i=1;i<=last;i++) print line[i]}' "$tmp"
-    printf '\n'
-    printf '%s\n' "$source_section"
-  } > "$out"
-
-  mv "$out" "$skill_file"
-  rm -f "$tmp"
-  echo "ok    $name"
+  mv "$tmp" "$skill_file"
+  echo "updated   $name"
   updated=$((updated + 1))
 done
 
 echo
-echo "Updated $updated, skipped $skipped."
+echo "Updated $updated, unchanged $unchanged, skipped $skipped."

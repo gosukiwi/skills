@@ -13,9 +13,3 @@ Do not duplicate content already captured in other artifacts (PRDs, plans, ADRs,
 Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
 
 If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
-
-## Source
-
-| Name | Description | Repo |
-| --- | --- | --- |
-| handoff | Compact a conversation into a handoff doc for another agent. | https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md |
