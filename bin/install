@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#
+# Sync this repo's skills/ folder into ~/.agents/skills, mirroring exactly
+# (files that no longer exist in the repo are removed from the destination).
+#
+set -euo pipefail
+
+# Resolve the repo root regardless of where the script is invoked from.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+SRC="$REPO_ROOT/skills/"
+DEST="$HOME/.agents/skills/"
+
+if ! command -v rsync >/dev/null 2>&1; then
+  echo "Error: rsync is not installed." >&2
+  echo >&2
+  echo "Install it with Homebrew, then re-run this script:" >&2
+  echo "    brew install rsync" >&2
+  echo >&2
+  echo "(If you don't have Homebrew, install it from https://brew.sh)" >&2
+  exit 1
+fi
+
+mkdir -p "$DEST"
+
+echo "Syncing $SRC -> $DEST"
+rsync -av --delete "$SRC" "$DEST"
+
+echo "Done."
