@@ -1,7 +1,6 @@
 ---
 name: succinct
-description: Provide a short answer to a prompt that keeps the same level of
-detail while being terse and consise
+description: Provide a short answer to a prompt that keeps the same level of detail while being terse and consise
 disable-model-invocation: true
 ---
 
