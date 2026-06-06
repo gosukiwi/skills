@@ -16,6 +16,7 @@ the shared location my agents read from.
 | Skill | Description | Source |
 | --- | --- | --- |
 | [`handoff`](skills/handoff/SKILL.md) | Compact a conversation into a handoff doc for another agent. | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md) |
+| [`succinct`](skills/succinct/SKILL.md) | Provide a short answer that keeps the same level of detail while being terse and consise. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/succinct/SKILL.md) |
 | [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. | [cursor/plugins](https://github.com/cursor/plugins/blob/21327bee99f30a73758c99f6c6459571bc9f6e98/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md) |
 
 ## Usage
