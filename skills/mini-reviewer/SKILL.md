@@ -71,6 +71,7 @@ Apply only the lenses that apply to this diff. Keep one finding per real issue �
 - Unearned abstractions — pass-through wrappers that spread complexity
 - Wrong layer — feature logic in shared modules; bespoke helpers duplicating canonical utilities
 - Missing model — repeated conditionals that want a typed union or dispatcher
+- Cross-file check: for each new/changed export, field, flag, or error type, grep every consumer. Ask: is this consumed? Is the new layer load-bearing, or does it duplicate a gate/contract that already exists upstream? Dead contract layers and duplicated gates compile fine — only the grep reveals them.
 - Prefer one high-conviction restructuring over many small nits.
 
 **Tests** — coverage and test quality for changed behavior.
@@ -101,11 +102,13 @@ When the same location surfaces under multiple lenses:
 - style + refactor → **refactor** if the fix is structural, **style** if local readability
 - correctness already flagged → suppress style nits at that location
 
-## Brevity
+## Format
+
+Be concise *per item*, not in *count*. Report every real issue you found; do not stop hunting once you have "enough" findings.
 
 - **Summary** — 2–4 sentences max
-- **Findings** — typically ≤8 total; cap nits at ~5 unless user asked for depth
 - **Per finding** — one line when possible: `` **B1** `path:line` — issue. **Fix:** … ``
+- **Findings** — no cap. Include every block and should-fix. Include nits that are real (repeated, structural, or load-bearing); drop nits that are pure taste.
 - **What looks good** — 1–3 bullets, or omit
 - Skip empty severity sections
 
@@ -137,6 +140,5 @@ When the same location surfaces under multiple lenses:
 - Single pass — do not spawn sub-agents.
 - Skip lenses that don't apply to the diff
 - Verify block findings before requesting changes
-- Prefer fewer, higher-signal findings — users can ask to expand any item
-- Large diff (>20 files): cap merged output; lead with blocks and should-fix, trim nits
+- Report every real issue. Brevity is per-finding (one line), not per-count — do not trim findings to hit a budget
 - Do not modify code
