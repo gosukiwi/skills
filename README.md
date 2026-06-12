@@ -17,6 +17,7 @@ the shared location my agents read from.
 | --- | --- | --- |
 | [`handoff`](skills/handoff/SKILL.md) | Compact a conversation into a handoff doc for another agent. | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md) |
 | [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. | [cursor/plugins](https://github.com/cursor/plugins/blob/21327bee99f30a73758c99f6c6459571bc9f6e98/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md) |
+| [`mini-reviewer`](skills/mini-reviewer/SKILL.md) | Code review across security, correctness, style, refactor, and tests in a single pass. | [gosukiwi/mini-reviewer](https://github.com/gosukiwi/mini-reviewer/blob/main/skill/SKILL.md) |
 
 ## Usage
 
