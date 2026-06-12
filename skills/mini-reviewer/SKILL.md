@@ -25,19 +25,20 @@ One agent. All lenses in a single pass. Concise report.
 
 Skip lenses that don't apply to this diff.
 
-| Lens | Run when |
-|------|----------|
-| security | code or config changed |
-| correctness | code changed |
-| style | code changed |
-| refactor | non-trivial code changed |
-| tests | source or test files changed |
+| Lens        | Run when                     |
+| ----------- | ---------------------------- |
+| security    | code or config changed       |
+| correctness | code changed                 |
+| style       | code changed                 |
+| refactor    | non-trivial code changed     |
+| tests       | source or test files changed |
 
 ## What to look for
 
 Apply only the lenses that apply to this diff. Keep one finding per real issue — do not duplicate the same problem under multiple lenses.
 
 **Security** — new exploitable risk introduced by this diff. >80% confidence only.
+
 - Injection — SQL, command, XSS, template, path traversal, NoSQL
 - AuthN/AuthZ — bypass, privilege escalation, session/JWT flaws, missing checks on new routes
 - Unsafe execution — deserialization, eval/exec, user-controlled code paths
@@ -46,6 +47,7 @@ Apply only the lenses that apply to this diff. Keep one finding per real issue �
 - Skip: DoS, rate limiting, theoretical races, dependency nits, test files, docs.
 
 **Correctness** — bugs in changed code, or existing code broken by the change.
+
 - Backwards compatibility — broken callers, removed exports, changed APIs, altered defaults
 - Logic errors — off-by-one, wrong operators, inverted conditions, overflow
 - Missing null/undefined checks — property access on nullable values
@@ -56,6 +58,7 @@ Apply only the lenses that apply to this diff. Keep one finding per real issue �
 - Be precise: say what breaks and under what input. Name the specific caller for compat issues.
 
 **Style** — clarity and maintainability.
+
 - Names — vague, too implementation-specific, or hiding side effects
 - Complexity — oversized files/functions, too many responsibilities, deep nesting
 - Duplication & magic values — unexplained literals; repeated knowledge (nit at 2, should-fix at 3+)
@@ -65,6 +68,7 @@ Apply only the lenses that apply to this diff. Keep one finding per real issue �
 - Skip formatter nits or personal taste when nearby code follows the same pattern.
 
 **Refactor** — structural simplification that deletes complexity.
+
 - Code judo — reframe so branches, helpers, modes, or layers disappear
 - Spaghetti growth — ad-hoc conditionals or special cases bolted onto unrelated flows
 - File size — diff pushes a file past ~1k lines without decomposition
@@ -75,20 +79,23 @@ Apply only the lenses that apply to this diff. Keep one finding per real issue �
 - Prefer one high-conviction restructuring over many small nits.
 
 **Tests** — coverage and test quality for changed behavior.
+
 - Changed behavior without tests — new paths, modified conditionals, altered logic
 - Removed or disabled tests — deleted or `.skip` covering live behavior
 - Untested error paths — catch blocks, fallbacks, retry/timeout logic
 - Critical paths without assertions — auth, payments, mutations, permissions
 - Tests changed to match wrong implementation; weakened assertions; tests of mocks/markup not behavior
-- Do not demand tests when the only practical path is expensive or low-signal — say what *would* be worth testing.
+- Do not demand tests when the only practical path is expensive or low-signal — say what _would_ be worth testing.
 
 ## Severity
 
-| Level | Prefix | Meaning | Merge impact |
-|-------|--------|---------|--------------|
-| **block** | `B` | Must fix before merge | Request changes |
-| **should-fix** | `F` | Real issue, non-blocking | Approve with notes |
-| **nit** | `N` | Optional polish | Comment only |
+| Level          | Prefix | Meaning                  | Merge impact       |
+| -------------- | ------ | ------------------------ | ------------------ |
+| **block**      | `B`    | Must fix before merge    | Request changes    |
+| **should-fix** | `F`    | Real issue, non-blocking | Approve with notes |
+| **nit**        | `N`    | Optional polish          | Comment only       |
+
+**Calibration:** if the fix would _delete code_ (not reorganize it) — a helper, type, branch, or layer that exists only to prop up one legacy caller and would disappear with a small change at that caller — it is at least **should-fix**, not a nit. Nits are for taste and local polish; permanent structural complexity with a visible deletion path is not a nit. When in doubt between nit and should-fix on a refactor finding, ask: "would this finding survive as code if accepted?" If yes → should-fix.
 
 **Final verdict:** Request changes if any block · Approve with notes if should-fix only · Approve if nits or clean.
 
@@ -104,10 +111,10 @@ When the same location surfaces under multiple lenses:
 
 ## Format
 
-Be concise *per item*, not in *count*. Report every real issue you found; do not stop hunting once you have "enough" findings.
+Be concise _per item_, not in _count_. Report every real issue you found; do not stop hunting once you have "enough" findings.
 
 - **Summary** — 2–4 sentences max
-- **Per finding** — one line when possible: `` **B1** `path:line` — issue. **Fix:** … ``
+- **Per finding** — one line when possible: ``**B1** `path:line` — issue. **Fix:** …``
 - **Findings** — no cap. Include every block and should-fix. Include nits that are real (repeated, structural, or load-bearing); drop nits that are pure taste.
 - **What looks good** — 1–3 bullets, or omit
 - Skip empty severity sections
@@ -118,20 +125,25 @@ Be concise *per item*, not in *count*. Report every real issue you found; do not
 # Code review — [target]
 
 ## Verdict
+
 [Approve | Approve with notes | Request changes]
 
 ## Findings
 
 ### Block
+
 - **B1** `path:line` — issue. **Fix:** …
 
 ### Should-fix
+
 - **F1** `path:line` — issue. **Fix:** …
 
 ### Nit
+
 - **N1** `path:line` — issue. **Fix:** …
 
 ## What looks good
+
 - …
 ```
 
