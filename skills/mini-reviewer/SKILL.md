@@ -83,13 +83,15 @@ Apply only the lenses that apply to this diff. Keep one finding per real issue �
 
 ## Severity
 
-| Level | Meaning | Merge impact |
-|-------|---------|--------------|
-| **block** | Must fix before merge | Request changes |
-| **should-fix** | Real issue, non-blocking | Approve with notes |
-| **nit** | Optional polish | Comment only |
+| Level | Prefix | Meaning | Merge impact |
+|-------|--------|---------|--------------|
+| **block** | `B` | Must fix before merge | Request changes |
+| **should-fix** | `F` | Real issue, non-blocking | Approve with notes |
+| **nit** | `N` | Optional polish | Comment only |
 
 **Final verdict:** Request changes if any block · Approve with notes if should-fix only · Approve if nits or clean.
+
+**Finding IDs:** Number findings within each severity (`B1`, `B2`, `F1`, `N1`…) so users can reference them by ID (e.g. "fix B1 and F2").
 
 ## Dedup rules
 
@@ -103,7 +105,7 @@ When the same location surfaces under multiple lenses:
 
 - **Summary** — 2–4 sentences max
 - **Findings** — typically ≤8 total; cap nits at ~5 unless user asked for depth
-- **Per finding** — one line when possible: `` **`path:line`** — issue. **Fix:** … ``
+- **Per finding** — one line when possible: `` **B1** `path:line` — issue. **Fix:** … ``
 - **What looks good** — 1–3 bullets, or omit
 - Skip empty severity sections
 
@@ -118,13 +120,13 @@ When the same location surfaces under multiple lenses:
 ## Findings
 
 ### Block
-- **`path:line`** — issue. **Fix:** …
+- **B1** `path:line` — issue. **Fix:** …
 
 ### Should-fix
-- …
+- **F1** `path:line` — issue. **Fix:** …
 
 ### Nit
-- …
+- **N1** `path:line` — issue. **Fix:** …
 
 ## What looks good
 - …
