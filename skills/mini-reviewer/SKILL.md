@@ -18,8 +18,11 @@ One agent. All lenses in a single pass. Concise report.
    - otherwise diff against base branch: `git diff $(git merge-base HEAD main)..HEAD` (or `master`)
    - `git diff --name-only` for the file list
    - note any user focus areas (security-only, specific files, etc.)
-2. **Review** — read the diff once. Apply each applicable lens (see below) in the same pass.
-3. **Report** — merge findings, dedupe by location, sort block → should-fix → nit, assign final verdict.
+2. **Review** — read the diff once per file. Apply each applicable lens (see below) in the same pass.
+3. **Sweep** — before writing findings:
+   - **Consumer check**: for every new, changed, or removed exported type or value, verify all consumers are consistent — especially hand-maintained enumerations and non-exhaustive branches.
+   - **Structural sweep** (when a file orchestrates 2+ independent groups of calls — e.g., a page composing multiple features side-by-side): asymmetries in calls, arg shapes, or layer boundaries are findings.
+4. **Report** — merge findings, dedupe by location, sort block → should-fix → nit, assign final verdict.
 
 ## Lens routing
 
@@ -75,7 +78,7 @@ Apply only the lenses that apply to this diff. Keep one finding per real issue �
 - Unearned abstractions — pass-through wrappers that spread complexity
 - Wrong layer — feature logic in shared modules; bespoke helpers duplicating canonical utilities
 - Missing model — repeated conditionals that want a typed union or dispatcher
-- Cross-file check: for each new/changed export, field, flag, or error type, grep every consumer. Ask: is this consumed? Is the new layer load-bearing, or does it duplicate a gate/contract that already exists upstream? Dead contract layers and duplicated gates compile fine — only the grep reveals them.
+- Dead contract layers — new gates, types, or error branches that duplicate a check already enforced upstream; compile fine, only revealed by reading the consumer.
 - Prefer one high-conviction restructuring over many small nits.
 
 **Tests** — coverage and test quality for changed behavior.
@@ -87,6 +90,10 @@ Apply only the lenses that apply to this diff. Keep one finding per real issue �
 - Tests changed to match wrong implementation; weakened assertions; tests of mocks/markup not behavior
 - Do not demand tests when the only practical path is expensive or low-signal — say what _would_ be worth testing.
 
+## Shape match, not pattern match
+
+"Matches existing convention" is not a stop signal — verify the shape (try/catch scope, filter breadth, arg ownership) matches. E.g., new try/catch wraps two calls where the convention wraps one.
+
 ## Severity
 
 | Level          | Prefix | Meaning                  | Merge impact       |
@@ -97,7 +104,7 @@ Apply only the lenses that apply to this diff. Keep one finding per real issue �
 
 **Calibration:** if the fix would _delete code_ (not reorganize it) — a helper, type, branch, or layer that exists only to prop up one legacy caller and would disappear with a small change at that caller — it is at least **should-fix**, not a nit. Nits are for taste and local polish; permanent structural complexity with a visible deletion path is not a nit. When in doubt between nit and should-fix on a refactor finding, ask: "would this finding survive as code if accepted?" If yes → should-fix.
 
-**Final verdict:** Request changes if any block · Approve with notes if should-fix only · Approve if nits or clean.
+**Final verdict:** Request changes if any block · Approve with notes if should-fix only · Approve if nits or clean. Do not Approve without completing the Sweep step.
 
 **Finding IDs:** Number findings within each severity (`B1`, `B2`, `F1`, `N1`…) so users can reference them by ID (e.g. "fix B1 and F2").
 
@@ -149,7 +156,7 @@ Be concise _per item_, not in _count_. Report every real issue you found; do not
 
 ## Rules
 
-- Single pass — do not spawn sub-agents.
+- Single pass per file, plus the Sweep step before reporting — do not spawn sub-agents.
 - Skip lenses that don't apply to the diff
 - Verify block findings before requesting changes
 - Report every real issue. Brevity is per-finding (one line), not per-count — do not trim findings to hit a budget
