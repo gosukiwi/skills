@@ -11,8 +11,9 @@ skills/
     source.json   (only for skills sourced from elsewhere)
 ```
 
-Each skill is a directory containing a `SKILL.md` (plus any supporting files).
-`SKILL.md` is kept as a pristine mirror of its upstream — no local edits.
+Each skill is a directory containing a `SKILL.md` (plus any supporting
+files such as `references/` or `scripts/`). Sourced skills are kept as a
+pristine mirror of their upstream directory — no local edits.
 
 ## source.json
 
@@ -44,18 +45,23 @@ script checks for it and exits with instructions if it's missing.
 ## bin/update
 
 For every skill that has a `source.json`, reads its `repo` URL, derives the
-matching raw URL (`github.com/.../blob/...` → `raw.githubusercontent.com/...`),
-fetches the latest `SKILL.md`, and replaces the local copy only if the content
-actually changed. Skills without a `source.json` are left untouched.
+upstream skill directory from that blob path, lists every file in it via the
+GitHub API, and fetches each one (`SKILL.md` plus any `references/`,
+`scripts/`, etc.). Local copies are replaced only when content actually
+changed; files that disappeared upstream are pruned. `source.json` itself is
+local metadata and is never overwritten. Skills without a `source.json` are
+left untouched.
 
 After updating, run `bin/install` to sync the changes to `~/.agents/skills`.
 
-Requires `curl` (preinstalled on macOS). The script checks for it and exits with
-instructions if it's missing.
+Requires `curl` and `python3` (both preinstalled on macOS). The script checks
+for them and exits with instructions if either is missing.
 
 ## Adding a skill
 
-1. Create `skills/<name>/SKILL.md`.
+1. Create `skills/<name>/SKILL.md` (and any supporting files).
 2. If it's sourced from elsewhere, add `skills/<name>/source.json` with `repo`
-   and `description`, and add a row to the table in `README.md`.
+   pointing at the upstream `SKILL.md` blob URL and a `description`, add a row
+   to the table in `README.md`, then run `bin/update` to pull the full upstream
+   directory.
 3. Run `bin/install`.

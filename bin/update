@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Update each skill's SKILL.md from its upstream source.
+# Update each sourced skill from its upstream GitHub directory.
 #
 # A skill is tracked by placing a "source.json" next to its SKILL.md:
 #
@@ -10,8 +10,12 @@
 #   }
 #
 # "repo" is the normal GitHub blob URL you'd open in a browser. This script
-# derives the raw URL, fetches the latest content, and replaces SKILL.md only
-# if it actually changed. Skills without a source.json are left untouched.
+# derives the skill's upstream directory from that URL, fetches every file in
+# it (SKILL.md plus references, scripts, etc.), and replaces local copies only
+# when content actually changed. Local-only source.json is never touched.
+# Skills without a source.json are left untouched.
+#
+# Requires: curl, python3 (for GitHub API JSON).
 #
 set -euo pipefail
 
@@ -27,11 +31,80 @@ if ! command -v curl >/dev/null 2>&1; then
   exit 1
 fi
 
-# Turn a GitHub "blob" URL into its raw.githubusercontent.com equivalent.
-#   https://github.com/USER/REPO/blob/BRANCH/path  ->
-#   https://raw.githubusercontent.com/USER/REPO/BRANCH/path
-to_raw_url() {
-  printf '%s\n' "$1" | sed -E 's#https://github\.com/([^/]+)/([^/]+)/blob/#https://raw.githubusercontent.com/\1/\2/#'
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "Error: python3 is not installed." >&2
+  echo >&2
+  echo "Install it with Homebrew, then re-run this script:" >&2
+  echo "    brew install python" >&2
+  exit 1
+fi
+
+# Parse a GitHub blob URL into owner, repo, ref, and file path (tab-separated).
+#   https://github.com/USER/REPO/blob/REF/path/to/file
+parse_blob_url() {
+  printf '%s\n' "$1" | python3 -c '
+import re, sys
+url = sys.stdin.read().strip()
+m = re.match(r"https://github\.com/([^/]+)/([^/]+)/blob/([^/]+)/(.*)", url)
+if not m:
+    sys.exit(1)
+print("\t".join(m.groups()))
+'
+}
+
+# List blob paths under an upstream skill directory (one relative path per line).
+# Relative paths are rooted at the skill directory (e.g. SKILL.md, scripts/log.sh).
+list_upstream_files() {
+  local owner="$1" repo="$2" ref="$3" skill_prefix="$4"
+  local api_url="https://api.github.com/repos/${owner}/${repo}/git/trees/${ref}?recursive=1"
+
+  curl -fsSL \
+    -H "Accept: application/vnd.github+json" \
+    -H "X-GitHub-Api-Version: 2022-11-28" \
+    "$api_url" | python3 -c '
+import json, sys
+prefix = sys.argv[1].rstrip("/")
+data = json.load(sys.stdin)
+if data.get("truncated"):
+    print("warning: tree listing was truncated; some files may be missing", file=sys.stderr)
+for entry in data.get("tree", []):
+    if entry.get("type") != "blob":
+        continue
+    path = entry["path"]
+    if not prefix:
+        print(path)
+        continue
+    if path == prefix:
+        continue
+    if path.startswith(prefix + "/"):
+        print(path[len(prefix) + 1:])
+' "$skill_prefix"
+}
+
+# Download one raw file from GitHub into dest, replacing only if content changed.
+# Prints "updated", "unchanged", or "fail" to stdout.
+fetch_file() {
+  local raw_url="$1" dest="$2"
+  local tmp dest_dir
+
+  dest_dir="$(dirname "$dest")"
+  mkdir -p "$dest_dir"
+
+  tmp="$(mktemp)"
+  if ! curl -fsSL "$raw_url" -o "$tmp"; then
+    rm -f "$tmp"
+    printf 'fail\n'
+    return 0
+  fi
+
+  if [ -f "$dest" ] && cmp -s "$tmp" "$dest"; then
+    rm -f "$tmp"
+    printf 'unchanged\n'
+    return 0
+  fi
+
+  mv "$tmp" "$dest"
+  printf 'updated\n'
 }
 
 updated=0
@@ -42,9 +115,7 @@ for source_file in "$SKILLS_DIR"/*/source.json; do
   [ -e "$source_file" ] || continue
   skill_dir="$(dirname "$source_file")"
   name="$(basename "$skill_dir")"
-  skill_file="$skill_dir/SKILL.md"
 
-  # Pull the GitHub URL out of source.json (flat JSON, dependency-free parse).
   repo_url="$(grep -oE '"repo"[[:space:]]*:[[:space:]]*"[^"]*"' "$source_file" \
     | sed -E 's/.*:[[:space:]]*"([^"]*)"/\1/' | head -1)"
 
@@ -54,26 +125,97 @@ for source_file in "$SKILLS_DIR"/*/source.json; do
     continue
   fi
 
-  raw_url="$(to_raw_url "$repo_url")"
-
-  tmp="$(mktemp)"
-  if ! curl -fsSL "$raw_url" -o "$tmp"; then
-    echo "fail      $name (could not fetch $raw_url)"
-    rm -f "$tmp"
+  if ! parsed="$(parse_blob_url "$repo_url")"; then
+    echo "skip      $name (could not parse repo URL)"
     skipped=$((skipped + 1))
     continue
   fi
 
-  if [ -f "$skill_file" ] && cmp -s "$tmp" "$skill_file"; then
-    echo "unchanged $name"
-    rm -f "$tmp"
-    unchanged=$((unchanged + 1))
+  # bash 3.2: read fields from a tab-separated string
+  owner="$(printf '%s\n' "$parsed" | cut -f1)"
+  repo="$(printf '%s\n' "$parsed" | cut -f2)"
+  ref="$(printf '%s\n' "$parsed" | cut -f3)"
+  file_path="$(printf '%s\n' "$parsed" | cut -f4)"
+  skill_prefix="$(dirname "$file_path")"
+  # dirname of "SKILL.md" is "."; treat that as repo root.
+  if [ "$skill_prefix" = "." ]; then
+    skill_prefix=""
+  fi
+
+  echo "$name"
+
+  keep_list="$(mktemp)"
+  if ! list_upstream_files "$owner" "$repo" "$ref" "$skill_prefix" > "$keep_list"; then
+    echo "  fail      (could not list upstream directory)"
+    rm -f "$keep_list"
+    skipped=$((skipped + 1))
     continue
   fi
 
-  mv "$tmp" "$skill_file"
-  echo "updated   $name"
-  updated=$((updated + 1))
+  if [ ! -s "$keep_list" ]; then
+    echo "  fail      (no files found under upstream skill directory)"
+    rm -f "$keep_list"
+    skipped=$((skipped + 1))
+    continue
+  fi
+
+  skill_updated=0
+  skill_failed=0
+
+  while IFS= read -r rel || [ -n "$rel" ]; do
+    [ -n "$rel" ] || continue
+    # source.json is this repo's local metadata, never part of the skill mirror.
+    if [ "$rel" = "source.json" ]; then
+      continue
+    fi
+    if [ -n "$skill_prefix" ]; then
+      raw_url="https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${skill_prefix}/${rel}"
+    else
+      raw_url="https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${rel}"
+    fi
+    dest="$skill_dir/$rel"
+    result="$(fetch_file "$raw_url" "$dest")"
+    case "$result" in
+      updated)
+        echo "  updated   $rel"
+        skill_updated=$((skill_updated + 1))
+        ;;
+      unchanged)
+        echo "  unchanged $rel"
+        ;;
+      fail)
+        echo "  fail      $rel"
+        skill_failed=$((skill_failed + 1))
+        ;;
+    esac
+  done < "$keep_list"
+
+  # Prune local files that are no longer upstream (never touch source.json).
+  pruned=0
+  while IFS= read -r -d '' local_file; do
+    rel="${local_file#"$skill_dir"/}"
+    if [ "$rel" = "source.json" ]; then
+      continue
+    fi
+    if ! grep -Fxq -- "$rel" "$keep_list"; then
+      rm -f "$local_file"
+      echo "  pruned   $rel"
+      pruned=$((pruned + 1))
+    fi
+  done < <(find "$skill_dir" -type f -print0)
+
+  # Drop empty directories left behind (depth-first).
+  find "$skill_dir" -mindepth 1 -type d -empty -delete 2>/dev/null || true
+
+  rm -f "$keep_list"
+
+  if [ "$skill_failed" -gt 0 ]; then
+    skipped=$((skipped + 1))
+  elif [ "$skill_updated" -gt 0 ] || [ "$pruned" -gt 0 ]; then
+    updated=$((updated + 1))
+  else
+    unchanged=$((unchanged + 1))
+  fi
 done
 
 echo
