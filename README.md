@@ -15,7 +15,9 @@ the shared location my agents read from.
 
 | Skill | Description | Source |
 | --- | --- | --- |
+| [`create-verification-skill`](skills/create-verification-skill/SKILL.md) | Generate a project-local skill that drives the app the way a user does and proves behavior with evidence. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/create-verification-skill/SKILL.md) |
 | [`handoff`](skills/handoff/SKILL.md) | Compact a conversation into a handoff doc for another agent. | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md) |
+| [`maintain-verification-skill`](skills/maintain-verification-skill/SKILL.md) | Keep a project's verification skill and feature map honest with source and live coverage. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/maintain-verification-skill/SKILL.md) |
 | [`show-me-your-work`](skills/show-me-your-work/SKILL.md) | Keep a reviewable decision trail for long-running or unattended work as a TSV log. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/show-me-your-work/SKILL.md) |
 | [`succinct`](skills/succinct/SKILL.md) | Provide a short answer that keeps the same level of detail while being terse and consise. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/succinct/SKILL.md) |
 | [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. | [cursor/plugins](https://github.com/cursor/plugins/blob/21327bee99f30a73758c99f6c6459571bc9f6e98/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md) |
