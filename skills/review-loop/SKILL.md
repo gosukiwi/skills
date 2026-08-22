@@ -22,5 +22,6 @@ Run step 1 again, re-reviewing for correctness and fixing blockers until there a
 
 ## 3. Refactor Review
 
-Run the `thermo-nuclear-code-quality-review` skill with subagent. Report all findings (remaining correctness non-blocking + thermo nuclear) prioritized
-and numbered.
+Run the `thermo-nuclear-code-quality-review` skill with subagent. Report all findings (remaining correctness non-blocking + thermo nuclear), numbered, prioritized and categorized by "Blocker", "Should-Fix" and "Minor".
+
+When displaying issues, don't use jargon and speak coherently. State them simply and concisely, like one human talking to another.
