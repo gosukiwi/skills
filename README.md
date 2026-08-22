@@ -17,6 +17,7 @@ the shared location my agents read from.
 | --- | --- | --- |
 | [`bro`](skills/bro/SKILL.md) | Restate the last message in plain human language, with no jargon. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/bro/SKILL.md) |
 | [`create-verification-skill`](skills/create-verification-skill/SKILL.md) | Generate a project-local skill that drives the app the way a user does and proves behavior with evidence. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/create-verification-skill/SKILL.md) |
+| [`grilling`](skills/grilling/SKILL.md) | Grill the user relentlessly about a plan, decision, or idea. | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) |
 | [`handoff`](skills/handoff/SKILL.md) | Compact a conversation into a handoff doc for another agent. | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md) |
 | [`maintain-verification-skill`](skills/maintain-verification-skill/SKILL.md) | Keep a project's verification skill and feature map honest with source and live coverage. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/maintain-verification-skill/SKILL.md) |
 | [`review-loop`](skills/review-loop/SKILL.md) | Clear correctness blockers in a loop, then report leftover findings and a refactor review. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/review-loop/SKILL.md) |
