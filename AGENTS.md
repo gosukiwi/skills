@@ -9,11 +9,20 @@ skills/
   <skill-name>/
     SKILL.md
     source.json   (only for skills sourced from elsewhere)
+  shared/
+    <prompt>.md   (shared prompts, not skills)
 ```
 
 Each skill is a directory containing a `SKILL.md` (plus any supporting
 files such as `references/` or `scripts/`). Sourced skills are kept as a
 pristine mirror of their upstream directory — no local edits.
+
+## skills/shared
+
+Prompts that several skills reuse. `shared/` holds plain markdown, not skills:
+it has no `SKILL.md`, so agents never load it as a skill or expose it as a
+slash command. Skills reach these files by path — see `shared/delegation.md`,
+which is how one skill runs another.
 
 ## source.json
 

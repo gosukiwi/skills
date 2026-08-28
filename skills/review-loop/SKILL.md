@@ -8,23 +8,25 @@ disable-model-invocation: true
 
 Use this skill to review the current branch thoroughly, while auto-fixing blocking changes.
 
+This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes.
+
 If the git tree is not clean (uncommitted changes), warn the user before continuing.
 
 Establish this project's gate commands (lint, typecheck, tests) and run them once now. If something is already failing, say what, and treat it as pre-existing.
 
 ## 1. Correctness Review
 
-Run the `correctness-review` skill with subagent to get the correctness findings.
+Run the `correctness-review` skill in a subagent to get the correctness findings.
 
 ## 2. Loop Fix Findings
 
-Use subagents to fix the Blockers and Should-Fix findings in the correctness review using the `flow-patch` skill. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
+Use subagents to fix the Blockers and Should-Fix findings in the correctness review by running the `flow-patch` skill. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
 
 Run step 1 again, re-reviewing for correctness and fixing findings until only Nits remain and the gates are green.
 
 ## 3. Refactor Review
 
-Run the `thermo-nuclear-code-quality-review` skill with subagent, scoped to what this change introduced or made worse — not the surrounding codebase.
+Run the `thermo-nuclear-code-quality-review` skill in a subagent, scoped to what this change introduced or made worse — not the surrounding codebase.
 
 It over-reports, so re-classify by what each problem costs later: Blocker if future edits here will likely introduce bugs or new code will copy the pattern, Should-Fix if it's real drag that gets more expensive with time, Nit otherwise.
 
