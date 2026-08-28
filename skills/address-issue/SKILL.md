@@ -6,17 +6,19 @@ disable-model-invocation: true
 
 The user gave you an issue to address. If they haven't, ask for one.
 
+This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes.
+
 # Common Understanding
 
-The first step is to read the issue. If there's something that's not clear, use the `grilling` skill to reach a common understanding on the issue. After that's done, suggest to update the issue if you think it's needed.
+The first step is to read the issue. If there's something that's not clear, run the `grilling` skill to reach a common understanding on the issue. After that's done, suggest to update the issue if you think it's needed.
 
 # Spec and Implement
 
-Work in a new branch. Create a spec using `flow-spec`, follow the skill until the implementation is done.
+Work in a new branch. Create a spec by running the `flow-spec` skill, and follow it until the implementation is done.
 
 # Review
 
-Review the branch using the `review-loop` skill.
+Review the branch by running the `review-loop` skill.
 
 # Open PR
 
