@@ -12,7 +12,7 @@ If the git tree is not clean (uncommitted changes), warn the user before continu
 
 ## 1. Correctness Review
 
-Use subagents to run the correctness review. If the `review-bugbot` skill is installed, use that skill for correctness review, otherwise, just do it yourself.
+Run the `correctness-review` skill with subagent to get the correctness findings.
 
 ## 2. Loop Fix Blockers
 
@@ -22,6 +22,6 @@ Run step 1 again, re-reviewing for correctness and fixing blockers until there a
 
 ## 3. Refactor Review
 
-Run the `thermo-nuclear-code-quality-review` skill with subagent. Report all findings (remaining correctness non-blocking + thermo nuclear), numbered, prioritized and categorized by "Blocker", "Should-Fix" and "Minor".
+Run the `thermo-nuclear-code-quality-review` skill with subagent. Report all findings (remaining correctness non-blocking + thermo nuclear), numbered, prioritized and categorized by "Blocker", "Should-Fix" and "Nit".
 
 When displaying issues, don't use jargon and speak coherently. State them simply and concisely, like one human talking to another.
