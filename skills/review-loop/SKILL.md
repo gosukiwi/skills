@@ -1,6 +1,6 @@
 ---
 name: review-loop
-description: Clear correctness blockers in a loop, then report leftover findings and a refactor review.
+description: Fix correctness findings in a loop, then fix the refactor findings worth fixing and report what's left.
 disable-model-invocation: true
 ---
 
@@ -10,18 +10,24 @@ Use this skill to review the current branch thoroughly, while auto-fixing blocki
 
 If the git tree is not clean (uncommitted changes), warn the user before continuing.
 
+Establish this project's gate commands (lint, typecheck, tests) and run them once now. If something is already failing, say what, and treat it as pre-existing.
+
 ## 1. Correctness Review
 
 Run the `correctness-review` skill with subagent to get the correctness findings.
 
-## 2. Loop Fix Blockers
+## 2. Loop Fix Findings
 
-Use subagents to fix the blockers in the correctness review. If the `flow-patch` skill is installed, use that skill, otherwise, just do it yourself.
+Use subagents to fix the Blockers and Should-Fix findings in the correctness review using the `flow-patch` skill. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
 
-Run step 1 again, re-reviewing for correctness and fixing blockers until there are no more blockers.
+Run step 1 again, re-reviewing for correctness and fixing findings until only Nits remain and the gates are green.
 
 ## 3. Refactor Review
 
-Run the `thermo-nuclear-code-quality-review` skill with subagent. Report all findings (remaining correctness non-blocking + thermo nuclear), numbered, prioritized and categorized by "Blocker", "Should-Fix" and "Nit".
+Run the `thermo-nuclear-code-quality-review` skill with subagent, scoped to what this change introduced or made worse — not the surrounding codebase.
 
-When displaying issues, don't use jargon and speak coherently. State them simply and concisely, like one human talking to another.
+It over-reports, so re-classify by what each problem costs later: Blocker if future edits here will likely introduce bugs or new code will copy the pattern, Should-Fix if it's real drag that gets more expensive with time, Nit otherwise.
+
+Address Blockers + Should-Fix, and only where the fix stays contained; report the ones that turn into a rewrite instead. If you changed anything, run step 1 and the gates once more to confirm nothing regressed.
+
+Report all remaining findings (correctness + thermo nuclear), numbered and prioritized.

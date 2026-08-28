@@ -1,6 +1,6 @@
 ---
 name: address-issue
-description: Addresses a GitHub issue
+description: Take a GitHub issue from shared understanding through spec, implementation, review, and PR.
 disable-model-invocation: true
 ---
 
@@ -16,8 +16,15 @@ Work in a new branch. Create a spec using `flow-spec`, follow the skill until th
 
 # Review
 
-Review the branch using the `pr-stabilization` skill. Once that's done, run the `thermo-nuclear-code-quality-review` skill using a subagent. The thermo nuclear review tends to over-report so re-classify the findings into Blocker, Should-Fix, and Nit. Address Blockers + Should-Fix.
+Review the branch using the `review-loop` skill.
 
 # Open PR
 
-Open a PR and include all the remaining findings as optional fixes (from `pr-stabilization` and `thermo-nuclear-code-quality-review`). Include steps so the user can verify themselves that the issue has been properly addressed.
+Open a PR. Keep the PR body concise and without jargon, using Simplified Technical English (ASD-STE100).
+
+The PR body must contain:
+
+- A summary of what the PR does
+- What the most relevant files and changes are
+- Steps so the user can verify themselves that the issue has been properly addressed, built from the spec's Success Criteria
+- The remaining review findings as optional fixes, calling out separately anything left unfixed because it needed a rewrite
