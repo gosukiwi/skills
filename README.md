@@ -27,6 +27,7 @@ the shared location my agents read from.
 | [`maintain-verification-skill`](skills/maintain-verification-skill/SKILL.md) | Keep a project's verification skill and feature map honest with source and live coverage. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/maintain-verification-skill/SKILL.md) |
 | [`review-loop`](skills/review-loop/SKILL.md) | Fix correctness findings in a loop via `correctness-review`, then fix the refactor findings worth fixing and report what's left. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/review-loop/SKILL.md) |
 | [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. | [cursor/plugins](https://github.com/cursor/plugins/blob/21327bee99f30a73758c99f6c6459571bc9f6e98/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md) |
+| [`tidy-up-agents-md`](skills/tidy-up-agents-md/SKILL.md) | Refactor an `AGENTS.md` into a minimal root file plus linked topic docs, following progressive disclosure. | [aihero.dev](https://www.aihero.dev/a-complete-guide-to-agents-md) |
 | [`use-simplified-english`](skills/use-simplified-english/SKILL.md) | Make the session respond in Simplified Technical English (ASD-STE100). | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/use-simplified-english/SKILL.md) |
 
 ## Usage
