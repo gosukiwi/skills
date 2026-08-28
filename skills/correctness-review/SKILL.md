@@ -28,8 +28,8 @@ Do not flag issues that need impossible inputs. If something looks intentional b
 
 Only findings. No fixes. For each finding: `Blocker | Should-Fix | Nit`, `file:line`, and the issue (trigger + why it matters).
 
-- **Blocker** — breaks behavior, corrupts data, is exploitable, or silently wrong for existing callers. Also a changed auth / money / data-mutation path with zero test coverage.
-- **Should-Fix** — likely bug or likely hole with a plausible production path, including other changed behavior with no test.
+- **Blocker** — breaks behavior, corrupts data, is exploitable, silently wrong for existing callers, or an uncovered behavior change when this area already has tests to extend.
+- **Should-Fix** — likely bug or likely hole with a plausible production path, or an uncovered behavior change when the area has no suite (don't invent a harness).
 - **Nit** — context-dependent or low-probability.
 
 If nothing qualifies, say so in one line. Do not pad with nits.
