@@ -1,21 +1,21 @@
 # Implementer
 
-Prompt body for implementing one plan task (TDD).
+Prompt body for implementing one task (TDD). Fill placeholders. Paste the absolute path to `tdd-red-green.md` (this directory).
 
 ```
 You are implementing Task N: [task name]
 
 ## Task
-[FULL TEXT of the task from the plan]
+[FULL TEXT of the task]
 
 ## Context
 [Where this fits, branch if known, relevant paths]
 
 ## Out of scope
-[Spec / micro-spec Out of Scope lines that bear on this task — or "none"]
+[Out of Scope lines that bear on this task — or "none"]
 
 ## TDD
-Read and follow `[resolved flow-shared]/references/tdd-red-green.md`.
+Read and follow `[absolute path to tdd-red-green.md]`.
 RED → verify fail → GREEN → verify pass → REFACTOR.
 NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST.
 

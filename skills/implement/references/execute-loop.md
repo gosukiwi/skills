@@ -1,17 +1,19 @@
 # Execute loop
 
-Per-task dispatch loop for `/flow-spec` and `/flow-patch`. The calling `SKILL.md` says where task text comes from; this file owns the loop itself.
+Per-task dispatch loop for `implement`. The calling `SKILL.md` says where task text comes from; this file owns the loop itself.
 
-Before each dispatch, pick a model per `references/subagent-model-size.md` — smallest capable tier. Resolve `flow-shared` paths before pasting prompts. Paste the filled template only: a subagent gets what you paste and nothing else, so never point it at a plan file or at chat history.
+Files in this directory: `implementer.md`, `reviewer.md`, `tdd-red-green.md`, `subagent-model-size.md`. Use those siblings. Paste filled templates only: a subagent gets what you paste and nothing else, so never point it at an issue, a plan file, or chat history.
+
+Before each dispatch, pick a model per `subagent-model-size.md` — smallest capable tier.
 
 Before the first dispatch, post a user-visible progress line: Task 1 of M — starting implementer. Continue; not a pause for OK.
 
 For each task, in order:
 
 1. Note `BASE_SHA` (`git rev-parse HEAD`)
-2. Dispatch implementer subagent — paste `prompts/implementer.md` (fill placeholders)
+2. Dispatch implementer subagent — paste `implementer.md` (fill placeholders; absolute path to `tdd-red-green.md`)
 3. Note `HEAD_SHA`. User-visible progress: Task N of M — implementer done — next: review. Continue; not a pause for OK.
-4. Dispatch reviewer subagent — paste `prompts/reviewer.md` (fill placeholders)
+4. Dispatch reviewer subagent — paste `reviewer.md` (fill placeholders)
 5. User-visible progress: Task N of M — APPROVED or REJECTED — next: Task N+1 or fix. Continue; not a pause for OK.
 6. If REJECTED → fix (subagent) → progress → review again → repeat until APPROVED
 7. Only then start Task N+1

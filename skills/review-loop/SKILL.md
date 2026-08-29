@@ -20,7 +20,7 @@ Run the `correctness-review` skill in a subagent to get the correctness findings
 
 ## 2. Loop Fix Findings
 
-Use subagents to fix the Blockers and Should-Fix findings in the correctness review by running the `flow-patch` skill. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
+Fix the Blockers and Should-Fix findings by running the `implement` skill. Pass those findings as an ad-hoc brief. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
 
 Run step 1 again, re-reviewing for correctness and fixing findings until only Nits remain and the gates are green.
 
@@ -30,6 +30,6 @@ Run the `thermo-nuclear-code-quality-review` skill in a subagent, scoped to what
 
 It over-reports, so re-classify by what each problem costs later: Blocker if future edits here will likely introduce bugs or new code will copy the pattern, Should-Fix if it's real drag that gets more expensive with time, Nit otherwise.
 
-Address Blockers + Should-Fix, and only where the fix stays contained; report the ones that turn into a rewrite instead. If you changed anything, run step 1 and the gates once more to confirm nothing regressed.
+Address Blockers + Should-Fix via `implement` only where the fix stays contained. Pass those findings as an ad-hoc brief. Report the ones that turn into a rewrite instead. If you changed anything, run step 1 and the gates once more to confirm nothing regressed.
 
 Report all remaining findings (correctness + thermo nuclear), numbered and prioritized.

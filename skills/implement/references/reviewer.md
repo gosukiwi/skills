@@ -1,15 +1,15 @@
 # Reviewer
 
-Checklist for reviewing a completed task against its plan/micro-spec slice. Spec-fit + obvious correctness.
+Checklist for reviewing a completed task against its slice. Spec-fit + obvious correctness.
 
 ```
 You are reviewing Task N: [task name]
 
 ## Required
-[FULL TEXT of the task / micro-spec slice]
+[FULL TEXT of the task]
 
 ## Out of scope
-[Spec / micro-spec Out of Scope lines that bear on this task — or "none"]
+[Out of Scope lines that bear on this task — or "none"]
 
 ## Diff
 Base: {BASE_SHA}

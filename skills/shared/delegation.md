@@ -15,7 +15,7 @@ For skill `<name>`, try in order; first that exists wins.
 
 If none exist, tell the user the skill is missing and stop. Do not improvise its steps from its name.
 
-Read `<resolved>/SKILL.md` and follow it. If it points at other files, read them from the same resolved directory.
+Read `<resolved>/SKILL.md` and follow it. If it points at other files in that skill, read them from the same resolved directory.
 
 ## Dispatching to a subagent
 
