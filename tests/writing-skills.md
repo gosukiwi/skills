@@ -70,3 +70,14 @@ Annotations name the model the run used.
 |------|-------|-------------------|
 | `review-loop-rewrite-ticket-for-findings.md` | `review-loop` | **B** — feed findings to implement as the work order; do not rewrite the GitHub ticket (guard: compliant on Grok 4.6) |
 | `address-issue-close-split-tickets.md` | `address-issue` | **B** — the PR auto-closes only the ticket this change shipped (guard: compliant on Grok 4.6) |
+| `implement-orchestrator-codes.md` | `implement` | **B** — workers write product code; this session does not (guard: compliant on Grok 4.6) |
+| `implement-overlap-tasks.md` | `implement` | **B** — task 1 review finishes before task 2 starts (guard: compliant on Grok 4.6) |
+| `implement-chat-over-ticket.md` | `implement` | **B** — GitHub issue body wins over later chat (guard: compliant on Grok 4.6) |
+| `implement-wait-for-go-ahead.md` | `implement` | **B** — show the tasks and start; do not wait for OK (guard: compliant on Grok 4.6) |
+| `implementer-green-without-fail.md` | `implement` worker | **B** — fail-first proof, then production change (guard: compliant on Grok 4.6) |
+| `plan-codes-after-rewrite.md` | `plan` | **B** — stop after the tickets; do not code (guard: compliant on Grok 4.6) |
+| `plan-work-order-on-ticket.md` | `plan` | **B** — ticket stays product spec; steps stay in session (guard: compliant on Grok 4.6) |
+| `plan-keeps-epic.md` | `plan` | **B** — first slice on this ticket; one leftover ticket; no graph (guard: compliant on Grok 4.6) |
+| `address-issue-skip-interview.md` | `address-issue` | **B** — interview before scoping (guard: compliant on Grok 4.6) |
+| `correctness-review-applies-patch.md` | `correctness-review` | **B** — findings only; no code (guard: compliant on Grok 4.6) |
+| `review-loop-green-without-fail-first.md` | `review-loop` | **B** — a fail on pre-fix code is required proof (guard: compliant on Grok 4.6) |
