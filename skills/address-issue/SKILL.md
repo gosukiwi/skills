@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 The user gave you an issue to address. If they haven't, ask for one.
 
-This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes. Run each in the current session.
+This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes.
 
 # Common Understanding
 
