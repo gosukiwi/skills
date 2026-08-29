@@ -34,6 +34,9 @@ the shared location my agents read from.
 ```sh
 bin/install   # sync skills to ~/.agents/skills
 bin/update    # pull the latest version of sourced skills
+make test-scenarios   # list pressure scenarios (does not run agents)
 ```
+
+Pressure scenarios for **owned** skills live under [`tests/scenarios/`](tests/scenarios/). Run them via a Task subagent — see [`tests/writing-skills.md`](tests/writing-skills.md) and Iron Law in [`AGENTS.md`](AGENTS.md).
 
 See [AGENTS.md](AGENTS.md) for how the repo is laid out and how the scripts work.
