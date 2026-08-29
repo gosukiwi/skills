@@ -1,4 +1,0 @@
-{
-  "description": "Investigate bugs before fixing. Write a RED test that confirms the issue, then stop.",
-  "repo": "https://github.com/gosukiwi/flow/blob/main/skills/flow-debug/SKILL.md"
-}
