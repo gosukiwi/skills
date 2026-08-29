@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Use this skill to review the current branch thoroughly, while auto-fixing blocking changes.
 
-This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes. Run `implement` in the current session.
+This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes.
 
 If the git tree is not clean (uncommitted changes), warn the user before continuing.
 
@@ -20,7 +20,7 @@ Run the `correctness-review` skill in a subagent to get the correctness findings
 
 ## 2. Loop Fix Findings
 
-Fix the Blockers and Should-Fix findings by running the `implement` skill in the current session. Pass those findings as an ad-hoc brief — no GitHub issue. Do not run `plan`. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
+Fix the Blockers and Should-Fix findings by running the `implement` skill. Pass those findings as an ad-hoc brief. Do not run `plan`. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
 
 Run step 1 again, re-reviewing for correctness and fixing findings until only Nits remain and the gates are green.
 
@@ -30,6 +30,6 @@ Run the `thermo-nuclear-code-quality-review` skill in a subagent, scoped to what
 
 It over-reports, so re-classify by what each problem costs later: Blocker if future edits here will likely introduce bugs or new code will copy the pattern, Should-Fix if it's real drag that gets more expensive with time, Nit otherwise.
 
-Address Blockers + Should-Fix via `implement` (ad-hoc brief, no issue), and only where the fix stays contained; report the ones that turn into a rewrite instead. If you changed anything, run step 1 and the gates once more to confirm nothing regressed.
+Address Blockers + Should-Fix via `implement` only where the fix stays contained. Pass those findings as an ad-hoc brief. Do not run `plan`. Report the ones that turn into a rewrite instead. If you changed anything, run step 1 and the gates once more to confirm nothing regressed.
 
 Report all remaining findings (correctness + thermo nuclear), numbered and prioritized.

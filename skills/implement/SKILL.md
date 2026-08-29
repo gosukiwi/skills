@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Break a scope into TDD tasks and implement with subagent review. Pass a GitHub issue (read-only) or an ad-hoc brief. Use for planned issue work or review-loop fixes. Never writes issues.
+description: Break a scope into TDD tasks and implement with subagent review. Pass a GitHub issue (read-only) or an ad-hoc brief.
 disable-model-invocation: true
 ---
 
@@ -10,8 +10,8 @@ This skill uses shared files. Read `shared/delegation.md` from your skills direc
 
 # Scope
 
-- **Issue** (number or URL) — `gh issue view`. That body is source of truth. Do not trust chat over it. If fetch fails, stop.
-- **Ad-hoc brief** — the pasted text is the scope. Do not fetch or infer an issue.
+- **Issue** (number or URL) — That body is source of truth. Do not trust chat over it. If fetch fails, stop.
+- **Ad-hoc brief** — The pasted text is the scope. Do not fetch or infer an issue.
 
 If neither was passed, ask and stop.
 
@@ -21,7 +21,7 @@ Read `shared/tdd-red-green.md`. Break the scope into sequential tasks a subagent
 
 Review the tasks against the codebase: match existing conventions, confirm APIs/helpers exist.
 
-Print the task breakdown (and out of scope). Then execute immediately.
+Print the task breakdown, then execute immediately.
 
 # Execute
 

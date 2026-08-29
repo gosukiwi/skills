@@ -10,7 +10,7 @@ This skill runs other skills. Read `shared/delegation.md` from your skills direc
 
 # Common Understanding
 
-Read the issue, then run the `grilling` skill. Do not update the issue.
+Read the issue, then run the `grilling` skill.
 
 # Plan
 
@@ -18,7 +18,7 @@ Run the `plan` skill on that issue.
 
 # Implement
 
-Work in a new branch. Run the `implement` skill. Pass the issue (read-only).
+Work in a new branch. Run the `implement` skill and pass the issue.
 
 # Review
 
@@ -26,7 +26,7 @@ Review the branch by running the `review-loop` skill.
 
 # Open PR
 
-Open a PR that `Fixes` the slice issue only (not a remainder issue). Keep the PR body concise and without jargon, using Simplified Technical English (ASD-STE100).
+Open a PR that `Fixes` the issue. Keep the PR body concise and without jargon, using Simplified Technical English (ASD-STE100).
 
 The PR body must contain:
 
