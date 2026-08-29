@@ -10,7 +10,7 @@ This skill runs other skills. Read `shared/delegation.md` from your skills direc
 
 # Common Understanding
 
-The first step is to read the issue. If there's something that's not clear, run the `grilling` skill to reach a common understanding on the issue. After that's done, suggest to update the issue if you think it's needed.
+Read the issue, then run the `grilling` skill. After that's done, suggest to update the issue if you think it's needed.
 
 # Spec and Implement
 
