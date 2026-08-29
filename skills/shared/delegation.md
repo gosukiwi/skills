@@ -17,17 +17,6 @@ If none exist, tell the user the skill is missing and stop. Do not improvise its
 
 Read `<resolved>/SKILL.md` and follow it. If it points at other files in that skill, read them from the same resolved directory.
 
-## Shared files
-
-Not skills. For `shared/<file>`, try in order; first that exists wins.
-
-1. `.agents/skills/shared/<file>`
-2. `.cursor/skills/shared/<file>`
-3. `~/.agents/skills/shared/<file>`
-4. `~/.cursor/skills/shared/<file>`
-
-If none exist, tell the user and stop.
-
 ## Dispatching to a subagent
 
 The calling skill says where each skill runs — most run in the current session. When the caller asks for a subagent, resolve the path yourself and paste into the prompt:
