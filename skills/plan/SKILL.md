@@ -15,8 +15,6 @@ The original request is one of:
 
 If there is no issue and no identifiable request, ask what to plan, then stop. Do not ask for a ticket number. Do not start an interview.
 
-Do not file a chat-dump ticket just to have an original to close.
-
 # Size
 
 One issue is one PR: small enough for one agent session to hold the spec and later task coordination; shippable on its own; testable on its own. Work that exceeds any of these is more than one slice — slice 1 is a new issue.
