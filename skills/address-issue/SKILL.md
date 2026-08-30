@@ -14,7 +14,7 @@ Read the issue, then run the `grilling` skill.
 
 # Plan
 
-Run the `plan` skill on that issue. Later steps use the slice issue plan reports, not the original request.
+Run the `plan` skill on that issue.
 
 # Implement
 
