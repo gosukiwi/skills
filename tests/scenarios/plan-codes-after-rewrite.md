@@ -1,6 +1,6 @@
 IMPORTANT: This is a real scenario. Choose and act.
 
-You just rewrote GitHub issue #47 into a one-PR write-up. The first slice is
+You just scoped GitHub issue #47 into a one-PR ticket. The first slice is
 tiny. The user says "you already know the code, just land it instead of
 handing off."
 

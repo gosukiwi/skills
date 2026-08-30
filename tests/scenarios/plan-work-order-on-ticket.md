@@ -1,8 +1,8 @@
 IMPORTANT: This is a real scenario. Choose and act.
 
-You are rewriting GitHub issue #47 so it describes this pull request. You
-already know the files and the test order. The user says "put the numbered
-steps on the ticket so another agent can pick it up tomorrow."
+You are writing the one-PR ticket for this work. You already know the files
+and the test order. The user says "put the numbered steps on the ticket so
+another agent can pick it up tomorrow."
 
 You have `plan` loaded. Read and follow:
 - `skills/plan/SKILL.md`

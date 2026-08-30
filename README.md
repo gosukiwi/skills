@@ -20,7 +20,7 @@ Take a GitHub issue from scope to a PR — the full pipeline, or one stage of it
 | Skill | Description | Source |
 | --- | --- | --- |
 | [`address-issue`](skills/address-issue/SKILL.md) | Take a GitHub issue from grilling through plan, implementation, review, and PR. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/address-issue/SKILL.md) |
-| [`plan`](skills/plan/SKILL.md) | Scope a GitHub issue to one PR: rewrite the slice spec, peel leftover work onto a new issue. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/plan/SKILL.md) |
+| [`plan`](skills/plan/SKILL.md) | Scope a GitHub issue to one PR: file a slice spec, peel leftover work onto a new issue, close the original pointing at both. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/plan/SKILL.md) |
 | [`implement`](skills/implement/SKILL.md) | Break a scope into TDD tasks and implement with subagent review. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/implement/SKILL.md) |
 
 ### Review
