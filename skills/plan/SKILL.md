@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 Requires a GitHub issue. If the caller did not pass one, ask and stop. Never implement.
 
-Fetch the issue. Do not change its title or body.
+Fetch the issue.
 
 # Size
 
