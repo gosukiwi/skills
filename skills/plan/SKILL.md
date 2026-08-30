@@ -60,4 +60,4 @@ A close comment that omits the leftover while a tail exists is incomplete — fi
 
 # Stop
 
-Report the slice issue URL and the remainder issue URL if you created one. If the request was a GitHub issue, report that the original is closed. If the request was this session, there is no original to close. Do not branch, implement, or open a PR.
+Report the slice issue URL and the remainder issue URL if you created one. If the request was a GitHub issue, report that the original is closed. Do not branch, implement, or open a PR.
