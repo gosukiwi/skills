@@ -80,6 +80,8 @@ Annotations name the model the run used.
 | `plan-keeps-epic.md` | `plan` | **B** — new slice ticket + one leftover; close original pointing at both; no graph (Grok 4.6) |
 | `plan-edit-in-place.md` | `plan` | **B** — new ticket for the slice spec; do not replace the original body (Grok 4.6) |
 | `plan-close-before-tail.md` | `plan` | **B** — leftover ticket exists before close; close comment points at both (Grok 4.6) |
+| `plan-session-without-ticket.md` | `plan` | **B** — session after an interview is the request; file slice + leftover; close nothing (Grok 4.6) |
+| `plan-no-request-asks-ticket.md` | `plan` | **B** — no issue and no request: ask what to plan, not for a ticket number (Grok 4.6) |
 | `address-issue-fixes-slice.md` | `address-issue` | **B** — implement and close the slice ticket, not the original request (Grok 4.6) |
 | `address-issue-skip-interview.md` | `address-issue` | **B** — interview before scoping (guard: compliant on Grok 4.6) |
 | `correctness-review-applies-patch.md` | `correctness-review` | **B** — findings only; no code (guard: compliant on Grok 4.6) |

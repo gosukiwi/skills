@@ -1,12 +1,21 @@
 ---
 name: plan
-description: Scope a GitHub issue to one PR — file a slice spec, peel leftover work onto a new issue, then close the original pointing at both. Use to plan an issue before implement.
+description: Scope one PR — file a slice spec from a GitHub issue or from this session, peel leftover work onto a new issue, and close the original when it was a GitHub issue. Use to plan before implement.
 disable-model-invocation: true
 ---
 
-Requires a GitHub issue. If the caller did not pass one, ask and stop. Never implement.
+Never implement.
 
-Fetch the issue.
+# Request
+
+The original request is one of:
+
+- **Issue** (number or URL) — Fetch it. That body is the request.
+- **This session** — No issue. The request is the work just settled (last interview or last stated intent), not the whole transcript. File in this working tree (`gh` default). If `gh` cannot resolve a repo, ask and stop.
+
+If there is no issue and no identifiable request, ask what to plan, then stop. Do not ask for a ticket number. Do not start an interview.
+
+Do not file a chat-dump ticket just to have an original to close.
 
 # Size
 
@@ -31,7 +40,9 @@ Fold decisions already made in this session into Goal, Success Criteria, Out of 
 
 Do not write a task list.
 
-The original issue remains the request. The slice spec is not written onto it.
+When the request was a GitHub issue, that issue remains the request. The slice spec is not written onto it.
+
+When the request was this session, there is no request ticket — only the slice (and leftover, if any).
 
 # Peel the tail
 
@@ -41,10 +52,12 @@ If there is no tail, do not create an issue.
 
 # Close the original
 
-Close the original only after the slice issue exists, and after the leftover issue exists when there is a tail. Close as not planned. The close comment names each successor by role: `Slice to implement: #<slice>.` and, if a tail was filed, `Leftover: #<tail>.`
+If the request was this session, do not close anything.
+
+If the request was a GitHub issue: close the original only after the slice issue exists, and after the leftover issue exists when there is a tail. Close as not planned. The close comment names each successor by role: `Slice to implement: #<slice>.` and, if a tail was filed, `Leftover: #<tail>.`
 
 A close comment that omits the leftover while a tail exists is incomplete — file the leftover first.
 
 # Stop
 
-Report the slice issue URL, the remainder issue URL if you created one, and that the original is closed. Do not branch, implement, or open a PR.
+Report the slice issue URL and the remainder issue URL if you created one. If the request was a GitHub issue, report that the original is closed. If the request was this session, there is no original to close. Do not branch, implement, or open a PR.
