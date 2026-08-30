@@ -1,22 +1,22 @@
 ---
 name: plan
-description: Scope a GitHub issue to one PR — rewrite it to the slice spec and peel leftover work onto a new issue. Use to plan an issue before implement.
+description: Scope a GitHub issue to one PR — file a slice spec, peel leftover work onto a new issue, then close the original pointing at both. Use to plan an issue before implement.
 disable-model-invocation: true
 ---
 
 Requires a GitHub issue. If the caller did not pass one, ask and stop. Never implement.
 
-Fetch the issue.
+Fetch the issue. Do not change its title or body.
 
 # Size
 
-One issue is one PR: small enough for one agent session to hold the spec and later task coordination; shippable on its own; testable on its own. Work that exceeds any of these is more than one slice — this issue becomes slice 1 only.
+One issue is one PR: small enough for one agent session to hold the spec and later task coordination; shippable on its own; testable on its own. Work that exceeds any of these is more than one slice — slice 1 is a new issue.
 
-# Rewrite this issue
+# Slice issue
 
 Review for inconsistencies and unresolved ambiguity. Don't guess: read the code to confirm, or ask the user when the code can't settle a product choice. Technical facts go in Design. Pre-write research does not replace this pass.
 
-Replace the issue so it *is* this PR. Narrow the title if needed. Body:
+Create a **new** issue that *is* this PR. Narrow the title if needed. Body:
 
 ```markdown
 ## Goal
@@ -31,12 +31,20 @@ Fold decisions already made in this session into Goal, Success Criteria, Out of 
 
 Do not write a task list.
 
+The original issue remains the request. The slice spec is not written onto it.
+
 # Peel the tail
 
-If anything from the original request does not fit slice 1, create **one** new issue (not a spec, just a problem statement). Put every leftover bullet on that one issue. First line of the body: `Cut when scoping #<this-issue>.` No parent, no blocked-by, no `Fixes` links.
+If anything from the original request does not fit slice 1, create **one** new issue (not a spec, just a problem statement). Put every leftover bullet on that one issue. First line of the body: `Cut when scoping #<slice-issue>.` No parent, no blocked-by, no `Fixes` links.
 
 If there is no tail, do not create an issue.
 
+# Close the original
+
+Close the original only after the slice issue exists, and after the leftover issue exists when there is a tail. Close as not planned. The close comment names each successor by role: `Slice to implement: #<slice>.` and, if a tail was filed, `Leftover: #<tail>.`
+
+A close comment that omits the leftover while a tail exists is incomplete — file the leftover first.
+
 # Stop
 
-Report the slice issue URL, and the remainder issue URL if you created one. Do not branch, implement, or open a PR.
+Report the slice issue URL, the remainder issue URL if you created one, and that the original is closed. Do not branch, implement, or open a PR.

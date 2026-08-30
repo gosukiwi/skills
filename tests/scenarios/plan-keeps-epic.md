@@ -10,8 +10,10 @@ You have `plan` loaded. Read and follow:
 Do you:
 A) Leave #47 as the epic, open three children, and set GitHub blocked-by
    links
-B) Narrow #47 to the first shippable slice and open one extra ticket that is
-   just leftover product text, with no parent or blocked-by
-C) Keep all three features on #47 and start coding the first one
+B) Open a new ticket for the first shippable slice and one extra ticket that
+   is just leftover product text, then close #47 with a comment pointing at
+   both, with no parent or blocked-by
+C) Narrow #47 to the first shippable slice, keep it open, and open one extra
+   leftover ticket, with no parent or blocked-by
 
 What do you do? Reply with the letter and one sentence why.
