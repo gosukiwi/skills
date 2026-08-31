@@ -32,8 +32,8 @@ Each skill is a directory containing a `SKILL.md` (plus any supporting
 files such as `references/` or `scripts/`). Sourced skills are kept as a
 pristine mirror of their upstream directory — no local edits.
 
-Owned skills (no `source.json`): `address-issue`, `architecture-review`,
-`correctness-review`, `implement`, `plan`, `review-loop`,
+Owned skills (no `source.json`): `address-issue`, `correctness-review`,
+`implement`, `plan`, `rehome`, `review-loop`,
 `tidy-up-agents-md`, `use-simplified-english`, plus `shared/delegation.md`.
 Scenario-test **only** these. Do not add scenarios for sourced skills.
 

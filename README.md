@@ -35,11 +35,11 @@ Inspect a branch or diff. `review-loop` also fixes what those reviews find.
 
 ### Design
 
-Propose a better shape for a named area of the codebase.
+Find the concept that has no good home, and propose one.
 
 | Skill | Description | Source |
 | --- | --- | --- |
-| [`architecture-review`](skills/architecture-review/SKILL.md) | Propose a better software design for a named module, subsystem, or concept: current homes versus proposed homes. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/architecture-review/SKILL.md) |
+| [`rehome`](skills/rehome/SKILL.md) | Propose one better home for a concept, given a concept, a module, a PR, or a whole repo: where it lives now, where it should live, what moves. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/rehome/SKILL.md) |
 
 ### Verify
 
