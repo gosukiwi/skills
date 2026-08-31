@@ -30,6 +30,8 @@ What moves is modules and responsibilities, not functions. Callers that do not c
 
 # Output
 
+Avoid jargon and use Simplified Technical English (ASD-STE100).
+
 ```markdown
 ## Current
 Where it lives. Why the next instance is expensive.
