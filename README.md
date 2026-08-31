@@ -33,6 +33,14 @@ Inspect a branch or diff. `review-loop` also fixes what those reviews find.
 | [`review-loop`](skills/review-loop/SKILL.md) | Fix correctness findings in a loop via `correctness-review`, then fix the refactor findings worth fixing and report what's left. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/review-loop/SKILL.md) |
 | [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. | [cursor/plugins](https://github.com/cursor/plugins/blob/21327bee99f30a73758c99f6c6459571bc9f6e98/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md) |
 
+### Design
+
+Propose a better shape for a named area of the codebase.
+
+| Skill | Description | Source |
+| --- | --- | --- |
+| [`architecture-review`](skills/architecture-review/SKILL.md) | Propose a better software design for a named module, subsystem, or concept: current homes versus proposed homes. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/architecture-review/SKILL.md) |
+
 ### Verify
 
 Generate and keep honest a project-local skill that drives the app the way a user does.
