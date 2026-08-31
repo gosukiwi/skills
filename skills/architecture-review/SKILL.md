@@ -22,6 +22,10 @@ Authorization as a single `if` in a handler is a one-off. A `policies/` module â
 
 Read enough to see where the concept lives today. Do not audit lines.
 
+A review that names a home has counted the callers of the concept. Search for the name they go through, and give the report that count and the name you searched for. A project document tells you what its author meant; only the call sites tell you what is true today. This count is not a line audit and not a catalog of nits: it is a list of modules, and the design rests on it.
+
+A home that fits three callers and forces the fourth is not one home. When a caller wants something different from the rest, the report says so.
+
 # Proposed
 
 One design. A second only if another home is genuinely close.
@@ -34,7 +38,7 @@ Avoid jargon and use Simplified Technical English (ASD-STE100).
 
 ```markdown
 ## Current
-Where it lives. Why the next instance is expensive.
+Where it lives, and every caller you found. Why the next instance is expensive.
 
 ## Proposed
 The home. What moves. Why the next instance is cheaper.
@@ -42,7 +46,7 @@ The home. What moves. Why the next instance is cheaper.
 
 If a second home was close, add `## Also considered` with why not.
 
-No code. No patches. No `file:line` notes. No catalog of nits.
+No code. No patches. No `file:line` notes. No catalog of nits. Name each caller by its module.
 
 # Stop
 
