@@ -32,6 +32,8 @@ One design. A second only if another home is genuinely close.
 
 What moves is modules and responsibilities, not functions. Callers that do not care about the new instance should not have to change.
 
+A move keeps the behavior unless you say it does not. If the move changes what the code does, name the behavior and who sees it. If it keeps the behavior, say so in one clause. Do not list the work as a cost: that the move takes edits and tests is not news.
+
 # Output
 
 Avoid jargon and use Simplified Technical English (ASD-STE100).
@@ -41,7 +43,7 @@ Avoid jargon and use Simplified Technical English (ASD-STE100).
 Where it lives, and every caller you found. Why the next instance is expensive.
 
 ## Proposed
-The home. What moves. Why the next instance is cheaper.
+The home. What moves. What behavior changes, if any. Why the next instance is cheaper.
 ```
 
 If a second home was close, add `## Also considered` with why not.
