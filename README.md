@@ -30,6 +30,7 @@ Inspect a branch or diff. `review-loop` also fixes what those reviews find.
 | Skill | Description | Source |
 | --- | --- | --- |
 | [`correctness-review`](skills/correctness-review/SKILL.md) | Review a diff for functional bugs, security, intent fit, and whether tests actually prove the change. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/correctness-review/SKILL.md) |
+| [`explain-finding`](skills/explain-finding/SKILL.md) | Explain a review finding in a short, simple way, using code examples. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/explain-finding/SKILL.md) |
 | [`review-loop`](skills/review-loop/SKILL.md) | Fix correctness findings in a loop via `correctness-review`, then fix the refactor findings worth fixing and report what's left. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/review-loop/SKILL.md) |
 | [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. | [cursor/plugins](https://github.com/cursor/plugins/blob/21327bee99f30a73758c99f6c6459571bc9f6e98/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md) |
 
