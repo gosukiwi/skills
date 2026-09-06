@@ -81,6 +81,7 @@ Annotations name the model the run used.
 | `plan-edit-in-place.md` | `plan` | **B** — new ticket for the slice spec; do not replace the original body (Grok 4.6) |
 | `plan-close-before-tail.md` | `plan` | **B** — leftover ticket exists before close; close comment points at both (Grok 4.6) |
 | `address-issue-fixes-slice.md` | `address-issue` | **B** — implement and close the slice ticket, not the original request (Grok 4.6) |
+| `address-issue-ignore-worktrees.md` | `address-issue` | **B** — scratch checkout folder stays out of tracked status via shared ignore config |
 | `address-issue-skip-interview.md` | `address-issue` | **B** — interview before scoping (guard: compliant on Grok 4.6) |
 | `correctness-review-applies-patch.md` | `correctness-review` | **B** — findings only; no code (guard: compliant on Grok 4.6) |
 | `review-loop-green-without-fail-first.md` | `review-loop` | **B** — a fail on pre-fix code is required proof (guard: compliant on Grok 4.6) |
