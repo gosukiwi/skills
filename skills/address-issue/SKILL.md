@@ -18,7 +18,7 @@ Run the `plan` skill on that issue.
 
 # Implement
 
-Work in a new branch, in a new worktree inside `.worktrees/`. Before creating it, ensure `.worktrees/` is ignored by tracked config (`git check-ignore -q .worktrees || echo '.worktrees/' >> .gitignore`) so the checkout never shows as untracked or gets committed. Run the `implement` skill and pass the slice issue.
+Work in a new branch, in a new worktree inside `.worktrees/`. Before creating it, ensure `.worktrees/` is ignored by tracked config (`.gitignore`, not local exclude) so the checkout never shows as untracked or gets committed. Run the `implement` skill and pass the slice issue.
 
 # Review
 
