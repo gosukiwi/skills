@@ -18,7 +18,7 @@ Run the `plan` skill on that issue.
 
 # Implement
 
-Work in a new branch. Run the `implement` skill and pass the slice issue.
+Work in a new branch, in a new worktree inside `.worktrees/`. Run the `implement` skill and pass the slice issue.
 
 # Review
 
