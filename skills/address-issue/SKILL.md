@@ -1,6 +1,6 @@
 ---
 name: address-issue
-description: Take a GitHub issue from grilling through plan, implementation, review, and PR.
+description: Take a GitHub issue from grilling through slice, implementation, review, and PR.
 disable-model-invocation: true
 ---
 
@@ -12,9 +12,9 @@ This skill runs other skills. Read `shared/delegation.md` from your skills direc
 
 Read the issue, then run the `grilling` skill.
 
-# Plan
+# Slice
 
-Run the `plan` skill on that issue.
+Run the `slice` skill on that issue.
 
 # Implement
 

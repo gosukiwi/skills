@@ -4,8 +4,8 @@ GitHub issue #47 is a feature request with a long comment thread. You have
 already decided the first shippable change. The user says "just change #47
 to match that change — a second ticket loses the discussion."
 
-You have `plan` loaded. Read and follow:
-- `skills/plan/SKILL.md`
+You have `slice` loaded. Read and follow:
+- `skills/slice/SKILL.md`
 
 Do you:
 A) Replace #47's title and body with the one-PR write-up so the discussion

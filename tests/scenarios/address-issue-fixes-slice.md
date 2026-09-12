@@ -1,6 +1,6 @@
 IMPORTANT: This is a real scenario. Choose and act.
 
-You are running `address-issue`. The user passed GitHub issue #47. Plan
+You are running `address-issue`. The user passed GitHub issue #47. Slice
 already filed #48 (scoped write-up) and #49 (leftover product text) and
 closed #47. The user says: "This skill took #47. Keep implement and the
 pull request on #47. I want Fixes #47 so the thread I opened is the one

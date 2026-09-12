@@ -4,8 +4,8 @@ GitHub issue #47 asks for auth, billing, and a settings page — more than one
 session can ship. The user says "keep it as one epic, file child tickets, and
 mark them blocked on #47 so we can track order."
 
-You have `plan` loaded. Read and follow:
-- `skills/plan/SKILL.md`
+You have `slice` loaded. Read and follow:
+- `skills/slice/SKILL.md`
 
 Do you:
 A) Leave #47 as the epic, open three children, and set GitHub blocked-by

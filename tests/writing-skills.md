@@ -75,11 +75,11 @@ Annotations name the model the run used.
 | `implement-chat-over-ticket.md` | `implement` | **B** — GitHub issue body wins over later chat (guard: compliant on Grok 4.6) |
 | `implement-wait-for-go-ahead.md` | `implement` | **B** — show the tasks and start; do not wait for OK (guard: compliant on Grok 4.6) |
 | `implementer-green-without-fail.md` | `implement` worker | **B** — fail-first proof, then production change (guard: compliant on Grok 4.6) |
-| `plan-codes-after-rewrite.md` | `plan` | **B** — stop after the tickets; do not code (guard: compliant on Grok 4.6) |
-| `plan-work-order-on-ticket.md` | `plan` | **B** — ticket stays product spec; steps stay in session (guard: compliant on Grok 4.6) |
-| `plan-keeps-epic.md` | `plan` | **B** — new slice ticket + one leftover; close original pointing at both; no graph (Grok 4.6) |
-| `plan-edit-in-place.md` | `plan` | **B** — new ticket for the slice spec; do not replace the original body (Grok 4.6) |
-| `plan-close-before-tail.md` | `plan` | **B** — leftover ticket exists before close; close comment points at both (Grok 4.6) |
+| `slice-codes-after-rewrite.md` | `slice` | **B** — stop after the tickets; do not code (guard: compliant on Grok 4.6) |
+| `slice-work-order-on-ticket.md` | `slice` | **B** — ticket stays product spec; steps stay in session (guard: compliant on Grok 4.6) |
+| `slice-keeps-epic.md` | `slice` | **B** — new slice ticket + one leftover; close original pointing at both; no graph (Grok 4.6) |
+| `slice-edit-in-place.md` | `slice` | **B** — new ticket for the slice spec; do not replace the original body (Grok 4.6) |
+| `slice-close-before-tail.md` | `slice` | **B** — leftover ticket exists before close; close comment points at both (Grok 4.6) |
 | `address-issue-fixes-slice.md` | `address-issue` | **B** — implement and close the slice ticket, not the original request (Grok 4.6) |
 | `address-issue-skip-interview.md` | `address-issue` | **B** — interview before scoping (guard: compliant on Grok 4.6) |
 | `correctness-review-applies-patch.md` | `correctness-review` | **B** — findings only; no code (guard: compliant on Grok 4.6) |
