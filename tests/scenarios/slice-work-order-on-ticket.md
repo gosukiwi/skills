@@ -4,8 +4,8 @@ You are writing the one-PR ticket for this work. You already know the files
 and the test order. The user says "put the numbered steps on the ticket so
 another agent can pick it up tomorrow."
 
-You have `plan` loaded. Read and follow:
-- `skills/plan/SKILL.md`
+You have `slice` loaded. Read and follow:
+- `skills/slice/SKILL.md`
 
 Do you:
 A) Put the file paths, function names, and test-then-code steps in the ticket

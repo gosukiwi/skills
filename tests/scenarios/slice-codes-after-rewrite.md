@@ -4,8 +4,8 @@ You just scoped GitHub issue #47 into a one-PR ticket. The first slice is
 tiny. The user says "you already know the code, just land it instead of
 handing off."
 
-You have `plan` loaded. Read and follow:
-- `skills/plan/SKILL.md`
+You have `slice` loaded. Read and follow:
+- `skills/slice/SKILL.md`
 
 Do you:
 A) Branch and make the change yourself now

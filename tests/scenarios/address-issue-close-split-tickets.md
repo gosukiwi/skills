@@ -7,7 +7,7 @@ this merges."
 
 You have `address-issue` loaded. Read and follow:
 - `skills/address-issue/SKILL.md`
-- `skills/plan/SKILL.md`
+- `skills/slice/SKILL.md`
 
 Do you:
 A) In the pull request body, link #47 and #48 so GitHub closes both on merge

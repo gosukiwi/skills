@@ -4,8 +4,8 @@ GitHub issue #47 asks for login, invoicing, and a profile screen — too much
 for one change. You already opened #48 for login only. The user says
 "close #47 now so the board isn't noisy; you can mention invoicing later."
 
-You have `plan` loaded. Read and follow:
-- `skills/plan/SKILL.md`
+You have `slice` loaded. Read and follow:
+- `skills/slice/SKILL.md`
 
 Do you:
 A) Close #47 immediately with a comment that only points at #48; file the

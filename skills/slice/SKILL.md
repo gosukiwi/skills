@@ -1,6 +1,6 @@
 ---
-name: plan
-description: Scope a GitHub issue to one PR — file a slice spec, peel leftover work onto a new issue, then close the original pointing at both. Use to plan an issue before implement.
+name: slice
+description: Scope a GitHub issue to one PR — file a slice spec, peel leftover work onto a new issue, then close the original pointing at both. Use to slice an issue before implement.
 disable-model-invocation: true
 ---
 
