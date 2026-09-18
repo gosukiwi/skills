@@ -84,3 +84,5 @@ Annotations name the model the run used.
 | `address-issue-skip-interview.md` | `address-issue` | **B** — interview before scoping (guard: compliant on Grok 4.6) |
 | `correctness-review-applies-patch.md` | `correctness-review` | **B** — findings only; no code (guard: compliant on Grok 4.6) |
 | `review-loop-green-without-fail-first.md` | `review-loop` | **B** — a fail on pre-fix code is required proof (guard: compliant on Grok 4.6) |
+| `review-loop-uses-strongest-model.md` | `review-loop` | **B** — dispatch review subagents on the strongest available reasoning tier (gemini-3.8-flash) |
+| `correctness-review-runs-in-session.md` | `correctness-review` | **B** — review directly in the current session without spawning a subagent (gemini-3.8-flash) |
