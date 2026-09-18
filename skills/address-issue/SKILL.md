@@ -33,4 +33,4 @@ The PR body must contain:
 - A brief summary of what the PR does
 - Steps so the user can verify themselves that the issue has been properly addressed, built from the slice issue's Success Criteria
 - The remaining review findings as optional fixes, calling out separately anything left unfixed because it needed a rewrite
-- A "Merge Danger" section: 1) Is the PR easily reversible? Does it involve expensive migrations? 2) What's the blast radius? If things go wrong, how bad will it be? 3) Give a verdict on what's the danger of merging this PR and what would be the best way for a human reviewer to handle it
+- A "Merge Danger" section: 1) Is the PR easily reversible? Does it involve expensive migrations? 2) What's the blast radius? If things go wrong, how bad will it be (e.g. total service downtime/boot crash vs isolated feature failure)? Are there deployment prerequisites or configuration dependencies (e.g. new required ENV variables that will crash the server or prevent boot if missing)? 3) Give a verdict on what's the danger of merging this PR and what would be the best way for a human reviewer to handle it
