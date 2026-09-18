@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Use this skill to review the current branch thoroughly, while auto-fixing blocking changes.
 
-This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes.
+This skill runs other skills. Read `shared/delegation.md` and `shared/subagent-model-size.md` from your skills directory first, and resolve every skill below the way it describes.
 
 If the git tree is not clean (uncommitted changes), warn the user before continuing.
 
@@ -16,7 +16,7 @@ Establish this project's gate commands (lint, typecheck, tests) and run them onc
 
 ## 1. Correctness Review
 
-Run the `correctness-review` skill in a subagent (using the largest reasoning tier) to get the correctness findings.
+Run the `correctness-review` skill in a subagent (using the large tier per `shared/subagent-model-size.md`) to get the correctness findings.
 
 ## 2. Loop Fix Findings
 
@@ -26,7 +26,7 @@ Run step 1 again, re-reviewing for correctness and fixing findings until only Ni
 
 ## 3. Refactor Review
 
-Run the `thermo-nuclear-code-quality-review` skill in a subagent (using the largest reasoning tier), scoped to what this change introduced or made worse — not the surrounding codebase.
+Run the `thermo-nuclear-code-quality-review` skill in a subagent (using the large tier per `shared/subagent-model-size.md`), scoped to what this change introduced or made worse — not the surrounding codebase.
 
 It over-reports, so re-classify by what each problem costs later: Blocker if future edits here will likely introduce bugs or new code will copy the pattern, Should-Fix if it's real drag that gets more expensive with time, Nit otherwise.
 

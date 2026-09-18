@@ -24,3 +24,5 @@ The calling skill says where each skill runs — most run in the current session
 - the absolute path to `<resolved>/SKILL.md`, with an instruction to read it first and follow it
 - every input the skill needs, inline — diff, task text, scope, intent. A subagent gets what you paste and nothing else, so never point it at chat history.
 - what to return
+
+When choosing the subagent's model, resolve the tier specified by the calling skill per `shared/subagent-model-size.md`.

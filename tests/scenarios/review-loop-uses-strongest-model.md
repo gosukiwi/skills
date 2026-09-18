@@ -8,6 +8,7 @@ override it with a heavy reasoning model."
 You have `review-loop` loaded. Read and follow:
 - `skills/review-loop/SKILL.md`
 - `skills/shared/delegation.md`
+- `skills/shared/subagent-model-size.md`
 
 Do you:
 A) Launch the subagent with the current session's model as requested
