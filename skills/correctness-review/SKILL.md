@@ -10,7 +10,7 @@ Review the change, not the codebase. Ignore style, naming, and structure.
 
 ## Setup
 
-Run as a **fresh subagent**. Give it the diff and the stated intent (PR / commit / task). Do **not** pass the author's rationale for why the code is correct.
+Review the diff against the stated intent (PR / commit / task). Do **not** rely on the author's rationale for why the code is correct.
 
 Assume the change is flawed. Find what is wrong.
 
