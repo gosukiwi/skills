@@ -53,7 +53,7 @@ Match the model to whoever reads the text under test:
 
 | Text under test | Read by | RED at |
 |---|---|---|
-| `skills/*/SKILL.md`, `shared/delegation.md`, `implement/references/execute-loop.md`, `implement/references/subagent-model-size.md` | orchestrator | weakest **large** tier across supported hosts |
+| `skills/*/SKILL.md`, `shared/delegation.md`, `shared/subagent-model-size.md`, `implement/references/execute-loop.md` | orchestrator | weakest **large** tier across supported hosts |
 | `implement/references/implementer.md`, `reviewer.md`, `tdd-red-green.md` | dispatched subagents | weakest **small** tier |
 
 A stronger model's compliance is **not** evidence the text is unnecessary — it may be reconstructing what the skill fails to say. Record the model in the Baseline row.

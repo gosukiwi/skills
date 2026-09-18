@@ -16,7 +16,7 @@ Establish this project's gate commands (lint, typecheck, tests) and run them onc
 
 ## 1. Correctness Review
 
-Run the `correctness-review` skill in a subagent (using the largest reasoning tier) to get the correctness findings.
+Run the `correctness-review` skill in a subagent (large tier) to get the correctness findings.
 
 ## 2. Loop Fix Findings
 
@@ -26,7 +26,7 @@ Run step 1 again, re-reviewing for correctness and fixing findings until only Ni
 
 ## 3. Refactor Review
 
-Run the `thermo-nuclear-code-quality-review` skill in a subagent (using the largest reasoning tier), scoped to what this change introduced or made worse — not the surrounding codebase.
+Run the `thermo-nuclear-code-quality-review` skill in a subagent (large tier), scoped to what this change introduced or made worse — not the surrounding codebase.
 
 It over-reports, so re-classify by what each problem costs later: Blocker if future edits here will likely introduce bugs or new code will copy the pattern, Should-Fix if it's real drag that gets more expensive with time, Nit otherwise.
 
