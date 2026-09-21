@@ -22,7 +22,7 @@ Run the `correctness-review` skill in a subagent (large tier) to get the correct
 
 ## 2. Loop Fix Findings
 
-Fix Blockers and Should-Fix findings by dispatching an implementer subagent directly (do not run the `implement` skill — step 1 already serves as the review). Size the subagent per `shared/subagent-model-size.md`. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
+Fix Blockers and Should-Fix findings by dispatching an implementer subagent directly. Size the subagent per `shared/subagent-model-size.md`. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
 
 Run step 1 again, re-reviewing for correctness and fixing findings until only Nits remain and the gates are green.
 
