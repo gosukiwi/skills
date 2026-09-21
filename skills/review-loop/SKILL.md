@@ -8,8 +8,6 @@ disable-model-invocation: true
 
 Use this skill to review the current branch thoroughly, while auto-fixing blocking changes.
 
-Orchestrator only: **subagents** review and fix. No production code in this session.
-
 This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes.
 
 If the git tree is not clean (uncommitted changes), warn the user before continuing.
