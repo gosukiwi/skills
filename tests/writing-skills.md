@@ -74,6 +74,7 @@ Annotations name the model the run used.
 | `implement-overlap-tasks.md` | `implement` | **B** — task 1 review finishes before task 2 starts (guard: compliant on Grok 4.6) |
 | `implement-chat-over-ticket.md` | `implement` | **B** — GitHub issue body wins over later chat (guard: compliant on Grok 4.6) |
 | `implement-wait-for-go-ahead.md` | `implement` | **B** — show the tasks and start; do not wait for OK (guard: compliant on Grok 4.6) |
+| `implement-small-scope-batch.md` | `implement` | **A** — one worker pass plus one independent check for a ≤2-item scope; the check itself is never skipped (muse-spark-1.3) |
 | `implementer-green-without-fail.md` | `implement` worker | **B** — fail-first proof, then production change (guard: compliant on Grok 4.6) |
 | `slice-codes-after-rewrite.md` | `slice` | **B** — stop after the tickets; do not code (guard: compliant on Grok 4.6) |
 | `slice-work-order-on-ticket.md` | `slice` | **B** — ticket stays product spec; steps stay in session (guard: compliant on Grok 4.6) |

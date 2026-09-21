@@ -23,7 +23,9 @@ Print the task breakdown, then execute immediately.
 
 # Execute
 
-Follow `references/execute-loop.md`. Task text comes from the breakdown you just wrote — paste it into the prompt; do not tell subagents to read the issue or chat history.
+Fast path (breakdown is 1–2 tasks that fit one subagent pass): treat the whole scope as a single task — one implementer dispatch, then one reviewer over the combined diff. Size the implementer model to the whole scope per `shared/subagent-model-size.md`. The review is never skipped.
+
+Otherwise, follow `references/execute-loop.md`. Task text comes from the breakdown you just wrote — paste it into the prompt; do not tell subagents to read the issue or chat history.
 
 # Verify
 
