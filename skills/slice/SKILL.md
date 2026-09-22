@@ -16,7 +16,7 @@ One issue is one PR: small enough for one agent session to hold the spec and lat
 
 Review for inconsistencies and unresolved ambiguity. Don't guess: read the code to confirm, or ask the user when the code can't settle a product choice. Technical facts go in Design. Pre-write research does not replace this pass.
 
-Create a **new** issue that *is* this PR. Narrow the title if needed. Body:
+Create a **new** issue that *is* this PR. Narrow the title if needed. Keep the relevant tags from the old issue, and add the "slice" tag (create if needed). Body:
 
 ```markdown
 ## Goal
