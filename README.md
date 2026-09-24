@@ -15,10 +15,11 @@ the shared location my agents read from.
 
 ### Ship
 
-Take a GitHub issue from scope to a PR — the full pipeline, or one stage of it.
+Turn an idea into a GitHub issue, then take it from scope to a PR — the full pipeline, or one stage of it.
 
 | Skill | Description | Source |
 | --- | --- | --- |
+| [`create-issue`](skills/create-issue/SKILL.md) | Explore an idea with the user and draft a GitHub issue ready for `address-issue`. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/create-issue/SKILL.md) |
 | [`address-issue`](skills/address-issue/SKILL.md) | Take a GitHub issue from grilling through slice, implementation, review, and PR. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/address-issue/SKILL.md) |
 | [`slice`](skills/slice/SKILL.md) | Scope a GitHub issue to one PR: file a slice spec, peel leftover work onto a new issue, close the original pointing at both. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/slice/SKILL.md) |
 | [`implement`](skills/implement/SKILL.md) | Break a scope into TDD tasks and implement with subagent review. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/implement/SKILL.md) |

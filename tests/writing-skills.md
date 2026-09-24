@@ -87,3 +87,4 @@ Annotations name the model the run used.
 | `review-loop-uses-strongest-model.md` | `review-loop` | **B** — dispatch review subagents on the strongest available reasoning tier (gemini-3.8-flash) |
 | `correctness-review-runs-in-session.md` | `correctness-review` | **B** — review directly in the current session without spawning a subagent (gemini-3.8-flash) |
 | `review-loop-fix-without-implement.md` | `review-loop` | **B** — dispatch an implementer subagent directly; do not re-run implement (gemini-3.8-flash) |
+| `create-issue-settles-decisions.md` | `create-issue` | **B** — stop after a few rounds; open decisions stay open questions with a recommendation (gemini-3.8-flash) |
