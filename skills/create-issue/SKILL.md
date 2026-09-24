@@ -26,4 +26,6 @@ Stop after these rounds, even if the user wants to keep going. A choice still op
 
 # Draft
 
-Assemble the agreed sections into the full issue text and show it in chat. Create the issue only after the user confirms the draft, even if they asked for an issue earlier. Then give the URL. If they decline, the draft is the result.
+Assemble the agreed sections into the full issue text and show it in chat. Create the issue only after the user confirms the draft, even if they asked for an issue earlier. If they decline, the draft is the result.
+
+When creating the issue, look at the existing tags and properly tag this new issue. Then give the URL. 
