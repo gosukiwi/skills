@@ -14,6 +14,8 @@ If the git tree is not clean (uncommitted changes), warn the user before continu
 
 Establish this project's gate commands (lint, typecheck, tests) and run them once now. If something is already failing, say what, and treat it as pre-existing.
 
+Treat each review-and-fix pass as one iteration. After implementing that pass's fixes and running the relevant checks, create one coherent commit before starting the next review. Do not create empty commits, split one coherent batch into multiple commits, or mix unrelated iterations.
+
 ## 1. Correctness Review
 
 Run the `correctness-review` skill in a subagent (large tier) to get the correctness findings.
