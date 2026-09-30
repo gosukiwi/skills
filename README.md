@@ -72,7 +72,7 @@ How the session thinks with you, how it writes, and how it hands off.
 ## Usage
 
 ```sh
-bin/install   # sync skills to ~/.agents/skills
+bin/install   # sync skills to ~/.agents/skills and link them into ~/.claude/skills
 bin/update    # pull the latest version of sourced skills
 ```
 

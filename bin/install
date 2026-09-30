@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 #
 # Sync this repo's skills/ folder into ~/.agents/skills, mirroring exactly
-# (files that no longer exist in the repo are removed from the destination).
+# (files that no longer exist in the repo are removed from the destination),
+# then symlink each installed skill into ~/.claude/skills so Claude Code finds
+# it. Claude Code only discovers skills one level deep, so each skill needs its
+# own link.
 #
 set -euo pipefail
 
@@ -28,5 +31,42 @@ echo "Syncing $SRC -> $DEST"
 # source.json files are repo-only metadata (used by bin/update); the agents
 # only need the skills themselves, so keep them out of the installed folder.
 rsync -av --delete --exclude 'source.json' "$SRC" "$DEST"
+
+CLAUDE_DEST="$HOME/.claude/skills"
+mkdir -p "$CLAUDE_DEST"
+
+echo "Linking $DEST* -> $CLAUDE_DEST"
+
+# Drop links to skills that were removed from ~/.agents/skills. Only links that
+# point into $DEST are ours; anything else in ~/.claude/skills is left alone.
+for link in "$CLAUDE_DEST"/*; do
+  [ -L "$link" ] || continue
+  case "$(readlink "$link")" in
+    "$DEST"*)
+      if [ ! -e "$link" ]; then
+        rm "$link"
+        echo "  unlinked $(basename "$link")"
+      fi
+      ;;
+  esac
+done
+
+for skill in "$DEST"*/; do
+  [ -d "$skill" ] || continue
+  name="$(basename "$skill")"
+  target="${skill%/}"
+  link="$CLAUDE_DEST/$name"
+
+  if [ -L "$link" ] && [ "$(readlink "$link")" = "$target" ]; then
+    continue
+  fi
+  if [ -e "$link" ] || [ -L "$link" ]; then
+    echo "  skip     $name ($link already exists and is not our link)" >&2
+    continue
+  fi
+
+  ln -s "$target" "$link"
+  echo "  linked   $name"
+done
 
 echo "Done."

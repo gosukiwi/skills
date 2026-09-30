@@ -68,6 +68,12 @@ from the repo are also removed from the destination. `source.json` sidecars are
 excluded — the agents only need the skills themselves. Run it any time you add,
 edit, or remove a skill.
 
+It then symlinks each skill folder in `~/.agents/skills` into
+`~/.claude/skills/<name>`, because Claude Code only discovers skills one level
+deep and does not read `~/.agents/skills`. Links whose skill was removed are
+deleted. Existing entries in `~/.claude/skills` that are not links into
+`~/.agents/skills` are never touched; a name clash is reported and skipped.
+
 Requires `rsync` (preinstalled on macOS; `brew install rsync` otherwise). The
 script checks for it and exits with instructions if it's missing.
 
@@ -108,7 +114,7 @@ for them and exits with instructions if either is missing.
 | Command | Purpose |
 |---------|---------|
 | `make test-scenarios` | List scenario files (does not run agents) |
-| `bin/install` | Sync `skills/` to `~/.agents/skills` |
+| `bin/install` | Sync `skills/` to `~/.agents/skills` and link them into `~/.claude/skills` |
 | `bin/update` | Pull sourced skills from upstream |
 
 ## Iron Law
