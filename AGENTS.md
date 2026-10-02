@@ -107,8 +107,8 @@ requires `git`.
 
 1. Create `skills/<name>/SKILL.md` (and any supporting files).
 2. If it's sourced from elsewhere, add `skills/<name>/source.json` with `repo`
-   pointing at the upstream `SKILL.md` blob URL and a `description`, add a row
-   to the table in `README.md`, then run `bin/update` to pull the full upstream
+   pointing at the upstream `SKILL.md` blob URL and a `description`, add it to
+   the list in `README.md`, then run `bin/update` to pull the full upstream
    directory.
 3. Run `bin/install`.
 
