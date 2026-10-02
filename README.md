@@ -69,10 +69,63 @@ How the session thinks with you, how it writes, and how it hands off.
 | --- | --- | --- |
 | [`tidy-up-agents-md`](skills/tidy-up-agents-md/SKILL.md) | Refactor an `AGENTS.md` into a minimal root file plus linked topic docs, following progressive disclosure. | [aihero.dev](https://www.aihero.dev/a-complete-guide-to-agents-md) |
 
-## Usage
+## Install these skills
+
+These are personal skills, but you're welcome to use them. The
+non-destructive way is to clone the repo and symlink each skill into the
+skills directory your agent reads — nothing already there is touched, and a
+single `git pull` updates everything.
+
+Claude Code reads personal skills from `~/.claude/skills/`; Codex, Cursor and
+the other agents in this repo's setup read the shared `~/.agents/skills/`. Use
+whichever your agent loads.
 
 ```sh
-bin/install   # sync skills to ~/.agents/skills
+git clone https://github.com/gosukiwi/skills.git ~/src/skills
+
+REPO="$HOME/src/skills"
+DEST="$HOME/.claude/skills"   # or ~/.agents/skills
+mkdir -p "$DEST"
+
+for entry in "$REPO"/skills/*; do
+  name="$(basename "$entry")"
+  if [ -e "$DEST/$name" ] || [ -L "$DEST/$name" ]; then
+    echo "skip  $name (already exists)"
+  else
+    ln -s "$entry" "$DEST/$name"
+  fi
+done
+```
+
+`skills/shared/` has to be linked alongside the skills: `address-issue`,
+`review-loop` and `implement` read `shared/delegation.md` and
+`shared/subagent-model-size.md` from your skills directory.
+
+Update later with:
+
+```sh
+git -C ~/src/skills pull
+```
+
+The symlinks point into the clone, so the new files are picked up with no
+re-copying. If your setup can't follow symlinks, copy instead
+(`cp -R "$REPO"/skills/* "$DEST"/`) and re-run it after each pull.
+
+**Name clashes.** The loop skips any skill whose name already exists in the
+destination, so your own skills are never overwritten. To take the repo's
+version instead, remove or rename your copy first. Note that under Claude Code
+a personal (`~/.claude/skills/`) skill already wins over a project skill of the
+same name, so both can coexist — the personal one is the one that runs.
+
+## Maintainer scripts
+
+`bin/install` is how *this* machine stays in sync. It uses `rsync --delete`,
+so it makes `~/.agents/skills` an exact mirror of `skills/` and **deletes
+anything else** in that directory. Don't hand it to someone else — give them
+the install steps above instead.
+
+```sh
+bin/install   # mirror skills/ to ~/.agents/skills (destructive)
 bin/update    # pull the latest version of sourced skills
 ```
 
