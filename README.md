@@ -71,14 +71,15 @@ How the session thinks with you, how it writes, and how it hands off.
 
 ## Install these skills
 
-These are personal skills, but you're welcome to use them. Clone the repo and
-run `bin/setup-gosukiwi` — it symlinks each skill into the skills directory
-you pick (`~/.claude/skills` by default, for Claude Code). Nothing already
-there is touched, and a single `git pull` updates everything.
+These are personal skills, but you're welcome to use them. Clone the repo
+wherever you like and run `bin/setup-gosukiwi` from it — it symlinks each
+skill into the skills directory you pick (`~/.claude/skills` by default, for
+Claude Code). Nothing already there is touched, and a single `git pull`
+updates everything.
 
 ```sh
-git clone https://github.com/gosukiwi/skills.git ~/src/skills
-~/src/skills/bin/setup-gosukiwi
+git clone https://github.com/gosukiwi/skills.git ~/gosukiwi-skills
+~/gosukiwi-skills/bin/setup-gosukiwi
 ```
 
 The script asks where to link: `~/.claude/skills` for Claude Code, or
