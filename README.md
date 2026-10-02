@@ -72,18 +72,18 @@ How the session thinks with you, how it writes, and how it hands off.
 ## Install these skills
 
 These are personal skills, but you're welcome to use them. Clone the repo and
-run `bin/gosukiwi` — it symlinks each skill into the skills directory you pick
-(`~/.claude/skills` by default, for Claude Code). Nothing already there is
-touched, and a single `git pull` updates everything.
+run `bin/setup-gosukiwi` — it symlinks each skill into the skills directory
+you pick (`~/.claude/skills` by default, for Claude Code). Nothing already
+there is touched, and a single `git pull` updates everything.
 
 ```sh
 git clone https://github.com/gosukiwi/skills.git ~/src/skills
-~/src/skills/bin/gosukiwi
+~/src/skills/bin/setup-gosukiwi
 ```
 
 The script asks where to link: `~/.claude/skills` for Claude Code, or
 `~/.agents/skills` for Codex, Cursor and the other agents in this repo's setup.
-Run `bin/gosukiwi --help` for the options — `--dest DIR` skips the prompt,
+Run `bin/setup-gosukiwi --help` for the options — `--dest DIR` skips the prompt,
 `--copy` copies instead of symlinking (for setups that can't follow symlinks),
 and `--update` runs `git pull` first.
 

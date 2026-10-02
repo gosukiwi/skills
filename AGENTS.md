@@ -86,7 +86,7 @@ After updating, run `bin/install` to sync the changes to `~/.agents/skills`.
 Requires `curl` and `python3` (both preinstalled on macOS). The script checks
 for them and exits with instructions if either is missing.
 
-## bin/gosukiwi
+## bin/setup-gosukiwi
 
 The non-destructive counterpart to `bin/install`, for people who are not me.
 Links every entry in `skills/` (including `shared/`) into an agent's skills
@@ -123,7 +123,7 @@ requires `git`.
 | `make test-scenarios` | List scenario files (does not run agents) |
 | `bin/install` | Sync `skills/` to `~/.agents/skills` |
 | `bin/update` | Pull sourced skills from upstream |
-| `bin/gosukiwi` | Link skills into an agent dir (non-destructive, for others) |
+| `bin/setup-gosukiwi` | Link skills into an agent dir (non-destructive, for others) |
 
 ## Iron Law
 

@@ -27,7 +27,7 @@ usage() {
   cat <<'EOF'
 Link this repo's skills into an agent's skills directory.
 
-Usage: bin/gosukiwi [options]
+Usage: bin/setup-gosukiwi [options]
 
 Options:
   --dest DIR   Link into DIR (skips the prompt)
