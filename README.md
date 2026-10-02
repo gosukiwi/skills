@@ -74,8 +74,8 @@ How the session thinks with you, how it writes, and how it hands off.
 These are personal skills, but you're welcome to use them. Clone the repo
 wherever you like and run `bin/setup-gosukiwi` from it — it symlinks each
 skill into the skills directory you pick (`~/.claude/skills` by default, for
-Claude Code). Nothing already there is touched, and a single `git pull`
-updates everything.
+Claude Code). It's safe to re-run, and it only ever touches skills it
+installed.
 
 ```sh
 git clone https://github.com/gosukiwi/skills.git ~/gosukiwi-skills
@@ -84,17 +84,22 @@ git clone https://github.com/gosukiwi/skills.git ~/gosukiwi-skills
 
 The script asks where to link: `~/.claude/skills` for Claude Code, or
 `~/.agents/skills` for Codex, Cursor and the other agents in this repo's setup.
-Run `bin/setup-gosukiwi --help` for the options — `--dest DIR` skips the prompt,
-`--copy` copies instead of symlinking (for setups that can't follow symlinks),
-and `--update` runs `git pull` first.
+Run `bin/setup-gosukiwi --help` for the options — `--dest DIR` skips the prompt
+and `--copy` copies instead of symlinking (for setups that can't follow
+symlinks).
 
 `skills/shared/` is linked along with the skills: `address-issue`,
 `review-loop` and `implement` read `shared/delegation.md` and
 `shared/subagent-model-size.md` from your skills directory.
 
-**Name clashes.** The script skips any skill whose name already exists in the
-destination, so your own skills are never overwritten. To take the repo's
-version instead, remove or rename your copy first. Under Claude Code a personal
+**Updating.** The skills are symlinks into the clone, so `git pull` brings in
+the new content. Run `bin/setup-gosukiwi` again afterwards to link any skills
+added upstream (`--update` does both in one go).
+
+**Name clashes.** The script only refreshes skills it installed. If the
+destination already has a skill with the same name that it didn't create — one
+of yours, say — it is skipped and never overwritten. To take the repo's version
+instead, remove or rename your copy first. Under Claude Code a personal
 (`~/.claude/skills/`) skill also wins over a project skill of the same name.
 
 ## Maintainer scripts

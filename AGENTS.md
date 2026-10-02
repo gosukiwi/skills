@@ -90,11 +90,15 @@ for them and exits with instructions if either is missing.
 
 The non-destructive counterpart to `bin/install`, for people who are not me.
 Links every entry in `skills/` (including `shared/`) into an agent's skills
-directory as symlinks, skipping any name that already exists — nothing is ever
-deleted. It prompts for the destination, defaulting to `~/.claude/skills`
-(Claude Code); `--dest DIR`, `--copy`, `--update`, and `-y` override that.
-Because the links point into the checkout, `git pull` updates the installed
-skills.
+directory as symlinks; nothing is ever deleted. It prompts for the destination,
+defaulting to `~/.claude/skills` (Claude Code); `--dest DIR`, `--copy`,
+`--update`, and `-y` override that.
+
+Running it again is safe and idempotent: it refreshes the links it made and
+skips any name it didn't install. Because the links point into the checkout,
+`git pull` is what brings in new content — re-run afterwards to link skills
+added upstream. (`--copy` snapshots instead and records what it installed in
+`<dest>/.setup-gosukiwi-manifest`, so a re-run can refresh those copies too.)
 
 Requires `ln` (or `cp` when run with `--copy`); `--update` additionally
 requires `git`.
