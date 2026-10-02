@@ -86,6 +86,19 @@ After updating, run `bin/install` to sync the changes to `~/.agents/skills`.
 Requires `curl` and `python3` (both preinstalled on macOS). The script checks
 for them and exits with instructions if either is missing.
 
+## bin/gosukiwi
+
+The non-destructive counterpart to `bin/install`, for people who are not me.
+Links every entry in `skills/` (including `shared/`) into an agent's skills
+directory as symlinks, skipping any name that already exists — nothing is ever
+deleted. It prompts for the destination, defaulting to `~/.claude/skills`
+(Claude Code); `--dest DIR`, `--copy`, `--update`, and `-y` override that.
+Because the links point into the checkout, `git pull` updates the installed
+skills.
+
+Requires `ln` (or `cp` when run with `--copy`); `--update` additionally
+requires `git`.
+
 ## Adding a skill
 
 1. Create `skills/<name>/SKILL.md` (and any supporting files).
@@ -110,6 +123,7 @@ for them and exits with instructions if either is missing.
 | `make test-scenarios` | List scenario files (does not run agents) |
 | `bin/install` | Sync `skills/` to `~/.agents/skills` |
 | `bin/update` | Pull sourced skills from upstream |
+| `bin/gosukiwi` | Link skills into an agent dir (non-destructive, for others) |
 
 ## Iron Law
 

@@ -71,58 +71,36 @@ How the session thinks with you, how it writes, and how it hands off.
 
 ## Install these skills
 
-These are personal skills, but you're welcome to use them. The
-non-destructive way is to clone the repo and symlink each skill into the
-skills directory your agent reads — nothing already there is touched, and a
-single `git pull` updates everything.
-
-Claude Code reads personal skills from `~/.claude/skills/`; Codex, Cursor and
-the other agents in this repo's setup read the shared `~/.agents/skills/`. Use
-whichever your agent loads.
+These are personal skills, but you're welcome to use them. Clone the repo and
+run `bin/gosukiwi` — it symlinks each skill into the skills directory you pick
+(`~/.claude/skills` by default, for Claude Code). Nothing already there is
+touched, and a single `git pull` updates everything.
 
 ```sh
 git clone https://github.com/gosukiwi/skills.git ~/src/skills
-
-REPO="$HOME/src/skills"
-DEST="$HOME/.claude/skills"   # or ~/.agents/skills
-mkdir -p "$DEST"
-
-for entry in "$REPO"/skills/*; do
-  name="$(basename "$entry")"
-  if [ -e "$DEST/$name" ] || [ -L "$DEST/$name" ]; then
-    echo "skip  $name (already exists)"
-  else
-    ln -s "$entry" "$DEST/$name"
-  fi
-done
+~/src/skills/bin/gosukiwi
 ```
 
-`skills/shared/` has to be linked alongside the skills: `address-issue`,
+The script asks where to link: `~/.claude/skills` for Claude Code, or
+`~/.agents/skills` for Codex, Cursor and the other agents in this repo's setup.
+Run `bin/gosukiwi --help` for the options — `--dest DIR` skips the prompt,
+`--copy` copies instead of symlinking (for setups that can't follow symlinks),
+and `--update` runs `git pull` first.
+
+`skills/shared/` is linked along with the skills: `address-issue`,
 `review-loop` and `implement` read `shared/delegation.md` and
 `shared/subagent-model-size.md` from your skills directory.
 
-Update later with:
-
-```sh
-git -C ~/src/skills pull
-```
-
-The symlinks point into the clone, so the new files are picked up with no
-re-copying. If your setup can't follow symlinks, copy instead
-(`cp -R "$REPO"/skills/* "$DEST"/`) and re-run it after each pull.
-
-**Name clashes.** The loop skips any skill whose name already exists in the
+**Name clashes.** The script skips any skill whose name already exists in the
 destination, so your own skills are never overwritten. To take the repo's
-version instead, remove or rename your copy first. Note that under Claude Code
-a personal (`~/.claude/skills/`) skill already wins over a project skill of the
-same name, so both can coexist — the personal one is the one that runs.
+version instead, remove or rename your copy first. Under Claude Code a personal
+(`~/.claude/skills/`) skill also wins over a project skill of the same name.
 
 ## Maintainer scripts
 
 `bin/install` is how *this* machine stays in sync. It uses `rsync --delete`,
 so it makes `~/.agents/skills` an exact mirror of `skills/` and **deletes
-anything else** in that directory. Don't hand it to someone else — give them
-the install steps above instead.
+anything else** in that directory.
 
 ```sh
 bin/install   # mirror skills/ to ~/.agents/skills (destructive)
