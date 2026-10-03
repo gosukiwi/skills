@@ -12,6 +12,10 @@ directory. With no destination option it asks where to install, defaulting to
 skips the prompt when there is no terminal. `--copy` copies instead of
 symlinking, and `--update` runs `git pull --ff-only` first.
 
+Claude Code discovers skills only one level deep and does not read
+`~/.agents/skills`, so install into `~/.claude/skills` for it — or use `--both`
+to cover Claude Code and the other agents in one run.
+
 Safe to re-run. It refreshes what it installed, skips any name it didn't create,
 and prunes links whose source has disappeared from the repo — nothing else in
 the destination is touched. `--force` replaces whatever sits at a matching name;
