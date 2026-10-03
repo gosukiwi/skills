@@ -1,72 +1,275 @@
 #!/usr/bin/env bash
 #
-# Sync this repo's skills/ folder into ~/.agents/skills, mirroring exactly
-# (files that no longer exist in the repo are removed from the destination),
-# then symlink each installed skill into ~/.claude/skills so Claude Code finds
-# it. Claude Code only discovers skills one level deep, so each skill needs its
-# own link.
+# Install this repo's skills into one or more agent skills directories.
+#
+# Only touches skills that come from this repo: each entry in skills/ (including
+# shared/) is linked into the destination, a name it doesn't own is left alone,
+# and links whose source has disappeared from the repo are pruned. Safe to
+# re-run.
 #
 set -euo pipefail
 
 # Resolve the repo root regardless of where the script is invoked from.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-
-SRC="$REPO_ROOT/skills/"
-DEST="$HOME/.agents/skills/"
-
-if ! command -v rsync >/dev/null 2>&1; then
-  echo "Error: rsync is not installed." >&2
-  echo >&2
-  echo "Install it with Homebrew, then re-run this script:" >&2
-  echo "    brew install rsync" >&2
-  echo >&2
-  echo "(If you don't have Homebrew, install it from https://brew.sh)" >&2
-  exit 1
-fi
-
-mkdir -p "$DEST"
-
-echo "Syncing $SRC -> $DEST"
-# source.json files are repo-only metadata (used by bin/update); the agents
-# only need the skills themselves, so keep them out of the installed folder.
-rsync -av --delete --exclude 'source.json' "$SRC" "$DEST"
+SKILLS_DIR="$REPO_ROOT/skills"
 
 CLAUDE_DEST="$HOME/.claude/skills"
-mkdir -p "$CLAUDE_DEST"
+AGENTS_DEST="$HOME/.agents/skills"
 
-echo "Linking $DEST* -> $CLAUDE_DEST"
+DEST=""
+DEST2=""
+DEST_SET=0
+USE_COPY=0
+DO_UPDATE=0
+FORCE=0
+ASSUME_YES=0
 
-# Drop links to skills that were removed from ~/.agents/skills. Only links that
-# point into $DEST are ours; anything else in ~/.claude/skills is left alone.
-for link in "$CLAUDE_DEST"/*; do
-  [ -L "$link" ] || continue
-  case "$(readlink "$link")" in
-    "$DEST"*)
-      if [ ! -e "$link" ]; then
-        rm "$link"
-        echo "  unlinked $(basename "$link")"
-      fi
+usage() {
+  cat <<'EOF'
+Install this repo's skills into an agent's skills directory.
+
+Usage: bin/install [options]
+
+Options:
+  --dest DIR   Install into DIR
+  --claude     Install into ~/.claude/skills (Claude Code)
+  --both       Install into both ~/.claude/skills and ~/.agents/skills
+  --copy       Copy the files instead of symlinking
+  --update     git pull --ff-only before installing
+  --force      Replace anything already at a matching name (one-time migration)
+  -y, --yes    With no destination option, skip the prompt (uses ~/.claude/skills)
+  -h, --help   Show this help
+
+With no destination option it asks where to install, defaulting to
+~/.claude/skills. Safe to re-run: it refreshes what it installed, skips any
+skill it didn't create, and prunes links whose source is gone from this repo.
+Nothing else in the destination is touched.
+EOF
+}
+
+die() { echo "Error: $*" >&2; exit 1; }
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --dest)
+      [ $# -ge 2 ] || die "--dest needs a directory"
+      DEST="$2"
+      DEST2=""
+      DEST_SET=1
+      shift 2
       ;;
+    --dest=*) DEST="${1#--dest=}"; DEST2=""; DEST_SET=1; shift ;;
+    --claude) DEST="$CLAUDE_DEST"; DEST2=""; DEST_SET=1; shift ;;
+    --both) DEST="$CLAUDE_DEST"; DEST2="$AGENTS_DEST"; DEST_SET=1; shift ;;
+    --copy) USE_COPY=1; shift ;;
+    --update) DO_UPDATE=1; shift ;;
+    --force) FORCE=1; shift ;;
+    -y|--yes) ASSUME_YES=1; shift ;;
+    -h|--help) usage; exit 0 ;;
+    *) die "unknown option: $1 (try --help)" ;;
   esac
 done
 
-for skill in "$DEST"*/; do
-  [ -d "$skill" ] || continue
-  name="$(basename "$skill")"
-  target="${skill%/}"
-  link="$CLAUDE_DEST/$name"
+[ -d "$SKILLS_DIR" ] || die "couldn't find skills/ next to this script (looked in $REPO_ROOT)."
 
-  if [ -L "$link" ] && [ "$(readlink "$link")" = "$target" ]; then
-    continue
+choose_dest() {
+  local answer custom
+  {
+    echo
+    echo "Where should I install the skills?"
+    echo "  1) $CLAUDE_DEST  (Claude Code)"
+    echo "  2) $AGENTS_DEST  (Codex, Cursor, other agents)"
+    echo "  3) Both"
+    echo "  4) A custom path"
+    printf 'Choose [1]: '
+  } > /dev/tty
+  read -r answer < /dev/tty || answer=""
+  case "$answer" in
+    ""|1) DEST="$CLAUDE_DEST"; DEST2="" ;;
+    2) DEST="$AGENTS_DEST"; DEST2="" ;;
+    3) DEST="$CLAUDE_DEST"; DEST2="$AGENTS_DEST" ;;
+    4)
+      printf 'Path: ' > /dev/tty
+      read -r custom < /dev/tty || custom=""
+      [ -n "$custom" ] || die "no path given."
+      DEST="$custom"
+      DEST2=""
+      ;;
+    *) die "unrecognized choice: $answer" ;;
+  esac
+}
+
+# No destination option: ask, unless told to skip or there is no terminal.
+if [ "$DEST_SET" -eq 0 ]; then
+  if [ "$ASSUME_YES" -eq 1 ] || [ ! -r /dev/tty ] || [ ! -w /dev/tty ]; then
+    DEST="$CLAUDE_DEST"
+    DEST2=""
+  else
+    choose_dest
   fi
-  if [ -e "$link" ] || [ -L "$link" ]; then
-    echo "  skip     $name ($link already exists and is not our link)" >&2
-    continue
+fi
+
+# Symlinking needs 'ln', copying needs 'cp'; git is only needed to update.
+if [ "$USE_COPY" -eq 1 ]; then
+  command -v cp >/dev/null 2>&1 || die "'cp' is not installed."
+else
+  command -v ln >/dev/null 2>&1 || die "'ln' is not installed."
+fi
+
+if [ "$DO_UPDATE" -eq 1 ]; then
+  command -v git >/dev/null 2>&1 || die "--update needs git, which isn't installed. Install git, or drop --update."
+  [ -d "$REPO_ROOT/.git" ] || die "--update needs a git checkout; $REPO_ROOT is not one."
+  echo "Updating $REPO_ROOT"
+  git -C "$REPO_ROOT" pull --ff-only
+fi
+
+# Expand a leading ~ and make the path absolute.
+resolve_dest() {
+  local d="$1"
+  d="${d/#\~/$HOME}"
+  case "$d" in
+    /*) ;;
+    *) d="$PWD/$d" ;;
+  esac
+  printf '%s\n' "$d"
+}
+
+DEST="$(resolve_dest "$DEST")"
+if [ -n "$DEST2" ]; then
+  DEST2="$(resolve_dest "$DEST2")"
+fi
+
+# A copy is ours if a previous --copy run recorded it in the manifest.
+is_owned_copy() {
+  [ -f "$1" ] && grep -Fxq -- "$2" "$1"
+}
+
+install_into() {
+  local DEST="$1"
+  local COPY_MANIFEST="$DEST/.install-skills-manifest"
+  local linked=0 refreshed=0 unchanged=0 skipped=0 pruned=0 failed=0
+  local installed entry name target was_refresh
+
+  mkdir -p "$DEST" || die "couldn't create $DEST"
+
+  echo "Installing skills from $SKILLS_DIR"
+  echo "                    to $DEST"
+
+  installed="$(mktemp)"
+
+  for entry in "$SKILLS_DIR"/*; do
+    [ -e "$entry" ] || continue
+    name="$(basename "$entry")"
+    target="$DEST/$name"
+    was_refresh=0
+
+    # A symlink we made earlier: leave it alone, or skip if it points elsewhere.
+    if [ -L "$target" ] && [ "$USE_COPY" -eq 0 ]; then
+      if [ "$(readlink "$target")" = "$entry" ]; then
+        echo "  ok      $name"
+        unchanged=$((unchanged + 1))
+        continue
+      fi
+      if [ "$FORCE" -eq 0 ]; then
+        echo "  skip    $name (symlink to $(readlink "$target"))"
+        skipped=$((skipped + 1))
+        continue
+      fi
+      rm -f "$target"
+    fi
+
+    # Something is already there.
+    if [ -e "$target" ]; then
+      if { [ "$USE_COPY" -eq 1 ] && is_owned_copy "$COPY_MANIFEST" "$name"; } || [ "$FORCE" -eq 1 ]; then
+        if rm -rf "$target"; then
+          was_refresh=1
+        else
+          echo "  fail    $name" >&2
+          failed=$((failed + 1))
+          continue
+        fi
+      else
+        echo "  skip    $name (already exists, not ours)"
+        skipped=$((skipped + 1))
+        continue
+      fi
+    fi
+
+    if [ "$USE_COPY" -eq 1 ]; then
+      if cp -R "$entry" "$target"; then
+        if [ "$was_refresh" -eq 1 ]; then
+          echo "  refresh $name"
+          refreshed=$((refreshed + 1))
+        else
+          echo "  copied  $name"
+          linked=$((linked + 1))
+        fi
+        printf '%s\n' "$name" >> "$installed"
+      else
+        echo "  fail    $name" >&2
+        failed=$((failed + 1))
+      fi
+    else
+      if ln -s "$entry" "$target"; then
+        echo "  linked  $name"
+        linked=$((linked + 1))
+      else
+        echo "  fail    $name" >&2
+        failed=$((failed + 1))
+      fi
+    fi
+  done
+
+  # Prune only what this repo owns and no longer ships.
+  if [ "$USE_COPY" -eq 1 ]; then
+    if [ -f "$COPY_MANIFEST" ]; then
+      while IFS= read -r old || [ -n "$old" ]; do
+        [ -n "$old" ] || continue
+        grep -Fxq -- "$old" "$installed" && continue
+        if [ -e "$DEST/$old" ] || [ -L "$DEST/$old" ]; then
+          if rm -rf "$DEST/$old"; then
+            echo "  pruned  $old"
+            pruned=$((pruned + 1))
+          fi
+        fi
+      done < "$COPY_MANIFEST"
+    fi
+    sort -u "$installed" > "$COPY_MANIFEST"
+  else
+    while IFS= read -r link; do
+      [ -L "$link" ] || continue
+      target="$(readlink "$link")"
+      case "$target" in
+        "$SKILLS_DIR"/*)
+          if [ ! -e "$target" ]; then
+            if rm -f "$link"; then
+              echo "  pruned  $(basename "$link")"
+              pruned=$((pruned + 1))
+            fi
+          fi
+          ;;
+      esac
+    done < <(find "$DEST" -maxdepth 1 -type l)
+  fi
+  rm -f "$installed"
+
+  echo
+  echo "Linked $linked, refreshed $refreshed, unchanged $unchanged, skipped $skipped, pruned $pruned, failed $failed."
+  if [ "$USE_COPY" -eq 1 ]; then
+    echo "Copies are snapshots: run 'git -C \"$REPO_ROOT\" pull' then this script again to refresh them."
+  else
+    echo "Links point into $REPO_ROOT, so 'git -C \"$REPO_ROOT\" pull' updates them."
   fi
 
-  ln -s "$target" "$link"
-  echo "  linked   $name"
-done
+  [ "$failed" -eq 0 ]
+}
 
-echo "Done."
+ok=0
+install_into "$DEST" || ok=1
+if [ -n "$DEST2" ]; then
+  echo
+  install_into "$DEST2" || ok=1
+fi
+
+exit "$ok"

@@ -2,15 +2,57 @@
 
 Skill changes use RED→GREEN like TDD. Scenarios are the failing tests.
 
-**Mandatory process:** see **Iron Law** in `AGENTS.md` — RED scenario → RED run → edit skills → GREEN run.
+Test **owned** skills only (no `source.json`); the list is in
+[`../docs/layout.md`](../docs/layout.md). Do not scenario sourced skills.
 
-Test **owned** skills only (no `source.json`). Do not scenario sourced skills.
+## Iron Law
+
+```
+NO SKILL CHANGE WITHOUT A FAILING SCENARIO FIRST
+```
+
+Any change to behaviour under owned `skills/` — including `shared/delegation.md`,
+`shared/subagent-model-size.md`, and an owned skill's `references/` — **must**
+follow this order. Do not reorder or skip. Sourced skills are not edited here,
+so they are out of scope.
+
+| Step | Action | Done when |
+|------|--------|-----------|
+| **1 — RED (write)** | Add or update `tests/scenarios/<skill>-<trap>.md`; register it in the [Baseline](#baseline) table below | Scenario traps one specific rationalization under pressure |
+| **2 — RED (run)** | Launch a **Task subagent** pointed at **pre-change** skills (`git show HEAD:skills/...` or stash edits); paste the scenario; return the choice **verbatim** | Subagent picks the **non-compliant** option (or rationalizes the violation) |
+| **3 — GREEN (edit)** | Edit `skills/` only after step 2 passes | Skill text blocks the rationalization seen in RED |
+| **4 — GREEN (run)** | Same subagent setup with **current** tree skills; paste the same scenario | Subagent picks the **compliant** option and cites the rule |
+
+If you already edited `skills/` before RED: that edit is **invalid** — revert or
+stash, run RED on the committed (pre-change) skills, then continue.
+
+If RED passes on old skills (agent already compliant): the scenario is **too
+weak** — sharpen it; do not edit skills yet.
+
+### Forbidden before RED run (step 2) completes
+
+- Editing `skills/**` for the behavior under test
+- Treating “the skill text looks correct” as RED evidence
+- Skipping scenarios because they are “manual”
+- Weakening a scenario so it passes on old skills
+
+### Exceptions (no scenario)
+
+- Pure wording / typos with **no** behavior or discipline change
+- Docs-only (`README.md`, `AGENTS.md`, `docs/**`, `tests/writing-skills.md`) with no skill edit
+- Sourced skills (`source.json` present) — never edit them locally
+- New file that introduces **no** new agent behavior
+
+When unsure whether behavior changed: **treat it as discipline** — follow Iron
+Law.
 
 ## When to scenario-test
 
-**Do:** discipline agents skip under pressure (orchestrator writes code, review-loop rewrites the GitHub issue, implement trusts chat over the issue body, a PR closes a ticket this change did not ship).
+**Do:** discipline agents skip under pressure (orchestrator writes code,
+review-loop rewrites the GitHub issue, implement trusts chat over the issue body,
+a PR closes a ticket this change did not ship).
 
-**Skip:** Iron Law exceptions in `AGENTS.md`.
+**Skip:** the exceptions above.
 
 ## Scenario recipe
 
@@ -32,20 +74,35 @@ C) [other loophole]
 What do you do? Reply with the letter and one sentence why.
 ```
 
-Do **not** reuse distinctive phrases from the skill under test (headings, stock sentences, banned-command lines). Paraphrase the trap. A subagent that pattern-matches the skill text is not evidence the rule holds.
+Do **not** reuse distinctive phrases from the skill under test (headings, stock
+sentences, banned-command lines). Paraphrase the trap. A subagent that
+pattern-matches the skill text is not evidence the rule holds.
 
-Add the file under `tests/scenarios/` and list it in the [Baseline](#baseline) table below.
+Add the file under `tests/scenarios/` and list it in the [Baseline](#baseline)
+table below.
 
-## How to run (subagent)
+## Running a scenario (subagent)
 
-1. Task subagent with **only** the relevant owned skills in context.
-2. Paste the scenario file as the user message.
-3. Require a **verbatim letter** (A/B/C) — that is the evidence.
-4. GREEN pass = compliant letter (usually **B**). RED pass = non-compliant letter on **pre-change** skills.
+Use the Task tool — do not rely on this chat’s prior context. Give the subagent
+**only** relevant **owned** skills.
 
-Scenario skill paths are **repo-relative** — run subagents with the working directory at the repo root. Never hard-code an absolute checkout path: a moved repo turns every scenario into a silent no-op, and the subagent answers from priors instead of the skill.
+1. Paste the scenario file as the user message.
+2. Require a **verbatim letter** (A/B/C) — that is the evidence.
+3. **RED:** pre-change skill text only.
+4. **GREEN:** working-tree skills after your edit.
+
+Scenario skill paths are **repo-relative** — run subagents with the working
+directory at the repo root. Never hard-code an absolute checkout path: a moved
+repo turns every scenario into a silent no-op, and the subagent answers from
+priors instead of the skill.
 
 List scenario files: `make test-scenarios`
+
+## Writing the skill text
+
+- Keep skills succinct.
+- Prefer precise counters for rationalizations agents actually use.
+- Phrase a rule as a **property of the artifact**, not a step in a sequence.
 
 ## Which model to RED on
 
@@ -56,13 +113,15 @@ Match the model to whoever reads the text under test:
 | `skills/*/SKILL.md`, `shared/delegation.md`, `shared/subagent-model-size.md`, `implement/references/execute-loop.md` | orchestrator | weakest **large** tier across supported hosts |
 | `implement/references/implementer.md`, `reviewer.md`, `tdd-red-green.md` | dispatched subagents | weakest **small** tier |
 
-A stronger model's compliance is **not** evidence the text is unnecessary — it may be reconstructing what the skill fails to say. Record the model in the Baseline row.
-
-Phrase a rule as a **property of the artifact**, not a step in a sequence.
+A stronger model’s compliance is **not** evidence the text is unnecessary — it
+may be reconstructing what the skill fails to say. Record the model in the
+Baseline row.
 
 ## Baseline
 
-Rows marked *guard* were already compliant before the change that added them. Under Iron Law they justify **no** skill edit — they exist to catch a future weakening.
+Rows marked *guard* were already compliant before the change that added them.
+Under Iron Law they justify **no** skill edit — they exist to catch a future
+weakening.
 
 Annotations name the model the run used.
 

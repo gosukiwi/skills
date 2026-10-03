@@ -1,79 +1,65 @@
-<div align="center">
+# Skills
 
-# 🧠 Skills
+My personal collection of agent skills, shared across my AI agents and
+projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 
-**My personal skill library — shared across all my AI agents and projects.**
+## What's inside
 
-Skills live under [`skills/`](skills/) and sync to `~/.agents/skills`,
-the shared location my agents read from.
+**Plan and ship**
 
-</div>
+- `create-issue` — turn an idea into a GitHub issue.
+- `address-issue` — take an issue from first discussion through to a pull request.
+- `slice` — cut an issue down to one pull request and file the rest as a new issue.
+- `implement` — build a task in small steps, each one reviewed.
 
----
+**Review code**
 
-## ✨ Skills
+- `correctness-review` — look over your changes for real bugs and weak tests.
+- `explain-finding` — explain a review finding in plain words, with code.
+- `review-loop` — fix the bugs a review finds in a loop, then the cleanups worth doing.
+- `thermo-nuclear-code-quality-review` — a very strict review for code that's hard to maintain.
 
-### Ship
+**Design**
 
-Turn an idea into a GitHub issue, then take it from scope to a PR — the full pipeline, or one stage of it.
+- `rehome` — suggest a better home for a concept, module, or repo.
 
-| Skill | Description | Source |
-| --- | --- | --- |
-| [`create-issue`](skills/create-issue/SKILL.md) | Explore an idea with the user and draft a GitHub issue ready for `address-issue`. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/create-issue/SKILL.md) |
-| [`address-issue`](skills/address-issue/SKILL.md) | Take a GitHub issue from grilling through slice, implementation, review, and PR. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/address-issue/SKILL.md) |
-| [`slice`](skills/slice/SKILL.md) | Scope a GitHub issue to one PR: file a slice spec, peel leftover work onto a new issue, close the original pointing at both. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/slice/SKILL.md) |
-| [`implement`](skills/implement/SKILL.md) | Break a scope into TDD tasks and implement with subagent review. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/implement/SKILL.md) |
+**Verify**
 
-### Review
+- `create-verification-skill` — build a project skill that drives your app the way a user would.
+- `maintain-verification-skill` — keep that skill and its feature list up to date.
 
-Inspect a branch or diff. `review-loop` also fixes what those reviews find.
+**Talk and write**
 
-| Skill | Description | Source |
-| --- | --- | --- |
-| [`correctness-review`](skills/correctness-review/SKILL.md) | Review a diff for functional bugs, security, intent fit, and whether tests actually prove the change. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/correctness-review/SKILL.md) |
-| [`explain-finding`](skills/explain-finding/SKILL.md) | Explain a review finding in a short, simple way, using code examples. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/explain-finding/SKILL.md) |
-| [`review-loop`](skills/review-loop/SKILL.md) | Fix correctness findings in a loop via `correctness-review`, then fix the refactor findings worth fixing and report what's left. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/review-loop/SKILL.md) |
-| [`thermo-nuclear-code-quality-review`](skills/thermo-nuclear-code-quality-review/SKILL.md) | Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. | [cursor/plugins](https://github.com/cursor/plugins/blob/21327bee99f30a73758c99f6c6459571bc9f6e98/cursor-team-kit/skills/thermo-nuclear-code-quality-review/SKILL.md) |
+- `grilling` — push back hard on a plan or idea.
+- `handoff` — write a note so another agent can pick up where you left off.
+- `bro` — restate the last message in plain words.
+- `use-simplified-english` — make replies use Simplified Technical English.
 
-### Design
+**Docs**
 
-Find the concept that has no good home, and propose one.
+- `tidy-up-agents-md` — split a bloated AGENTS.md into a short index plus linked pages.
 
-| Skill | Description | Source |
-| --- | --- | --- |
-| [`rehome`](skills/rehome/SKILL.md) | Propose one better home for a concept, given a concept, a module, a PR, or a whole repo: where it lives now, where it should live, what moves. | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/rehome/SKILL.md) |
+Most skills are mine. A few are mirrored from other repos — mattpocock/skills,
+cursor/plugins, and a guide from aihero.dev — and each mirrored skill has a
+`source.json` showing where it came from.
 
-### Verify
+## Install
 
-Generate and keep honest a project-local skill that drives the app the way a user does.
-
-| Skill | Description | Source |
-| --- | --- | --- |
-| [`create-verification-skill`](skills/create-verification-skill/SKILL.md) | Generate a project-local skill that drives the app the way a user does and proves behavior with evidence. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/create-verification-skill/SKILL.md) |
-| [`maintain-verification-skill`](skills/maintain-verification-skill/SKILL.md) | Keep a project's verification skill and feature map honest with source and live coverage. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/maintain-verification-skill/SKILL.md) |
-
-### Communicate
-
-How the session thinks with you, how it writes, and how it hands off.
-
-| Skill | Description | Source |
-| --- | --- | --- |
-| [`grilling`](skills/grilling/SKILL.md) | Grill the user relentlessly about a plan, decision, or idea. | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) |
-| [`handoff`](skills/handoff/SKILL.md) | Compact a conversation into a handoff doc for another agent. | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md) |
-| [`bro`](skills/bro/SKILL.md) | Restate the last message in plain human language, with no jargon. | [cursor/plugins](https://github.com/cursor/plugins/blob/main/pstack/skills/bro/SKILL.md) |
-| [`use-simplified-english`](skills/use-simplified-english/SKILL.md) | Make the session respond in Simplified Technical English (ASD-STE100). | [gosukiwi/skills](https://github.com/gosukiwi/skills/blob/main/skills/use-simplified-english/SKILL.md) |
-
-### Docs
-
-| Skill | Description | Source |
-| --- | --- | --- |
-| [`tidy-up-agents-md`](skills/tidy-up-agents-md/SKILL.md) | Refactor an `AGENTS.md` into a minimal root file plus linked topic docs, following progressive disclosure. | [aihero.dev](https://www.aihero.dev/a-complete-guide-to-agents-md) |
-
-## Usage
+Clone the repo, then run the install script — it asks where to put the skills:
+Claude Code's `~/.claude/skills`, other agents' `~/.agents/skills`, or both.
 
 ```sh
-bin/install   # sync skills to ~/.agents/skills and link them into ~/.claude/skills
-bin/update    # pull the latest version of sourced skills
+git clone https://github.com/gosukiwi/skills.git ~/gosukiwi-skills
+~/gosukiwi-skills/bin/install
 ```
 
-See [AGENTS.md](AGENTS.md) for how the repo is laid out and how the scripts work.
+It only touches the skills it installs and leaves everything else alone, so
+running it again is safe. Run `bin/install --help` for the options.
+
+To update, `git pull` in the clone and run it again.
+
+## Maintaining this repo
+
+`bin/install` links `skills/` into an agent's skills directory, touching only
+the skills it installed. `bin/update` refreshes the skills that come from other
+people. See [AGENTS.md](AGENTS.md).
