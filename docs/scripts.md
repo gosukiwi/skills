@@ -6,10 +6,11 @@ leave everything else in the destination alone.
 ## bin/install
 
 Installs every entry in `skills/` (including `shared/`) into an agent's skills
-directory. The default destination is `~/.agents/skills`; `--claude` is
-shorthand for `~/.claude/skills`, and `--dest DIR` picks anywhere else.
-`--copy` copies instead of symlinking, and `--update` runs `git pull --ff-only`
-first.
+directory. With no destination option it asks where to install, defaulting to
+`~/.claude/skills` (Claude Code). `--claude`, `--both` (`~/.claude/skills` and
+`~/.agents/skills`) and `--dest DIR` set the destination directly, and `-y`
+skips the prompt when there is no terminal. `--copy` copies instead of
+symlinking, and `--update` runs `git pull --ff-only` first.
 
 Safe to re-run. It refreshes what it installed, skips any name it didn't create,
 and prunes links whose source has disappeared from the repo — nothing else in

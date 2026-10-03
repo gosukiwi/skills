@@ -45,13 +45,12 @@ cursor/plugins, and a guide from aihero.dev — and each mirrored skill has a
 
 ## Install
 
-Clone the repo, then run the install script. It links the skills into
-`~/.agents/skills` by default; pass `--claude` to install into Claude Code's
-`~/.claude/skills` instead:
+Clone the repo, then run the install script — it asks where to put the skills:
+Claude Code's `~/.claude/skills`, other agents' `~/.agents/skills`, or both.
 
 ```sh
 git clone https://github.com/gosukiwi/skills.git ~/gosukiwi-skills
-~/gosukiwi-skills/bin/install --claude
+~/gosukiwi-skills/bin/install
 ```
 
 It only touches the skills it installs and leaves everything else alone, so
@@ -61,6 +60,6 @@ To update, `git pull` in the clone and run it again.
 
 ## Maintaining this repo
 
-`bin/install` links `skills/` into an agent's skills directory (default
-`~/.agents/skills`), touching only the skills it installed. `bin/update`
-refreshes the skills that come from other people. See [AGENTS.md](AGENTS.md).
+`bin/install` links `skills/` into an agent's skills directory, touching only
+the skills it installed. `bin/update` refreshes the skills that come from other
+people. See [AGENTS.md](AGENTS.md).
