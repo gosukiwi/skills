@@ -8,7 +8,7 @@ echo "Skills pressure scenarios"
 echo "============================"
 echo ""
 echo "Guide: tests/writing-skills.md"
-echo "Run via Task subagent or fresh session — see tests/writing-skills.md and AGENTS.md"
+echo "Run via Task subagent or fresh session — see tests/writing-skills.md"
 echo "Owned skills only."
 
 echo ""
