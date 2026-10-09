@@ -148,5 +148,6 @@ Annotations name the model the run used.
 | `correctness-review-runs-in-session.md` | `correctness-review` | **B** — review directly in the current session without spawning a subagent (gemini-3.8-flash) |
 | `review-loop-fix-without-implement.md` | `review-loop` | **B** — dispatch an implementer subagent directly; do not re-run implement (gemini-3.8-flash) |
 | `create-issue-settles-decisions.md` | `create-issue` | **B** — stop after a few rounds; open decisions stay open questions with a recommendation (gemini-3.8-flash) |
+| `create-issue-lists-rejected-options.md` | `create-issue` | **B** — questions the user answered become one-line Decisions; rejected options are not shown (gemini-3.8-flash) |
 | `review-loop-skip-rereview-tests-only.md` | `review-loop` | **B** — a tests-only pass with the full suite green skips the correctness re-review (sonnet) |
 | `review-loop-rereview-mixed-test-pass.md` | `review-loop` | **B** — a pass that also touched production code still gets re-reviewed (guard: compliant on sonnet) |

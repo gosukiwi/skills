@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 Turn a rough idea into a GitHub issue. If the user gave you no idea, ask for one.
 
-This skill explores; it does not decide. `address-issue` runs `grilling` when the work starts, against the code as it is then. So the issue carries the user's intent and the open questions — not settled decisions.
+This skill explores; it does not decide. `address-issue` runs `grilling` when the work starts, against the code as it is then. So the issue carries the user's intent, the choices the user made, and the open questions — never your own preference as a settled decision.
 
 # Research
 
@@ -26,6 +26,8 @@ Stop after these rounds, even if the user wants to keep going. A choice still op
 
 # Draft
 
-Assemble the agreed sections into the full issue text and show it in chat. Create the issue only after the user confirms the draft, even if they asked for an issue earlier. If they decline, the draft is the result.
+Assemble the agreed sections into the full issue text and show it in chat. Each question the user answered becomes one line under **Decisions**, stating only what was chosen — no rejected options, trade-offs, or option letters. Only questions the user left unanswered stay under **Open questions** with their options and your recommendation. Omit a section that would be empty.
+
+Create the issue only after the user confirms the draft, even if they asked for an issue earlier. If they decline, the draft is the result.
 
 When creating the issue, look at the existing tags and properly tag this new issue. Then give the URL. 
