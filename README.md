@@ -33,7 +33,6 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 - `grilling` — push back hard on a plan or idea.
 - `handoff` — write a note so another agent can pick up where you left off.
 - `bro` — restate the last message in plain words.
-- `use-simplified-english` — make replies use Simplified Technical English.
 
 **Docs**
 
