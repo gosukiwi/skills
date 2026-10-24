@@ -24,7 +24,8 @@ as `references/` or `scripts/`.
 that get scenarios:
 
 `address-issue`, `correctness-review`, `create-issue`, `explain-finding`,
-`implement`, `slice`, `rehome`, `review-loop`, `tidy-up-agents-md`.
+`implement`, `slice`, `rehome`, `review-loop`, `tidy-up-agents-md`,
+`yolo-issues`.
 
 **Sourced** skills are a pristine mirror of their upstream directory — never
 edit them locally, and never add scenarios for them:
