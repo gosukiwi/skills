@@ -1,25 +1,20 @@
 # Subagent model size
 
-Prefer the **smallest model that can finish the task reliably**. When the host offers a ladder of tiers, do not default to the coordinator's model.
+Prefer the **smallest model that can finish the task reliably**. When the host can express tiers, do not default to the coordinator's model.
 
 ## Resolve (each dispatch)
 
 1. Load config: `Read` (or `test -f` / shell) `.flow` at that exact path before choosing a model. Do **not** treat a failed Glob/grep/search as "no config" — the file is often gitignored and invisible to search tools.
 2. Choose a **tier** (small / medium / large) using Tiers + Heuristics.
-3. Resolve that tier to a **model** by host:
+3. Resolve that tier to a **model**:
+   - If the file defines `models.<tier>`, use that exact ID. It wins on every host.
+   - Else, if the host has a **tier ladder** — its model option accepts documented values per size (the host's own small/medium/large names) — use the value for that tier.
+   - Else, leave the model option unset so the session's current model is used.
+4. Never invent an ID. If a config ID is rejected by the host, stop and ask the user — do not silently rewrite it.
 
-   | Host | Pass the tier as | Ladder |
-   |------|------------------|--------|
-   | Claude Code `Task` | `model: haiku \| sonnet \| opus` | those three names |
-   | Cursor Task | `model: <id>` | `.flow`, else the Task picker |
-   | pi `agent` | leave `model` unset | none — the harness default is the session model |
+A free-form model ID — any string the tool will accept, chosen from a catalog or picker — is **not** a ladder. On such a host with no `.flow` tier, subagents inherit the session model.
 
-   - If the file exists and defines `models.<tier>`, use that exact ID on any host.
-   - With no config, a host with tier names maps to those names.
-   - With no config, a host with no ladder of its own (pi) inherits the session model. Do not assemble a ladder from the host's model catalog.
-4. Never invent an ID. If the host has no model parameter, or no ladder, leave the default. If a config ID is rejected by the host, stop and ask the user — do not silently rewrite it.
-
-Config is optional (missing file → host mapping, or the harness default). Example `.flow`:
+Config is optional (missing file → host ladder, else the session model). Example `.flow`:
 
 ```yaml
 models:
@@ -28,7 +23,7 @@ models:
   large: grok-4.5-xhigh
 ```
 
-A present tier key wins over a "familiar" host default (e.g. do not swap in GPT because it feels like medium).
+A present tier key wins over any host default the model feels like.
 
 ## Tiers
 
@@ -52,6 +47,6 @@ A present tier key wins over a "familiar" host default (e.g. do not swap in GPT 
 - Ignore `.flow` when it defines the chosen tier
 - Silently rewrite a config ID to a similar host name
 - Use a large model for mechanical RED/GREEN on an already-specified task
-- Read the host's model catalog or store (`~/.pi/agent/*models*.json`, `/model` output, model-list JSON) and treat it as a set of IDs you may use
+- Treat a model catalog, store, or picker listing as a set of IDs you may pass
 - Probe IDs with throwaway `Reply with exactly: OK` subagents
-- Read a subagent that returns no text as a verdict on the model — retry once on the host default, then report the failure
+- Read a subagent that returns no text as a verdict on the model — retry once on the session model, then report the failure
