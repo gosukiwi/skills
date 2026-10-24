@@ -9,6 +9,7 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 
 - `create-issue` — turn an idea into a GitHub issue.
 - `address-issue` — take an issue from first discussion through to a pull request.
+- `yolo-issues` — run `address-issue` over a set of issues into one review branch, then open a single PR, accepting every recommendation.
 - `slice` — cut an issue down to one pull request and file the rest as a new issue.
 - `implement` — build a task in small steps, each one reviewed.
 
