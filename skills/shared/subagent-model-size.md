@@ -1,17 +1,20 @@
 # Subagent model size
 
-Prefer the **smallest model that can finish the task reliably**. Do not default to the coordinator's model.
+Prefer the **smallest model that can finish the task reliably**. When the host can express tiers, do not default to the coordinator's model.
 
 ## Resolve (each dispatch)
 
 1. Load config: `Read` (or `test -f` / shell) `.flow` at that exact path before choosing a model. Do **not** treat a failed Glob/grep/search as "no config" — the file is often gitignored and invisible to search tools.
 2. Choose a **tier** (small / medium / large) using Tiers + Heuristics.
-3. Resolve that tier to a **model ID**:
-   - If the file exists and defines `models.<tier>`, use that exact ID.
-   - Else map the tier to a model the **host** exposes (Cursor Task `model`, Claude Code Haiku/Sonnet/Opus, etc.).
-4. Never invent an ID absent from both the config and the host allowlist. If the host has no model parameter, leave the default. If a config ID is not on the host allowlist, stop and ask the user — do not silently rewrite it.
+3. Resolve that tier to a **model**:
+   - If the file defines `models.<tier>`, use that exact ID. It wins on every host.
+   - Else, if the host has a **tier ladder** — its model option accepts documented values per size (the host's own small/medium/large names) — use the value for that tier.
+   - Else, leave the model option unset so the session's current model is used.
+4. Never invent an ID. If a config ID is rejected by the host, stop and ask the user — do not silently rewrite it.
 
-Config is optional (missing file → host mapping). Example `.flow`:
+A free-form model ID — any string the tool will accept, chosen from a catalog or picker — is **not** a ladder. On such a host with no `.flow` tier, subagents inherit the session model.
+
+Config is optional (missing file → host ladder, else the session model). Example `.flow`:
 
 ```yaml
 models:
@@ -20,7 +23,7 @@ models:
   large: grok-4.5-xhigh
 ```
 
-A present tier key wins over a "familiar" host default (e.g. do not swap in GPT because it feels like medium).
+A present tier key wins over any host default the model feels like.
 
 ## Tiers
 
@@ -44,3 +47,6 @@ A present tier key wins over a "familiar" host default (e.g. do not swap in GPT 
 - Ignore `.flow` when it defines the chosen tier
 - Silently rewrite a config ID to a similar host name
 - Use a large model for mechanical RED/GREEN on an already-specified task
+- Treat a model catalog, store, or picker listing as a set of IDs you may pass
+- Probe IDs with throwaway `Reply with exactly: OK` subagents
+- Read a subagent that returns no text as a verdict on the model — retry once on the session model, then report the failure
