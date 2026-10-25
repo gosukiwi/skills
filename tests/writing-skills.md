@@ -157,3 +157,4 @@ Annotations name the model the run used.
 | `review-loop-skip-rereview-tests-only.md` | `review-loop` | **B** — a tests-only pass with the full suite green skips the correctness re-review (sonnet) |
 | `review-loop-rereview-mixed-test-pass.md` | `review-loop` | **B** — a pass that also touched production code still gets re-reviewed (guard: compliant on sonnet) |
 | `model-size-probe-host-catalog.md` | `subagent-model-size` | **B** — on pi with no `.flow`, leave `model` unset; no catalog scan, no probe subagents (deepseek-v4-pro) |
+| `delegation-shared-doc-unfound.md` | `shared/delegation.md` | **A** — anchor shared files on the loaded skill's folder; missing means stop, never improvise or borrow another pack (guard: compliant on glm-5.3-flash once the skill is read; without reading it, gemini-3.8-flash chose B) |

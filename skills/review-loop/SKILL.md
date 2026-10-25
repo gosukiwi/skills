@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Use this skill to review the current branch thoroughly, while auto-fixing blocking changes.
 
-This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes.
+This skill runs other skills. Read `../shared/delegation.md` — relative to this skill's folder — before any other step, and resolve every skill below the way it describes. It is required, not a lookup aid: if the file is missing, stop and tell the user. Do not hunt for another copy, and do not start the work without it.
 
 If the git tree is not clean (uncommitted changes), warn the user before continuing.
 
@@ -22,7 +22,7 @@ Run the `correctness-review` skill in a subagent (large tier) to get the correct
 
 ## 2. Loop Fix Findings
 
-Fix Blockers and Should-Fix findings by dispatching an implementer subagent directly. Size the subagent per `shared/subagent-model-size.md`. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
+Fix Blockers and Should-Fix findings by dispatching an implementer subagent directly. Size the subagent per `../shared/subagent-model-size.md`. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
 
 Run step 1 again, re-reviewing for correctness and fixing findings until only Nits remain and the gates are green. If a pass only added or changed tests, skip the re-review once the full test suite passes.
 
