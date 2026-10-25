@@ -14,10 +14,10 @@ Finding facts is your job. Read the code and docs, and search online when it hel
 
 # Explore
 
-Build the issue one section per round, in this order. Each round is a few bullets with no preamble; wait for the user's reaction before the next.
+Build the issue one section per round, in this order. Each round is a short numbered list with no preamble, so the user can reference an item by number; wait for the user's reaction before the next.
 
 1. **Problem** — what is wrong or missing and why it matters, linking the key code or docs.
-2. **Outcome** — what is true when this is done, including limits the user set and what is excluded.
+2. **Solution** — what is true when this is done, including limits the user set and what is excluded.
 3. **Open questions** — each with 2–3 options, their trade-offs, and your recommendation.
 
 Revise a section when the user corrects it, but do not reopen agreed sections. More than about three open questions means the idea is too big for one issue: say so and suggest what to cut.
