@@ -27,4 +27,10 @@ Follow `references/execute-loop.md`. Task text comes from the breakdown you just
 
 # Verify
 
-Run the project's usual checks — tests, lint, typecheck, formatters, build — whichever exist. If the scope was an issue, check each Success Criterion. Report pass/fail. Stop — the caller owns review, PR, merge, and push.
+Run the project's usual checks — tests, lint, typecheck, formatters, build — whichever exist.
+
+Then prove the scope's Success Criteria that a user can observe. Start the app and drive each one with the most reproducible harness the repo has: an existing end-to-end suite first, then a connected browser-automation tool for web surfaces, or plain HTTP / a PTY for services and CLIs. Capture the evidence — screenshot, transcript, response body — and keep it after teardown.
+
+Report each criterion as proven live, proven by tests only, or not observable here, with the reason. A green suite is not live proof, however tightly its assertions map to the criteria. A missing browser tool changes how you drive the app, not whether you do — it is never the reason to skip. Do not fix what you find; report it.
+
+Stop — the caller owns review, PR, merge, and push.

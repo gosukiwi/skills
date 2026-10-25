@@ -133,6 +133,7 @@ Annotations name the model the run used.
 | `implement-overlap-tasks.md` | `implement` | **B** — task 1 review finishes before task 2 starts (guard: compliant on Grok 4.6) |
 | `implement-chat-over-ticket.md` | `implement` | **B** — GitHub issue body wins over later chat (guard: compliant on Grok 4.6) |
 | `implement-wait-for-go-ahead.md` | `implement` | **B** — show the tasks and start; do not wait for OK (guard: compliant on Grok 4.6) |
+| `implement-criteria-without-app.md` | `implement` | **B** — set up the app and drive the criteria live; a tightly mapped green suite is not live proof, and a missing browser tool is no reason to skip (deepseek-v4.1-flash) |
 | `implementer-green-without-fail.md` | `implement` worker | **B** — fail-first proof, then production change (guard: compliant on Grok 4.6) |
 | `slice-codes-after-rewrite.md` | `slice` | **B** — stop after the tickets; do not code (guard: compliant on Grok 4.6) |
 | `slice-work-order-on-ticket.md` | `slice` | **B** — ticket stays product spec; steps stay in session (guard: compliant on Grok 4.6) |
