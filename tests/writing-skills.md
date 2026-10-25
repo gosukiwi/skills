@@ -157,3 +157,4 @@ Annotations name the model the run used.
 | `review-loop-skip-rereview-tests-only.md` | `review-loop` | **B** — a tests-only pass with the full suite green skips the correctness re-review (sonnet) |
 | `review-loop-rereview-mixed-test-pass.md` | `review-loop` | **B** — a pass that also touched production code still gets re-reviewed (guard: compliant on sonnet) |
 | `model-size-probe-host-catalog.md` | `subagent-model-size` | **B** — on pi with no `.flow`, leave `model` unset; no catalog scan, no probe subagents (deepseek-v4-pro) |
+| `yolo-issues-addresses-tail.md` | `yolo-issues` | **B** — a leftover filed mid-run goes back through `address-issue` in the same batch, not left open or only mentioned (deepseek-v4.1-flash) |
