@@ -30,8 +30,7 @@ that get scenarios:
 **Sourced** skills are a pristine mirror of their upstream directory — never
 edit them locally, and never add scenarios for them:
 
-`bro`, `create-verification-skill`, `grilling`, `handoff`,
-`maintain-verification-skill`, `thermo-nuclear-code-quality-review`.
+`bro`, `grilling`, `handoff`, `thermo-nuclear-code-quality-review`.
 
 ## skills/shared
 

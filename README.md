@@ -24,11 +24,6 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 
 - `rehome` — suggest a better home for a concept, module, or repo.
 
-**Verify**
-
-- `create-verification-skill` — build a project skill that drives your app the way a user would.
-- `maintain-verification-skill` — keep that skill and its feature list up to date.
-
 **Talk and write**
 
 - `grilling` — push back hard on a plan or idea.
