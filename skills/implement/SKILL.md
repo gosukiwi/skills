@@ -27,4 +27,8 @@ Follow `references/execute-loop.md`. Task text comes from the breakdown you just
 
 # Verify
 
-Run the project's usual checks — tests, lint, typecheck, formatters, build — whichever exist. If the scope was an issue, check each Success Criterion. Report pass/fail. Stop — the caller owns review, PR, merge, and push.
+Run the usual checks — tests, lint, typecheck, formatters, build — then prove each user-observable Success Criterion the way a user would. Drive the app however the project documents — a verification skill, an AGENTS.md section, an e2e suite — else a connected browser tool for web, plain HTTP for services, or a PTY for CLIs. Capture the evidence — screenshot, transcript, response body — and keep it.
+
+Internal setters, test-only endpoints, and modes that disable the behavior prove nothing, even when the repo documents them. A green suite is not live proof, and a missing browser tool changes how you drive the app, not whether.
+
+Report, do not fix: no new tests or driver scripts. A behavior that deserves a permanent check was a missed task. Mark each criterion proven live, proven by tests only, or not observable here, with the reason. Stop — the caller owns review, PR, merge, and push.
