@@ -29,8 +29,10 @@ Follow `references/execute-loop.md`. Task text comes from the breakdown you just
 
 Run the project's usual checks — tests, lint, typecheck, formatters, build — whichever exist.
 
-Then prove the scope's Success Criteria that a user can observe. Start the app and drive each one with the most reproducible harness the repo has: an existing end-to-end suite first, then a connected browser-automation tool for web surfaces, or plain HTTP / a PTY for services and CLIs. Capture the evidence — screenshot, transcript, response body — and keep it after teardown.
+Then prove the scope's Success Criteria that a user can observe, by doing what a user does. Run the project's own user-level harness if it has one — a verification skill or an end-to-end suite. Otherwise drive the running app with a connected browser-automation tool for web surfaces, or plain HTTP / a PTY for services and CLIs. Capture the evidence — screenshot, transcript, response body — and keep it after teardown.
 
-Report each criterion as proven live, proven by tests only, or not observable here, with the reason. A green suite is not live proof, however tightly its assertions map to the criteria. A missing browser tool changes how you drive the app, not whether you do — it is never the reason to skip. Do not fix what you find; report it.
+The action and what you observe must both be open to a user. Internal setters, test-only endpoints, and modes that disable the behavior prove nothing, however the repo documents them. A green suite is not live proof, however tightly its assertions map to the criteria. A missing browser tool changes how you drive the app, not whether you do.
 
-Stop — the caller owns review, PR, merge, and push.
+Verify writes no tests or driver scripts. A behavior that deserves a permanent check was a task that got missed — report it, do not add it here. Do not fix what you find either.
+
+Report each criterion as proven live, proven by tests only, or not observable here, with the reason. Then stop — the caller owns review, PR, merge, and push.
