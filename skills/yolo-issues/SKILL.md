@@ -20,7 +20,7 @@ Run every step of the flow, including `grilling`, but you also play the user: wh
 
 # Review branch
 
-Before you start, create `yolo/batch-<YYYY-MM-DD>` from an up-to-date `main` (add a suffix if the name is taken) and push it. Nothing goes into `main` during this run.
+Before you start, create `yolo/batch-<short-description>` from an up-to-date `main` (add a suffix if the name is taken) and push it. For `<short-description>`, write a few kebab-case words summarizing the set, such as `yolo/batch-fix-auth-redirects`. Nothing goes into `main` during this run.
 
 # Loop
 
