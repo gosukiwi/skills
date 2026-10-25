@@ -12,6 +12,8 @@ This skill explores; it does not decide. `address-issue` runs `grilling` when th
 
 Finding facts is your job. Read the code and docs, and search online when it helps. Do not guess. You may run throwaway scripts, but they write only to a temp dir: never change the repo, git state, or anything remote.
 
+Search the project's **open** issues before you draft. If one already covers the idea, show it and ask whether to update that issue instead of filing a new one. A confirmed draft is not permission to file a duplicate: create nothing until the user chooses. If they choose the existing issue, update it with the agreed sections and create nothing.
+
 # Explore
 
 Build the issue one section per round, in this order. Each round is a short numbered list with no preamble, so the user can reference an item by number; wait for the user's reaction before the next.
@@ -30,4 +32,6 @@ Assemble the agreed sections into the full issue text and show it in chat. Each 
 
 Create the issue only after the user confirms the draft, even if they asked for an issue earlier. If they decline, the draft is the result.
 
-When creating the issue, look at the existing tags and properly tag this new issue. Then give the URL. 
+When creating the issue, look at the existing tags and properly tag this new issue.
+
+After creating it, check the other open issues it touches: a tracking issue that should list it, one it overlaps, one it supersedes. List each with the exact edit — a cross-reference, a checklist entry, a close pointing at the new issue. Apply only the edits the user confirms; leave every other issue untouched. The URL alone is not done: give it with the proposed edits.
