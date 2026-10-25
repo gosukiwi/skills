@@ -26,6 +26,8 @@ Before you start, create `yolo/batch-<short-description>` from an up-to-date `ma
 
 Address the issues one at a time, in the order given. For each, run the `address-issue` skill end to end, with that issue as the one it was given. Follow it exactly, including its delegation — no production code in this session.
 
+A leftover issue that `slice` files for the rest of an issue's request is part of this batch. Append it to the queue and address it in this run, and likewise for a leftover filed while addressing a leftover. It is an issue the run addresses, not a follow-up for later.
+
 Two overrides, so the work stays off `main`:
 
 - Cut the issue's branch from the review branch, never from `main`.
@@ -41,7 +43,7 @@ When the set is done, run the repo's full gate on the review branch. If two issu
 
 Open one PR from the review branch into `main`. Its body starts from `address-issue`'s PR body, plus:
 
-- It lists every addressed issue — original and slice — with its per-issue PR.
+- It lists every addressed issue — original, slice, and leftover — with its per-issue PR.
 - It has one `Fixes #<n>` line per slice issue. Their per-issue PRs targeted the review branch, so they did not close on merge.
 - Verification steps for the whole batch, built from the slice issues' Success Criteria.
 - The remaining review findings from all per-issue PRs.
