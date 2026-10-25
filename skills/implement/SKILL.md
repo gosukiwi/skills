@@ -27,12 +27,8 @@ Follow `references/execute-loop.md`. Task text comes from the breakdown you just
 
 # Verify
 
-Run the project's usual checks — tests, lint, typecheck, formatters, build — whichever exist.
+Run the usual checks — tests, lint, typecheck, formatters, build — then prove each user-observable Success Criterion the way a user would. Drive the app however the project documents — a verification skill, an AGENTS.md section, an e2e suite — else a connected browser tool for web, plain HTTP for services, or a PTY for CLIs. Capture the evidence — screenshot, transcript, response body — and keep it.
 
-Then prove the scope's Success Criteria that a user can observe, by doing what a user does. Run the project's own user-level harness if it has one — a verification skill or an end-to-end suite. Otherwise drive the running app with a connected browser-automation tool for web surfaces, or plain HTTP / a PTY for services and CLIs. Capture the evidence — screenshot, transcript, response body — and keep it after teardown.
+Internal setters, test-only endpoints, and modes that disable the behavior prove nothing, even when the repo documents them. A green suite is not live proof, and a missing browser tool changes how you drive the app, not whether.
 
-The action and what you observe must both be open to a user. Internal setters, test-only endpoints, and modes that disable the behavior prove nothing, however the repo documents them. A green suite is not live proof, however tightly its assertions map to the criteria. A missing browser tool changes how you drive the app, not whether you do.
-
-Verify writes no tests or driver scripts. A behavior that deserves a permanent check was a task that got missed — report it, do not add it here. Do not fix what you find either.
-
-Report each criterion as proven live, proven by tests only, or not observable here, with the reason. Then stop — the caller owns review, PR, merge, and push.
+Report, do not fix: no new tests or driver scripts. A behavior that deserves a permanent check was a missed task. Mark each criterion proven live, proven by tests only, or not observable here, with the reason. Stop — the caller owns review, PR, merge, and push.
