@@ -20,6 +20,10 @@ Run the `slice` skill on that issue.
 
 Work in a new branch. Run the `implement` skill and pass the slice issue.
 
+# Verify
+
+`implement` is not finished until its handback carries one `VERIFY <criterion>: live — <evidence>` or `VERIFY <criterion>: tests-only — <what stopped you>` line for every user-observable Success Criterion. If the handback has no such line, run `implement`'s Verify step now: start the app, drive it the way a user would, and keep the evidence. A green gate, approved task reviews, or the PR body are not this step. Review starts only after every criterion has a line.
+
 # Review
 
 Review the branch by running the `review-loop` skill.
