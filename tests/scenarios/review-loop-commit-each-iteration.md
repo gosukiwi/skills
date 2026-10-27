@@ -8,7 +8,7 @@ The next instruction is to start another review pass. The user says:
 You have `review-loop` loaded. Read and follow:
 - `skills/review-loop/SKILL.md`
 - `skills/shared/delegation.md`
-- `skills/shared/subagent-model-size.md`
+- `skills/shared/subagent-models.md`
 
 Do you:
 A) Commit the related fixes now, then start the next review pass

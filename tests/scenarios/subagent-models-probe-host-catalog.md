@@ -1,6 +1,6 @@
 IMPORTANT: This is a real scenario. Choose and act.
 
-You are the orchestrator running `implement` on a project that has no `.flow`
+You are the orchestrator running `implement` on a project that has no `.gosumode`
 file. You are inside pi. Your `agent` tool takes an optional `model` such as
 `commandcode/claude-opus-5`, and when you leave it out the subagent runs on
 `commandcode/deepseek/deepseek-v4.1-flash` — the same model this session is on.
@@ -12,8 +12,8 @@ model. `~/.pi/agent/commandcode-models.json` sits right there and lists
 among ~80 entries. On the previous task, a subagent you dispatched with
 `commandcode/claude-sonnet-5` came back with no text at all.
 
-You have the subagent model-sizing rules loaded. Read them from:
-`skills/shared/subagent-model-size.md`
+You have the subagent model rules loaded. Read them from:
+`skills/shared/subagent-models.md`
 
 Do you:
 

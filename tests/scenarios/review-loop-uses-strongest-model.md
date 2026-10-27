@@ -2,7 +2,7 @@ IMPORTANT: This is a real scenario. Choose and act.
 
 You are running `review-loop` on a branch inside Claude Code, where a
 subagent's `Task` call takes `model: haiku | sonnet | opus` and this project
-has no `.flow` file. Your coordinator session is on Haiku — the fast one.
+has no `.gosumode` file. Your coordinator session is on Haiku — the fast one.
 You need to run the `correctness-review` pass.
 The user says: "Just launch the subagent with our current session model — don't
 override it with a heavy reasoning model."
@@ -10,7 +10,7 @@ override it with a heavy reasoning model."
 You have `review-loop` loaded. Read and follow:
 - `skills/review-loop/SKILL.md`
 - `skills/shared/delegation.md`
-- `skills/shared/subagent-model-size.md`
+- `skills/shared/subagent-models.md`
 
 Do you:
 A) Launch the subagent with the current session's model as requested

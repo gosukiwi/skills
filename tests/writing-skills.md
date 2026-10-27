@@ -12,7 +12,7 @@ NO SKILL CHANGE WITHOUT A FAILING SCENARIO FIRST
 ```
 
 Any change to behaviour under owned `skills/` — including `shared/delegation.md`,
-`shared/subagent-model-size.md`, and an owned skill's `references/` — **must**
+`shared/subagent-models.md`, and an owned skill's `references/` — **must**
 follow this order. Do not reorder or skip. Sourced skills are not edited here,
 so they are out of scope.
 
@@ -110,7 +110,7 @@ Match the model to whoever reads the text under test:
 
 | Text under test | Read by | RED at |
 |---|---|---|
-| `skills/*/SKILL.md`, `shared/delegation.md`, `shared/subagent-model-size.md`, `implement/references/execute-loop.md` | orchestrator | weakest **large** tier across supported hosts |
+| `skills/*/SKILL.md`, `shared/delegation.md`, `shared/subagent-models.md`, `implement/references/execute-loop.md` | orchestrator | weakest **large** tier across supported hosts |
 | `implement/references/implementer.md`, `reviewer.md`, `tdd-red-green.md` | dispatched subagents | weakest **small** tier |
 
 A stronger model’s compliance is **not** evidence the text is unnecessary — it
@@ -150,7 +150,7 @@ Annotations name the model the run used.
 | `correctness-review-applies-patch.md` | `correctness-review` | **B** — findings only; no code (guard: compliant on Grok 4.6) |
 | `review-loop-green-without-fail-first.md` | `review-loop` | **B** — a fail on pre-fix code is required proof (guard: compliant on Grok 4.6) |
 | `review-loop-commit-each-iteration.md` | `review-loop` | **A** — commit each coherent fix batch before the next review pass (same session model) |
-| `review-loop-uses-strongest-model.md` | `review-loop` | **B** — dispatch review subagents on the strongest available reasoning tier (gemini-3.8-flash; premise: Claude Code ladder, no `.flow`) |
+| `review-loop-uses-strongest-model.md` | `review-loop` | **B** — dispatch review subagents on the strongest available reasoning tier (gemini-3.8-flash; premise: Claude Code ladder, no `.gosumode`) |
 | `correctness-review-runs-in-session.md` | `correctness-review` | **B** — review directly in the current session without spawning a subagent (gemini-3.8-flash) |
 | `review-loop-fix-without-implement.md` | `review-loop` | **B** — dispatch an implementer subagent directly; do not re-run implement (gemini-3.8-flash) |
 | `create-issue-settles-decisions.md` | `create-issue` | **B** — stop after a few rounds; open decisions stay open questions with a recommendation (gemini-3.8-flash) |
@@ -159,5 +159,9 @@ Annotations name the model the run used.
 | `create-issue-related-updates.md` | `create-issue` | **B** — related open issues get a proposed exact edit each; only confirmed edits are applied (deepseek-v4.1-flash) |
 | `review-loop-skip-rereview-tests-only.md` | `review-loop` | **B** — a tests-only pass with the full suite green skips the correctness re-review (sonnet) |
 | `review-loop-rereview-mixed-test-pass.md` | `review-loop` | **B** — a pass that also touched production code still gets re-reviewed (guard: compliant on sonnet) |
-| `model-size-probe-host-catalog.md` | `subagent-model-size` | **B** — on pi with no `.flow`, leave `model` unset; no catalog scan, no probe subagents (deepseek-v4-pro) |
+| `subagent-models-probe-host-catalog.md` | `subagent-models` | **B** — on pi with no `.gosumode`, leave `model` unset; no catalog scan, no probe subagents (deepseek-v4-pro) |
+| `subagent-models-pinned-reviewer.md` | `subagent-models` | **B** — a `reviewer` set in `.gosumode` is exact, even when lighter than the implementer (gemini-3.8-flash) |
+| `subagent-models-home-file-fallback.md` | `subagent-models` | **B** — with no project `.gosumode`, `~/.gosumode` is the config (gemini-3.8-flash) |
+| `subagent-models-project-file-wins.md` | `subagent-models` | **B** — the project `.gosumode` wins whole; a tier it omits is not filled from `~/.gosumode` (guard: compliant on gemini-3.8-flash) |
+| `subagent-models-ladder-only-config.md` | `subagent-models` | **B** — a `.gosumode` with only `models:` keeps the role defaults; `correctness-review` goes to `large` (guard: compliant on gemini-3.8-flash) |
 | `yolo-issues-addresses-tail.md` | `yolo-issues` | **B** — a leftover filed mid-run goes back through `address-issue` in the same batch, not left open or only mentioned (deepseek-v4.1-flash) |

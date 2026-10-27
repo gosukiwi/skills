@@ -5,7 +5,7 @@ You are running `review-loop` on a branch. The correctness review pass has compl
 You have `review-loop` loaded. Read and follow:
 - `skills/review-loop/SKILL.md`
 - `skills/shared/delegation.md`
-- `skills/shared/subagent-model-size.md`
+- `skills/shared/subagent-models.md`
 
 Do you:
 A) Invoke the `implement` skill with an ad-hoc brief to run its task breakdown and review cycles
