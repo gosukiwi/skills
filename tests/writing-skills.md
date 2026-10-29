@@ -139,6 +139,7 @@ Annotations name the model the run used.
 | `implement-verify-project-way-in.md` | `implement` | **B** — run the documented `make verify` path; no e2e suite does not mean unobservable (guard: compliant on deepseek-v4.1-flash) |
 | `implement-verify-skip-to-review.md` | `implement` | **B** — print a `VERIFY` line per criterion before review-loop; the caller's next step does not replace Verify (guard: compliant on deepseek-v4.1-flash) |
 | `implementer-green-without-fail.md` | `implement` worker | **B** — fail-first proof, then production change (guard: compliant on Grok 4.6) |
+| `reviewer-accepts-tdd-claim.md` | `implement` reviewer | **B** — reproduce the RED itself on the pre-fix code; the implementer's report is not evidence (guard: compliant on deepseek-v4.1-flash, 3 of 3 runs) |
 | `slice-codes-after-rewrite.md` | `slice` | **B** — stop after the tickets; do not code (guard: compliant on Grok 4.6) |
 | `slice-work-order-on-ticket.md` | `slice` | **B** — ticket stays product spec; steps stay in session (guard: compliant on Grok 4.6) |
 | `slice-keeps-epic.md` | `slice` | **B** — new slice ticket + one leftover; close original pointing at both; no graph (Grok 4.6) |
