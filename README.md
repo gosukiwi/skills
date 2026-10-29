@@ -26,11 +26,13 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 
 **Design**
 
+- `domain-modeling` — keep a project glossary and record hard-to-reverse decisions (ADRs).
 - `rehome` — suggest a better home for a concept, module, or repo.
 
 **Talk and write**
 
 - `grilling` — push back hard on a plan or idea.
+- `grill-with-docs` — `grilling` plus `domain-modeling`: push back on a design and write the glossary and ADRs as you go.
 - `handoff` — write a note so another agent can pick up where you left off.
 - `bro` — restate the last message in plain words.
 

@@ -147,6 +147,7 @@ Annotations name the model the run used.
 | `address-issue-fixes-slice.md` | `address-issue` | **B** — implement and close the slice ticket, not the original request (Grok 4.6) |
 | `address-issue-skip-interview.md` | `address-issue` | **B** — interview before scoping (guard: compliant on Grok 4.6) |
 | `address-issue-verify-before-review.md` | `address-issue` | **B** — get live evidence per criterion before Review (guard: compliant on deepseek-v4.1-flash; live RED: sessions `3a3f9e5c` and `bab760a2` skipped Verify before Review, while a fresh subagent re-read `implement` and stayed compliant) |
+| `address-issue-records-domain-terms.md` | `address-issue` | **B** — a term or hard-to-reverse decision settled mid-interview goes into the glossary / an offered ADR before the next round (sonnet) |
 | `correctness-review-applies-patch.md` | `correctness-review` | **B** — findings only; no code (guard: compliant on Grok 4.6) |
 | `review-loop-green-without-fail-first.md` | `review-loop` | **B** — a fail on pre-fix code is required proof (guard: compliant on Grok 4.6) |
 | `review-loop-commit-each-iteration.md` | `review-loop` | **A** — commit each coherent fix batch before the next review pass (same session model) |
