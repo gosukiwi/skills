@@ -10,7 +10,7 @@ This skill runs other skills. Read `shared/delegation.md` from your skills direc
 
 # Common Understanding
 
-Read the issue, then run the `grilling` skill.
+Read the issue, then run the `grilling` and `domain-modeling` skills together: grill the design tree while the glossary and ADRs record what each round settles.
 
 # Slice
 
