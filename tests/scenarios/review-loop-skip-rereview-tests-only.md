@@ -11,7 +11,7 @@ The user says: "Nice, what's next?"
 You have `review-loop` loaded. Read and follow:
 - `skills/review-loop/SKILL.md`
 - `skills/shared/delegation.md`
-- `skills/shared/subagent-models.md`
+- `skills/shared/subagent-model-size.md`
 
 Do you:
 A) Dispatch another correctness review subagent over the branch before moving

@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Use this skill to review the current branch thoroughly, while auto-fixing blocking changes.
 
-This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes. Pick each subagent's model by its role per `shared/subagent-models.md`.
+This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes.
 
 If the git tree is not clean (uncommitted changes), warn the user before continuing.
 
@@ -18,20 +18,20 @@ Treat each review-and-fix pass as one iteration. After implementing that pass's 
 
 ## 1. Correctness Review
 
-Run the `correctness-review` skill in a subagent (role `correctness-review`) to get the correctness findings.
+Run the `correctness-review` skill in a subagent (large tier) to get the correctness findings.
 
 ## 2. Loop Fix Findings
 
-Fix Blockers and Should-Fix findings by dispatching a fixer subagent directly (role `fixer`). A regression test has to fail on the pre-fix code, otherwise it proves nothing.
+Fix Blockers and Should-Fix findings by dispatching an implementer subagent directly. Size the subagent per `shared/subagent-model-size.md`. A regression test has to fail on the pre-fix code, otherwise it proves nothing.
 
 Run step 1 again, re-reviewing for correctness and fixing findings until only Nits remain and the gates are green. If a pass only added or changed tests, skip the re-review once the full test suite passes.
 
 ## 3. Refactor Review
 
-Run the `thermo-nuclear-code-quality-review` skill in a subagent (role `quality-review`), scoped to what this change introduced or made worse — not the surrounding codebase.
+Run the `thermo-nuclear-code-quality-review` skill in a subagent (large tier), scoped to what this change introduced or made worse — not the surrounding codebase.
 
 It over-reports, so re-classify by what each problem costs later: Blocker if future edits here will likely introduce bugs or new code will copy the pattern, Should-Fix if it's real drag that gets more expensive with time, Nit otherwise.
 
-Address contained Blockers and Should-Fix findings by dispatching a fixer subagent directly (role `fixer`). Report the ones that turn into a rewrite instead. If you changed anything, run step 1 and the gates once more to confirm nothing regressed.
+Address contained Blockers and Should-Fix findings by dispatching an implementer subagent directly. Report the ones that turn into a rewrite instead. If you changed anything, run step 1 and the gates once more to confirm nothing regressed.
 
 Report all remaining findings (correctness + thermo nuclear), numbered and prioritized.

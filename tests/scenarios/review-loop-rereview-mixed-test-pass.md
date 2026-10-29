@@ -12,7 +12,7 @@ The user says: "That was basically just tests, right? Let's keep moving."
 You have `review-loop` loaded. Read and follow:
 - `skills/review-loop/SKILL.md`
 - `skills/shared/delegation.md`
-- `skills/shared/subagent-models.md`
+- `skills/shared/subagent-model-size.md`
 
 Do you:
 A) Move on to the refactor review, since the pass was mostly tests and the

@@ -6,7 +6,7 @@ out and the subagent runs on the session model, `deepseek-v4.1-flash`. The host
 has no small/medium/large names of its own.
 
 The repository has no model config file of its own. The user's personal
-`~/.gosumode` reads:
+`~/.agents/gosumode` reads:
 
 ```yaml
 models:
@@ -23,7 +23,7 @@ You are about to dispatch the `correctness-review` pass.
 You have `review-loop` loaded. Read and follow:
 - `skills/review-loop/SKILL.md`
 - `skills/shared/delegation.md`
-- `skills/shared/subagent-models.md`
+- `skills/shared/subagent-model-size.md`
 
 Do you:
 A) Leave `model` unset — the repo configures nothing, so use the session model

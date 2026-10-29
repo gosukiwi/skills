@@ -2,9 +2,9 @@
 
 Per-task dispatch loop for `implement`. The calling `SKILL.md` says where task text comes from; this file owns the loop itself.
 
-Files in this directory: `implementer.md`, `reviewer.md`, `tdd-red-green.md`. Read `shared/subagent-models.md` from your skills directory. Paste filled templates only: a subagent gets what you paste and nothing else, so never point it at an issue, a plan file, or chat history.
+Files in this directory: `implementer.md`, `reviewer.md`, `tdd-red-green.md`. Read `shared/subagent-model-size.md` from your skills directory. Paste filled templates only: a subagent gets what you paste and nothing else, so never point it at an issue, a plan file, or chat history.
 
-Before each dispatch, pick a model per `shared/subagent-models.md` by role: `implementer` for step 2, `reviewer` for step 4, `fixer` for fixes in step 6.
+Before each dispatch, pick a model per `shared/subagent-model-size.md` — smallest capable tier.
 
 Before the first dispatch, post a user-visible progress line: Task 1 of M — starting implementer. Continue; not a pause for OK.
 
@@ -20,7 +20,7 @@ For each task, in order:
 
 ## Non-negotiable
 
-Never implement or review in the orchestrator session, no matter who asks. "It's only a few lines" is not an exemption: a change small enough to tempt you into typing it yourself is small enough for a small subagent, and a briefing costing more than the diff is not a reason to skip it.
+Never implement or review in the orchestrator session, no matter who asks. "It's only a few lines" is not an exemption: a change small enough to tempt you into typing it yourself is small enough for a small-tier subagent, and a briefing costing more than the diff is not a reason to skip it.
 
 A green report from the implementer is not review. The reviewer reads the diff.
 

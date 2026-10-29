@@ -39,7 +39,7 @@ it has no `SKILL.md`, so agents never load it as a skill or expose it as a slash
 command. Skills reach these files by path — see `shared/delegation.md`, which is
 how one skill runs another.
 
-`shared/delegation.md` and `shared/subagent-models.md` are owned, so both
+`shared/delegation.md` and `shared/subagent-model-size.md` are owned, so both
 fall under the Iron Law.
 
 ## source.json

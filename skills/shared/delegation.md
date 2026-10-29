@@ -25,4 +25,4 @@ The calling skill says where each skill runs — most run in the current session
 - every input the skill needs, inline — diff, task text, scope, intent. A subagent gets what you paste and nothing else, so never point it at chat history.
 - what to return
 
-When choosing the subagent's model, use the role the calling skill names and resolve it per `shared/subagent-models.md`.
+When choosing the subagent's model, resolve the tier specified by the calling skill per `shared/subagent-model-size.md`.

@@ -11,7 +11,7 @@ NO SKILL CHANGE WITHOUT A FAILING SCENARIO FIRST
 ```
 
 Applies to any behaviour change under an owned skill, `shared/delegation.md`,
-`shared/subagent-models.md`, or an owned skill's `references/`. Full process
+`shared/subagent-model-size.md`, or an owned skill's `references/`. Full process
 and exceptions: [`tests/writing-skills.md`](tests/writing-skills.md).
 
 ## Commands
