@@ -160,6 +160,8 @@ Annotations name the model the run used.
 | `review-loop-skip-rereview-tests-only.md` | `review-loop` | **B** — a tests-only pass with the full suite green skips the correctness re-review (sonnet) |
 | `review-loop-rereview-mixed-test-pass.md` | `review-loop` | **B** — a pass that also touched production code still gets re-reviewed (guard: compliant on sonnet) |
 | `model-size-probe-host-catalog.md` | `subagent-model-size` | **B** — on pi with no `.agents/gosumode`, leave `model` unset; no catalog scan, no probe subagents (deepseek-v4-pro) |
+| `gosumode-routes-idea-to-create-issue.md` | `gosumode` | **B** — route a ticketless idea to `create-issue`, not `grilling` or `implement` (deepseek-v4.1-flash) |
+| `gosumode-no-fit-answers-directly.md` | `gosumode` | **B** — with no matching skill, answer directly instead of forcing one (guard: compliant on deepseek-v4.1-flash) |
 | `subagent-model-size-home-file-fallback.md` | `subagent-model-size` | **B** — with no project config, `~/.agents/gosumode` is the config (deepseek-v4.1-flash) |
 | `subagent-model-size-project-file-wins.md` | `subagent-model-size` | **B** — the project `.agents/gosumode` wins whole; a tier it omits is not filled from the home file (guard: compliant on deepseek-v4.1-flash) |
 | `yolo-issues-addresses-tail.md` | `yolo-issues` | **B** — a leftover filed mid-run goes back through `address-issue` in the same batch, not left open or only mentioned (deepseek-v4.1-flash) |

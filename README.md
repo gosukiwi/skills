@@ -5,6 +5,10 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 
 ## What's inside
 
+**Start here**
+
+- `gosumode` — describe what you're trying to do; it points you at the right skill.
+
 **Plan and ship**
 
 - `create-issue` — turn an idea into a GitHub issue.
