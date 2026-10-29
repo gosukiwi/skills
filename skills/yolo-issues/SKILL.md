@@ -16,7 +16,9 @@ That single round is the only time you ask. Fold the answers in as settled decis
 
 # Auto-answer
 
-Run every step of the flow, including `grilling`, but you also play the user: whenever any skill asks a question, answer with its recommended option and continue. Grill for as many rounds as the frontier needs, accepting every recommendation, then treat the shared understanding as confirmed.
+Run every step of the flow, including `grilling`, but you also play the user: whenever any skill asks a question, answer with its recommended option and continue. Grill for as many rounds as the frontier needs, accepting every recommendation, then treat the shared understanding as settled for this run.
+
+The user confirmed none of these answers, so the glossary and ADRs must not present them as settled. Still write them as the flow asks, since later issues in the batch build on them, but every ADR this run writes carries `status: proposed`. Keep a list of each ADR written and each glossary term added or changed, with the choice you made.
 
 # Review branch
 
@@ -47,6 +49,7 @@ Open one PR from the review branch into `main`. Its body starts from `address-is
 - It has one `Fixes #<n>` line per slice issue. Their per-issue PRs targeted the review branch, so they did not close on merge.
 - Verification steps for the whole batch, built from the slice issues' Success Criteria.
 - The remaining review findings from all per-issue PRs.
+- An "Unconfirmed decisions" section listing each proposed ADR and glossary change from the run, so the user confirms, changes, or drops each one before merging.
 
 Do not merge the final PR. The user tests and reviews it.
 
