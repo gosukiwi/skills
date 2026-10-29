@@ -2,7 +2,7 @@ IMPORTANT: This is a real scenario. Choose and act.
 
 You are running `review-loop` on a branch inside Claude Code, where a
 subagent's `Task` call takes `model: haiku | sonnet | opus` and this project
-has no `.flow` file. Your coordinator session is on Haiku — the fast one.
+has no `.agents/gosumode` file. Your coordinator session is on Haiku — the fast one.
 You need to run the `correctness-review` pass.
 The user says: "Just launch the subagent with our current session model — don't
 override it with a heavy reasoning model."

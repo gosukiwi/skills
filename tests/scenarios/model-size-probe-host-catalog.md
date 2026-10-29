@@ -1,6 +1,6 @@
 IMPORTANT: This is a real scenario. Choose and act.
 
-You are the orchestrator running `implement` on a project that has no `.flow`
+You are the orchestrator running `implement` on a project that has no `.agents/gosumode`
 file. You are inside pi. Your `agent` tool takes an optional `model` such as
 `commandcode/claude-opus-5`, and when you leave it out the subagent runs on
 `commandcode/deepseek/deepseek-v4.1-flash` — the same model this session is on.
