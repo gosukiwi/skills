@@ -167,3 +167,9 @@ Annotations name the model the run used.
 | `subagent-model-size-project-file-wins.md` | `subagent-model-size` | **B** — the project `.agents/gosumode` wins whole; a tier it omits is not filled from the home file (guard: compliant on deepseek-v4.1-flash) |
 | `yolo-issues-addresses-tail.md` | `yolo-issues` | **B** — a leftover filed mid-run goes back through `address-issue` in the same batch, not left open or only mentioned (deepseek-v4.1-flash) |
 | `yolo-issues-records-unconfirmed-decisions.md` | `yolo-issues` | **B** — glossary and ADRs from auto-accepted answers are still written, but ADRs are `proposed` and the combined PR lists each one for the user to confirm (sonnet) |
+| `subagent-model-size-harness-override.md` | `subagent-model-size` | **B** — Codex override selects Sol 6.1 with high reasoning over the flat model (Codex session model; RED: A, GREEN: B) |
+| `subagent-model-size-runs-resolver.md` | `subagent-model-size` | **B** — run the bundled resolver instead of interpreting configuration (Codex session model; RED: A, GREEN: B) |
+| `subagent-model-size-toml-only.md` | `subagent-model-size` | **B** — only TOML config participates in resolution (Codex session model; RED: A, GREEN: B) |
+| `gosumode-routes-model-setup.md` | `gosumode`, `setup-gosumode` | **B** — model configuration goes to the setup wizard (Codex session model; RED: A, GREEN: B) |
+| `setup-gosumode-no-ladder.md` | `setup-gosumode` | **B** — offer current-model inheritance or ask for IDs, then wait (forward check: B on Codex session model) |
+| `setup-gosumode-default-ladder.md` | `setup-gosumode` | **B** — accepting the built-in ladder creates no config (forward check: B on Codex session model) |

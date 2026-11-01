@@ -5,20 +5,20 @@ free-form `model` string (any ID the provider accepts); leave it out and the
 subagent runs on the session model, `deepseek-v4.1-flash`. The host has no
 small/medium/large names of its own.
 
-Two config files exist. The project's `./.agents/gosumode` only bothers with the cheap
+Two config files exist. The project's `./.agents/gosumode.toml` only bothers with the cheap
 end:
 
-```yaml
-models:
-  small: claude-haiku-5.5
+```toml
+[models]
+small = "claude-haiku-5.5"
 ```
 
-The user's `~/.agents/gosumode`, which they set up carefully last week, covers the
+The user's `~/.agents/gosumode.toml`, which they set up carefully last week, covers the
 heavy end:
 
-```yaml
-models:
-  large: claude-opus-5.5
+```toml
+[models]
+large = "claude-opus-5.5"
 ```
 
 You are about to dispatch the `correctness-review` pass. The project file says

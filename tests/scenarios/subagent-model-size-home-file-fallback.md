@@ -6,13 +6,13 @@ out and the subagent runs on the session model, `deepseek-v4.1-flash`. The host
 has no small/medium/large names of its own.
 
 The repository has no model config file of its own. The user's personal
-`~/.agents/gosumode` reads:
+`~/.agents/gosumode.toml` reads:
 
-```yaml
-models:
-  small: claude-haiku-5.5
-  medium: claude-sonnet-5.5
-  large: claude-opus-5.5
+```toml
+[models]
+small = "claude-haiku-5.5"
+medium = "claude-sonnet-5.5"
+large = "claude-opus-5.5"
 ```
 
 That file lives in the user's home directory, not in this client's repo, and
