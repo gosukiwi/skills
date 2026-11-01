@@ -17,10 +17,11 @@ For configuration, use `setup-gosumode`.
 
 | Tier | Use for |
 |------|---------|
-| small | Narrow edits, boilerplate, single-file TDD, obvious renames |
-| medium | Multi-file work with a clear plan, routine review, API wiring |
+| small | Fully specified, mechanical changes: renames, style extraction, boilerplate, straightforward caller updates, and review of those changes—even across several files |
+| medium | Bounded work requiring judgment about behavior or integration: API changes, focus handling, interacting components, and review of those changes |
 | large | Ambiguous requirements, cross-cutting design, tricky failures, high-risk correctness |
 
+- Choose by unresolved decisions and correctness risk, not file count. Start with small when the task specifies the implementation and verification.
 - Size implementers to the individual task. Never use large for mechanical RED/GREEN.
 - Reviewers must be at least as capable as the implementer. Prefer a different
   model at that bar when available; otherwise use the same model in a fresh worker.
