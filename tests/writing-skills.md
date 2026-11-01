@@ -169,3 +169,4 @@ Annotations name the model the run used.
 | `yolo-issues-records-unconfirmed-decisions.md` | `yolo-issues` | **B** — glossary and ADRs from auto-accepted answers are still written, but ADRs are `proposed` and the combined PR lists each one for the user to confirm (sonnet) |
 | `subagent-model-size-harness-override.md` | `subagent-model-size` | **B** — Codex override selects Sol 6.1 with high reasoning over the flat model (Codex session model; RED: A, GREEN: B) |
 | `subagent-model-size-runs-resolver.md` | `subagent-model-size` | **B** — run the bundled resolver instead of interpreting configuration (Codex session model; RED: A, GREEN: B) |
+| `subagent-model-size-toml-only.md` | `subagent-model-size` | **B** — only TOML config participates in resolution (Codex session model; RED: A, GREEN: B) |

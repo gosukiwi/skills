@@ -48,9 +48,6 @@ def load_config(project_root):
             with path.open('rb') as stream:
                 config = tomllib.load(stream)
         except FileNotFoundError:
-            legacy = path.with_name('gosumode')
-            if legacy.exists():
-                raise ValueError(f'migrate {legacy} from YAML to {path}')
             continue
         table(config, {'models', 'hosts'}, str(path))
         validate_models(config.get('models', {}))

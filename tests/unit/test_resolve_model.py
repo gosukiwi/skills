@@ -19,10 +19,10 @@ class ResolverTests(unittest.TestCase):
         self.project.mkdir()
         self.home.mkdir()
 
-    def config(self, text, home=False, legacy=False):
+    def config(self, text, home=False):
         path = (self.home if home else self.project) / '.agents'
         path.mkdir(exist_ok=True)
-        (path / ('gosumode' if legacy else 'gosumode.toml')).write_text(text)
+        (path / 'gosumode.toml').write_text(text)
 
     def run_resolver(self, host='codex', tier='large'):
         return subprocess.run(
@@ -83,18 +83,11 @@ reasoning_effort = "high"
         self.config('[models]\nlarge="home"', home=True)
         self.assertEqual(self.resolve(), {})
 
-    def test_legacy_project_reports_migration_before_home(self):
-        self.config('models:\n  large: old', legacy=True)
+    def test_unrelated_file_does_not_block_home_config(self):
+        (self.project / '.agents').mkdir()
+        (self.project / '.agents/gosumode').write_text('unrelated file')
         self.config('[models]\nlarge="home"', home=True)
-        result = self.run_resolver()
-        self.assertNotEqual(result.returncode, 0)
-        self.assertEqual(result.stdout, '')
-        self.assertIn('migrate', result.stderr.lower())
-
-    def test_toml_replaces_legacy_in_same_directory(self):
-        self.config('old', legacy=True)
-        self.config('[models]\nlarge="new"')
-        self.assertEqual(self.resolve(), {'model': 'new'})
+        self.assertEqual(self.resolve(), {'model': 'home'})
 
     def test_invalid_config_errors_without_fallback(self):
         for text in ('[models', '[models]\nlarge=3', '[models.large]\nreasoning_effort="high"',

@@ -24,13 +24,7 @@ or rejects an ID, stop and report it; never silently drop or rewrite options.
 
 ## Config
 
-The resolver selects `.agents/gosumode.toml` at the project root, then
-`~/.agents/gosumode.toml`. The first file wins whole, including an empty file.
-Within that file, a host tier overrides the flat tier. Missing tiers use Claude
-Code's haiku/sonnet/opus ladder; other hosts inherit the session model. A model
-catalog or picker is not a ladder.
-
-Example personal config for Codex:
+Config: project `.agents/gosumode.toml`, otherwise `~/.agents/gosumode.toml`.
 
 ```toml
 [hosts.codex.models]
@@ -41,11 +35,6 @@ large = "gpt-6.1-sol"
 
 Optional `[models]` entries provide defaults for all hosts. Each tier accepts a
 model ID string or a table with `model` and optional `reasoning_effort`.
-
-Migration: replace YAML `.agents/gosumode` with `.agents/gosumode.toml` using
-TOML syntax as above. A legacy file without a TOML replacement in the same
-location causes an explicit migration error, including before any home fallback.
-The resolver never modifies config files.
 
 ## Tiers
 
@@ -65,10 +54,6 @@ The resolver never modifies config files.
 ## Do not
 
 - Hard-code vendor model IDs in task breakdowns (put project IDs in `.agents/gosumode.toml`)
-- Skip the resolver because Glob/search returned nothing
-- Ignore `.agents/gosumode.toml` when it defines the chosen tier
-- Merge a home file into a project file that exists
-- Silently rewrite a config ID to a similar host name
 - Use a large model for mechanical RED/GREEN on an already-specified task
 - Treat a model catalog, store, or picker listing as a set of IDs you may pass
 - Probe IDs with throwaway `Reply with exactly: OK` subagents

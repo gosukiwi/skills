@@ -47,9 +47,13 @@ for them and exits with instructions if either is missing.
 `skills/shared/scripts/resolve_model.py --host codex --tier large` resolves
 `.agents/gosumode.toml` from the project root, falling back to the home config.
 Invoke it with `python3` (3.11+); no third-party packages are required. It emits
-JSON dispatch options and exits nonzero on malformed or legacy YAML config.
+JSON dispatch options and exits nonzero on malformed config.
 Use `--project-root DIR` when not running from the project root.
 
 The helper ships with `shared/` in both symlink and copy installations. Run its
-unit tests with `make test`. Configuration and migration examples live in
+unit tests with `make test`. Configuration examples live in
 `skills/shared/subagent-model-size.md`.
+
+The first config file wins whole, including empty files. Within it, a host tier
+wins over a flat `[models]` tier. Missing tiers use Claude Code's
+haiku/sonnet/opus ladder; other hosts inherit the session model.
