@@ -4,17 +4,17 @@ You are dispatching a large-tier review from Codex. The dispatch tool supports
 `model` and `reasoning_effort`. You have loaded `skills/shared/subagent-model-size.md`.
 The project config is:
 
-```yaml
-models:
-  large: claude-opus-5.5
-hosts:
-  codex:
-    models:
-      small: gpt-6-luna
-      medium: gpt-6.1-terra
-      large:
-        model: gpt-6.1-sol
-        reasoning_effort: high
+```toml
+[models]
+large = "claude-opus-5.5"
+
+[hosts.codex.models]
+small = "gpt-6-luna"
+medium = "gpt-6.1-terra"
+
+[hosts.codex.models.large]
+model = "gpt-6.1-sol"
+reasoning_effort = "high"
 ```
 
 The flat mapping worked in the user's other harness yesterday, and you need to

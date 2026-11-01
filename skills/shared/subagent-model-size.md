@@ -4,44 +4,48 @@ Prefer the **smallest model that can finish the task reliably**. When the host c
 
 ## Resolve (each dispatch)
 
-1. Load config: `Read` (or `test -f` / shell) `./.agents/gosumode` at the project root, then `~/.agents/gosumode`, before choosing a model. Do **not** treat a failed Glob/grep/search as "no config" — the file is often gitignored and invisible to search tools.
-2. Choose a **tier** (small / medium / large) using Tiers + Heuristics.
-3. Resolve that tier to a **model**:
-   - Use `hosts.<current-host>.models.<tier>` when present (host keys identify the harness, e.g. `codex`, `claude-code`, `pi`). Otherwise use `models.<tier>` from that same file. Never use another host's mapping.
-   - A tier value may be an exact model ID string, or an object with `model` and optional `reasoning_effort`. Pass these as dispatch options; on Codex, explicit model/reasoning overrides require `fork_turns: "none"`, so supply the task context in the prompt. If the host cannot express a configured option, stop and report it rather than dropping it silently.
-   - Else, if the host has a **tier ladder** — its model option accepts documented values per size (the host's own small/medium/large names) — use the value for that tier.
-   - Else, leave the model option unset so the session's current model is used.
-4. Never invent an ID. If a config ID is rejected by the host, stop and ask the user — do not silently rewrite it.
+Choose a tier (small / medium / large) using Tiers + Heuristics, then run the
+bundled resolver with Python 3.11+ from the project root:
 
-A free-form model ID — any string the tool will accept, chosen from a catalog or picker — is **not** a ladder. On such a host with no config tier, subagents inherit the session model.
-
-Config is optional (missing file → host ladder, else the session model). The **first file found is the config, whole**: never fill a tier the project file leaves out from the home file. A home file applies to any project that has none of its own. Example `.agents/gosumode`:
-
-```yaml
-models:
-  small: composer-2.5-fast
-  medium: grok-4.5-xhigh
-  large: grok-4.5-xhigh
+```sh
+python3 <skills-directory>/shared/scripts/resolve_model.py --host codex --tier large
 ```
 
-To use different models across harnesses, add host overrides in the same file.
-For example, keep the flat mapping above for other hosts and add:
+Use the actual installed skills directory containing this file and the current
+harness key (`codex`, `claude-code`, `pi`, or another host's config key).
+When running elsewhere, pass `--project-root /path/to/project`.
+Use the JSON object on stdout as dispatch options; `{}` means leave model and
+reasoning unset. Do not parse config or calculate precedence yourself. On a
+nonzero exit, report the error and stop dispatch; do not bypass the resolver.
 
-```yaml
-hosts:
-  codex:
-    models:
-      small: gpt-6-luna
-      medium: gpt-6.1-terra
-      large:
-        model: gpt-6.1-sol
-        reasoning_effort: high
+On Codex, explicit model/reasoning overrides require `fork_turns: "none"`, so
+supply task context in the prompt. If the dispatch tool cannot express an option
+or rejects an ID, stop and report it; never silently drop or rewrite options.
+
+## Config
+
+The resolver selects `.agents/gosumode.toml` at the project root, then
+`~/.agents/gosumode.toml`. The first file wins whole, including an empty file.
+Within that file, a host tier overrides the flat tier. Missing tiers use Claude
+Code's haiku/sonnet/opus ladder; other hosts inherit the session model. A model
+catalog or picker is not a ladder.
+
+Example personal config for Codex:
+
+```toml
+[hosts.codex.models]
+small = "gpt-6-luna"
+medium = "gpt-6.1-terra"
+large = "gpt-6.1-sol"
 ```
 
-Host overrides are per tier: a missing host tier falls back to the flat
-`models.<tier>` in the selected file, then the host ladder/session rule above.
-File selection still happens first; never fill omissions from the home file.
-A present tier key wins over any host default the model feels like.
+Optional `[models]` entries provide defaults for all hosts. Each tier accepts a
+model ID string or a table with `model` and optional `reasoning_effort`.
+
+Migration: replace YAML `.agents/gosumode` with `.agents/gosumode.toml` using
+TOML syntax as above. A legacy file without a TOML replacement in the same
+location causes an explicit migration error, including before any home fallback.
+The resolver never modifies config files.
 
 ## Tiers
 
@@ -60,9 +64,9 @@ A present tier key wins over any host default the model feels like.
 
 ## Do not
 
-- Hard-code vendor model IDs in task breakdowns (put project IDs in `.agents/gosumode`)
-- Skip the path Read because Glob/search returned nothing
-- Ignore `.agents/gosumode` when it defines the chosen tier
+- Hard-code vendor model IDs in task breakdowns (put project IDs in `.agents/gosumode.toml`)
+- Skip the resolver because Glob/search returned nothing
+- Ignore `.agents/gosumode.toml` when it defines the chosen tier
 - Merge a home file into a project file that exists
 - Silently rewrite a config ID to a similar host name
 - Use a large model for mechanical RED/GREEN on an already-specified task

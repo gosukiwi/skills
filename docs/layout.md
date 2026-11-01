@@ -8,6 +8,7 @@ skills/
     references/   (optional, skill-local)
   shared/
     <prompt>.md   (shared prompts, not skills)
+    scripts/     (helpers shared by several skills)
 
 tests/
   writing-skills.md
@@ -35,7 +36,7 @@ edit them locally, and never add scenarios for them:
 
 ## skills/shared
 
-Prompts that several skills reuse. `shared/` holds plain markdown, not skills:
+Prompts that several skills reuse. `shared/` holds shared markdown and helpers, not skills:
 it has no `SKILL.md`, so agents never load it as a skill or expose it as a slash
 command. Skills reach these files by path — see `shared/delegation.md`, which is
 how one skill runs another.
