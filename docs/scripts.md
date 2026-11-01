@@ -51,8 +51,8 @@ JSON dispatch options and exits nonzero on malformed config.
 Use `--project-root DIR` when not running from the project root.
 
 The helper ships with `shared/` in both symlink and copy installations. Run its
-unit tests with `make test`. Configuration examples live in
-`skills/shared/subagent-model-size.md`.
+unit tests with `make test`. The setup wizard and configuration examples live in
+`skills/setup-gosumode/`.
 
 The first config file wins whole, including empty files. Within it, a host tier
 wins over a flat `[models]` tier. Missing tiers use Claude Code's

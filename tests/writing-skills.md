@@ -170,3 +170,6 @@ Annotations name the model the run used.
 | `subagent-model-size-harness-override.md` | `subagent-model-size` | **B** — Codex override selects Sol 6.1 with high reasoning over the flat model (Codex session model; RED: A, GREEN: B) |
 | `subagent-model-size-runs-resolver.md` | `subagent-model-size` | **B** — run the bundled resolver instead of interpreting configuration (Codex session model; RED: A, GREEN: B) |
 | `subagent-model-size-toml-only.md` | `subagent-model-size` | **B** — only TOML config participates in resolution (Codex session model; RED: A, GREEN: B) |
+| `gosumode-routes-model-setup.md` | `gosumode`, `setup-gosumode` | **B** — model configuration goes to the setup wizard (Codex session model; RED: A, GREEN: B) |
+| `setup-gosumode-no-ladder.md` | `setup-gosumode` | **B** — offer current-model inheritance or ask for IDs, then wait (forward check: B on Codex session model) |
+| `setup-gosumode-default-ladder.md` | `setup-gosumode` | **B** — accepting the built-in ladder creates no config (forward check: B on Codex session model) |

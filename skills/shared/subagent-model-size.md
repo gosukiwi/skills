@@ -22,19 +22,7 @@ On Codex, explicit model/reasoning overrides require `fork_turns: "none"`, so
 supply task context in the prompt. If the dispatch tool cannot express an option
 or rejects an ID, stop and report it; never silently drop or rewrite options.
 
-## Config
-
-Config: project `.agents/gosumode.toml`, otherwise `~/.agents/gosumode.toml`.
-
-```toml
-[hosts.codex.models]
-small = "gpt-6-luna"
-medium = "gpt-6.1-terra"
-large = "gpt-6.1-sol"
-```
-
-Optional `[models]` entries provide defaults for all hosts. Each tier accepts a
-model ID string or a table with `model` and optional `reasoning_effort`.
+For configuration requests, use `setup-gosumode`.
 
 ## Tiers
 
@@ -53,7 +41,7 @@ model ID string or a table with `model` and optional `reasoning_effort`.
 
 ## Do not
 
-- Hard-code vendor model IDs in task breakdowns (put project IDs in `.agents/gosumode.toml`)
+- Hard-code model IDs in task breakdowns
 - Use a large model for mechanical RED/GREEN on an already-specified task
 - Treat a model catalog, store, or picker listing as a set of IDs you may pass
 - Probe IDs with throwaway `Reply with exactly: OK` subagents

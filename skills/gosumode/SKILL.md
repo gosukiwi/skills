@@ -23,6 +23,8 @@ Read the chosen skill's `SKILL.md` before invoking it. The lines below orient yo
 
 ## Standalone
 
+- **Set up or change worker model tiers** → `setup-gosumode`.
+
 - **Stress-test a plan, decision, or idea** → `grilling`.
 - **Review a diff for bugs, no fixes** → `correctness-review`.
 - **Harsh maintainability pass** → `thermo-nuclear-code-quality-review`.
