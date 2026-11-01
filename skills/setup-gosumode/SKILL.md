@@ -1,40 +1,28 @@
 ---
 name: setup-gosumode
-description: Walk through creating or updating Gosumode model tiers for one or more harnesses.
+description: Walk through creating or updating Gosumode model tiers across harnesses.
 disable-model-invocation: true
 ---
 
-Configure model tiers through a short conversation. Use choices already supplied
-in the session; ask only what is missing. Read existing project and home
-`.agents/gosumode.toml` files before proposing changes.
+Read existing project and home `.agents/gosumode.toml` files. Reuse choices
+already supplied; ask only what is missing, one short numbered round at a time.
+Offer options and a recommendation, then wait for the answer.
 
-## Explore
+1. **Scope and harnesses:** personal defaults or this project? Recommend personal
+   scope for personal preferences. Infer the current harness; ask about others.
+2. **Tiers:** which of small, medium, large? Check
+   `../shared/scripts/resolve_model.py` for built-in ladders. Suggest a supported
+   ladder's defaults; otherwise recommend current-model inheritance or ask for
+   exact model IDs. Never invent a ladder or pick IDs from a catalog.
+3. **Mappings:** settle explicit model choices per selected tier. Omit reasoning
+   unless the user requests an override.
 
-Ask one short numbered round at a time, with options and a recommendation. Wait
-for the answer before the next round; skip rounds already settled.
+Accepting fallback defaults creates no file. Existing config stays unchanged
+unless the user chooses to remove overrides. Explain the fallback: the built-in
+ladder where supported, otherwise the current session model.
 
-1. **Scope and harnesses.** Personal defaults (`~/.agents/gosumode.toml`, recommended
-   for personal preferences) or this project (`.agents/gosumode.toml`)? Which
-   harnesses? Infer the current harness when clear; ask about others.
-2. **Tiers.** Which of small, medium, and large should be configured? Check
-   `../shared/scripts/resolve_model.py` for built-in ladders. For a laddered host,
-   suggest its small/medium/large defaults and explain that accepting them needs
-   no config. For a host without a ladder, recommend inheriting the current
-   session model, or ask the user for exact model IDs for the tiers they want.
-   Do not invent a ladder or choose IDs from a catalog.
-3. **Overrides.** For explicit mappings, settle each selected tier's model.
-   Default reasoning needs no field; ask about reasoning only if requested.
-
-No overrides chosen? Create no file. Existing config stays unchanged unless the
-user explicitly chooses to remove its overrides. Explain the effective fallback:
-a built-in ladder where supported, otherwise the current session model.
-
-## Write
-
-Read `references/config.md` for schema and precedence. Explain if the chosen
-scope is shadowed or a project file will replace home defaults as a whole.
-Preserve unrelated settings in an existing file; resolve conflicting values
-with the user. Once scope and mappings are settled, validate the draft in a
-temporary project root with the resolver, then write the chosen config.
-Report its path and effective model per selected tier. Do not dispatch probe
-workers, install skills, or modify harness settings.
+Read `references/config.md` before writing. Explain scope shadowing or loss of
+home defaults when relevant. Preserve unrelated settings and resolve conflicts
+with the user. Once choices are settled, validate the draft in a temporary
+project root, write it, and report the path and effective mappings.
+Limit changes to the config; never dispatch probe workers.

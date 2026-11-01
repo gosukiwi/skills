@@ -1,48 +1,32 @@
 # Subagent model size
 
-Prefer the **smallest model that can finish the task reliably**. When the host can express tiers, do not default to the coordinator's model.
-
-## Resolve (each dispatch)
-
-Choose a tier (small / medium / large) using Tiers + Heuristics, then run the
-bundled resolver with Python 3.11+ from the project root:
+Choose the smallest tier that can finish reliably, then run the resolver:
 
 ```sh
-python3 <skills-directory>/shared/scripts/resolve_model.py --host codex --tier large
+python3 <skills-directory>/shared/scripts/resolve_model.py --host <harness> --tier <tier>
 ```
 
-Use the actual installed skills directory containing this file and the current
-harness key (`codex`, `claude-code`, `pi`, or another host's config key).
-When running elsewhere, pass `--project-root /path/to/project`.
-Use the JSON object on stdout as dispatch options; `{}` means leave model and
-reasoning unset. Do not parse config or calculate precedence yourself. On a
-nonzero exit, report the error and stop dispatch; do not bypass the resolver.
-
-On Codex, explicit model/reasoning overrides require `fork_turns: "none"`, so
-supply task context in the prompt. If the dispatch tool cannot express an option
-or rejects an ID, stop and report it; never silently drop or rewrite options.
-
-For configuration requests, use `setup-gosumode`.
+Use the installed skills directory and current harness key (e.g. `codex`,
+`claude-code`, `pi`). Run from the project root or pass `--project-root DIR`.
+Apply the returned JSON options through the host's dispatch tool; `{}` means
+leave model/reasoning unset. Report resolver errors or unsupported/rejected options and stop;
+never substitute IDs, drop options, or calculate precedence yourself.
+For configuration, use `setup-gosumode`.
 
 ## Tiers
 
 | Tier | Use for |
 |------|---------|
-| **Small / fast** | Narrow edits, boilerplate, single-file TDD, obvious renames, "make this test green" |
-| **Medium** | Multi-file tasks within a clear plan, routine review, straightforward API wiring |
-| **Large** | Ambiguous requirements, cross-cutting design, tricky failures, high-risk correctness |
+| small | Narrow edits, boilerplate, single-file TDD, obvious renames |
+| medium | Multi-file work with a clear plan, routine review, API wiring |
+| large | Ambiguous requirements, cross-cutting design, tricky failures, high-risk correctness |
 
-## Heuristics
-
-- **Implementer:** size to the *task*, not the whole feature. A two-line change → small.
-- **Reviewer:** capability ≥ that task's implementer; prefer a *different* model ID when the host/config offers one at that bar. If the implementer already used the strongest available (or no different ID exists), same model is OK — still use a fresh review subagent. Never review with a weaker model.
-- **Fix after REJECTED:** same size as the implementer unless the rejection needs deeper reasoning → bump one tier.
-- When unsure between two tiers, pick the **smaller**; bump only after a failed attempt or a clearly hard task.
-
-## Do not
-
-- Hard-code model IDs in task breakdowns
-- Use a large model for mechanical RED/GREEN on an already-specified task
-- Treat a model catalog, store, or picker listing as a set of IDs you may pass
-- Probe IDs with throwaway `Reply with exactly: OK` subagents
-- Read a subagent that returns no text as a verdict on the model — retry once on the session model, then report the failure
+- Size implementers to the individual task. Never use large for mechanical RED/GREEN.
+- Reviewers must be at least as capable as the implementer. Prefer a different
+  model at that bar when available; otherwise use the same model in a fresh worker.
+- After rejection, keep the implementer's tier; bump one tier for deeper reasoning.
+- When unsure, choose the smaller tier; bump after failure or clearly hard work.
+- Keep model IDs out of task breakdowns. Catalogs are not dispatch mappings;
+  never probe IDs with throwaway workers.
+- An empty worker response is not model evidence: retry once on the session
+  model, then report failure.
