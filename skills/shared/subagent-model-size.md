@@ -17,8 +17,8 @@ For configuration, use `setup-gosumode`.
 
 | Tier | Use for |
 |------|---------|
-| small | Narrow edits, boilerplate, single-file TDD, obvious renames |
-| medium | Multi-file work with a clear plan, routine review, API wiring |
+| small | Fully specified, mechanical changes: renames, style extraction, boilerplate, straightforward caller updates, and review of those changes—even across several files |
+| medium | Bounded work requiring judgment about behavior or integration: API changes, focus handling, interacting components, and review of those changes |
 | large | Ambiguous requirements, cross-cutting design, tricky failures, high-risk correctness |
 
 - Size implementers to the individual task. Never use large for mechanical RED/GREEN.
