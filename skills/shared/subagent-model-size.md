@@ -7,7 +7,8 @@ Prefer the **smallest model that can finish the task reliably**. When the host c
 1. Load config: `Read` (or `test -f` / shell) `./.agents/gosumode` at the project root, then `~/.agents/gosumode`, before choosing a model. Do **not** treat a failed Glob/grep/search as "no config" — the file is often gitignored and invisible to search tools.
 2. Choose a **tier** (small / medium / large) using Tiers + Heuristics.
 3. Resolve that tier to a **model**:
-   - If the file defines `models.<tier>`, use that exact ID. It wins on every host.
+   - Use `hosts.<current-host>.models.<tier>` when present (host keys identify the harness, e.g. `codex`, `claude-code`, `pi`). Otherwise use `models.<tier>` from that same file. Never use another host's mapping.
+   - A tier value may be an exact model ID string, or an object with `model` and optional `reasoning_effort`. Pass these as dispatch options; on Codex, explicit model/reasoning overrides require `fork_turns: "none"`, so supply the task context in the prompt. If the host cannot express a configured option, stop and report it rather than dropping it silently.
    - Else, if the host has a **tier ladder** — its model option accepts documented values per size (the host's own small/medium/large names) — use the value for that tier.
    - Else, leave the model option unset so the session's current model is used.
 4. Never invent an ID. If a config ID is rejected by the host, stop and ask the user — do not silently rewrite it.
@@ -23,6 +24,23 @@ models:
   large: grok-4.5-xhigh
 ```
 
+To use different models across harnesses, add host overrides in the same file.
+For example, keep the flat mapping above for other hosts and add:
+
+```yaml
+hosts:
+  codex:
+    models:
+      small: gpt-6-luna
+      medium: gpt-6.1-terra
+      large:
+        model: gpt-6.1-sol
+        reasoning_effort: high
+```
+
+Host overrides are per tier: a missing host tier falls back to the flat
+`models.<tier>` in the selected file, then the host ladder/session rule above.
+File selection still happens first; never fill omissions from the home file.
 A present tier key wins over any host default the model feels like.
 
 ## Tiers
