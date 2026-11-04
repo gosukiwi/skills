@@ -10,9 +10,11 @@ directory. Human overview: [`README.md`](README.md).
 NO SKILL CHANGE WITHOUT A FAILING SCENARIO FIRST
 ```
 
-Applies to any behaviour change under an owned skill, `shared/delegation.md`,
-`shared/subagent-model-size.md`, or an owned skill's `references/`. Full process
-and exceptions: [`tests/writing-skills.md`](tests/writing-skills.md).
+Applies only to skills we own: any behaviour change under an owned skill,
+`shared/delegation.md`, `shared/subagent-model-size.md`, or an owned skill's
+`references/`. Sourced skills (those with a `source.json`) are out of scope:
+never edit them locally, and they get no scenarios. Full process and
+exceptions: [`tests/writing-skills.md`](tests/writing-skills.md).
 
 ## Commands
 
