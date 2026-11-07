@@ -9,9 +9,12 @@ These skills set `disable-model-invocation: true`, so naming a skill does not ru
 For skill `<name>`, try in order; first that exists wins.
 
 1. `.agents/skills/<name>/`
-2. `.cursor/skills/<name>/`
-3. `~/.agents/skills/<name>/`
-4. `~/.cursor/skills/<name>/`
+2. `.claude/skills/<name>/`
+3. `.cursor/skills/<name>/`
+4. `~/.gemini/antigravity-cli/skills/<name>/`
+5. `~/.agents/skills/<name>/`
+6. `~/.claude/skills/<name>/`
+7. `~/.cursor/skills/<name>/`
 
 If none exist, tell the user the skill is missing and stop. Do not improvise its steps from its name.
 

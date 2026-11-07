@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Use this skill to review the current branch thoroughly, while auto-fixing blocking changes.
 
-This skill runs other skills. Read `shared/delegation.md` from your skills directory first, and resolve every skill below the way it describes.
+This skill runs other skills. Read `shared/delegation.md` from your skills directory (such as `~/.gemini/antigravity-cli/skills/`, `~/.agents/skills/`, `~/.claude/skills/`, or `.agents/skills/`) first, and resolve every skill below the way it describes.
 
 If the git tree is not clean (uncommitted changes), warn the user before continuing.
 
