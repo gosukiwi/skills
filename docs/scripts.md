@@ -7,14 +7,17 @@ leave everything else in the destination alone.
 
 Installs every entry in `skills/` (including `shared/`) into an agent's skills
 directory. With no destination option it asks where to install, defaulting to
-`~/.claude/skills` (Claude Code). `--claude`, `--both` (`~/.claude/skills` and
-`~/.agents/skills`) and `--dest DIR` set the destination directly, and `-y`
-skips the prompt when there is no terminal. `--copy` copies instead of
-symlinking, and `--update` runs `git pull --ff-only` first.
+`~/.claude/skills` (Claude Code). `--claude`, `--agents` (`~/.agents/skills`),
+`--antigravity` / `--agy` (`~/.gemini/antigravity-cli/skills`), `--both`
+(`~/.claude/skills` and `~/.agents/skills`), `--all` (all three), and
+`--dest DIR` set the destination directly, and `-y` skips the prompt when there
+is no terminal. `--copy` copies instead of symlinking, and `--update` runs
+`git pull --ff-only` first.
 
 Claude Code discovers skills only one level deep and does not read
-`~/.agents/skills`, so install into `~/.claude/skills` for it — or use `--both`
-to cover Claude Code and the other agents in one run.
+`~/.agents/skills`, and Antigravity CLI uses `~/.gemini/antigravity-cli/skills`,
+so install into their respective directories — or use `--all` to cover Claude
+Code, Antigravity CLI, and other agents in one run.
 
 Safe to re-run. It refreshes what it installed, skips any name it didn't create,
 and prunes links whose source has disappeared from the repo — nothing else in
