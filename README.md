@@ -49,7 +49,8 @@ cursor/plugins, and a guide from aihero.dev — and each mirrored skill has a
 ## Install
 
 Clone the repo, then run the install script — it asks where to put the skills:
-Claude Code's `~/.claude/skills`, other agents' `~/.agents/skills`, or both.
+Claude Code's `~/.claude/skills`, other agents' `~/.agents/skills`,
+Antigravity CLI's `~/.gemini/antigravity-cli/skills`, or all of them.
 
 ```sh
 git clone https://github.com/gosukiwi/skills.git ~/gosukiwi-skills

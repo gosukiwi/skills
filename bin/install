@@ -16,9 +16,9 @@ SKILLS_DIR="$REPO_ROOT/skills"
 
 CLAUDE_DEST="$HOME/.claude/skills"
 AGENTS_DEST="$HOME/.agents/skills"
+ANTIGRAVITY_DEST="$HOME/.gemini/antigravity-cli/skills"
 
-DEST=""
-DEST2=""
+DESTS=()
 DEST_SET=0
 USE_COPY=0
 DO_UPDATE=0
@@ -32,14 +32,18 @@ Install this repo's skills into an agent's skills directory.
 Usage: bin/install [options]
 
 Options:
-  --dest DIR   Install into DIR
-  --claude     Install into ~/.claude/skills (Claude Code)
-  --both       Install into both ~/.claude/skills and ~/.agents/skills
-  --copy       Copy the files instead of symlinking
-  --update     git pull --ff-only before installing
-  --force      Replace anything already at a matching name (one-time migration)
-  -y, --yes    With no destination option, skip the prompt (uses ~/.claude/skills)
-  -h, --help   Show this help
+  --dest DIR       Install into DIR
+  --claude         Install into ~/.claude/skills (Claude Code)
+  --agents         Install into ~/.agents/skills (Codex, Cursor, other agents)
+  --antigravity    Install into ~/.gemini/antigravity-cli/skills (Antigravity CLI)
+  --agy            Alias for --antigravity
+  --both           Install into both ~/.claude/skills and ~/.agents/skills
+  --all            Install into Claude Code, ~/.agents/skills, and Antigravity CLI
+  --copy           Copy the files instead of symlinking
+  --update         git pull --ff-only before installing
+  --force          Replace anything already at a matching name (one-time migration)
+  -y, --yes        With no destination option, skip the prompt (uses ~/.claude/skills)
+  -h, --help       Show this help
 
 With no destination option it asks where to install, defaulting to
 ~/.claude/skills. Safe to re-run: it refreshes what it installed, skips any
@@ -54,14 +58,16 @@ while [ $# -gt 0 ]; do
   case "$1" in
     --dest)
       [ $# -ge 2 ] || die "--dest needs a directory"
-      DEST="$2"
-      DEST2=""
+      DESTS+=("$2")
       DEST_SET=1
       shift 2
       ;;
-    --dest=*) DEST="${1#--dest=}"; DEST2=""; DEST_SET=1; shift ;;
-    --claude) DEST="$CLAUDE_DEST"; DEST2=""; DEST_SET=1; shift ;;
-    --both) DEST="$CLAUDE_DEST"; DEST2="$AGENTS_DEST"; DEST_SET=1; shift ;;
+    --dest=*) DESTS+=("${1#--dest=}"); DEST_SET=1; shift ;;
+    --claude) DESTS+=("$CLAUDE_DEST"); DEST_SET=1; shift ;;
+    --agents) DESTS+=("$AGENTS_DEST"); DEST_SET=1; shift ;;
+    --antigravity|--agy) DESTS+=("$ANTIGRAVITY_DEST"); DEST_SET=1; shift ;;
+    --both) DESTS+=("$CLAUDE_DEST" "$AGENTS_DEST"); DEST_SET=1; shift ;;
+    --all) DESTS+=("$CLAUDE_DEST" "$AGENTS_DEST" "$ANTIGRAVITY_DEST"); DEST_SET=1; shift ;;
     --copy) USE_COPY=1; shift ;;
     --update) DO_UPDATE=1; shift ;;
     --force) FORCE=1; shift ;;
@@ -80,21 +86,22 @@ choose_dest() {
     echo "Where should I install the skills?"
     echo "  1) $CLAUDE_DEST  (Claude Code)"
     echo "  2) $AGENTS_DEST  (Codex, Cursor, other agents)"
-    echo "  3) Both"
-    echo "  4) A custom path"
+    echo "  3) $ANTIGRAVITY_DEST  (Antigravity CLI)"
+    echo "  4) All of the above"
+    echo "  5) A custom path"
     printf 'Choose [1]: '
   } > /dev/tty
   read -r answer < /dev/tty || answer=""
   case "$answer" in
-    ""|1) DEST="$CLAUDE_DEST"; DEST2="" ;;
-    2) DEST="$AGENTS_DEST"; DEST2="" ;;
-    3) DEST="$CLAUDE_DEST"; DEST2="$AGENTS_DEST" ;;
-    4)
+    ""|1) DESTS=("$CLAUDE_DEST") ;;
+    2) DESTS=("$AGENTS_DEST") ;;
+    3) DESTS=("$ANTIGRAVITY_DEST") ;;
+    4) DESTS=("$CLAUDE_DEST" "$AGENTS_DEST" "$ANTIGRAVITY_DEST") ;;
+    5)
       printf 'Path: ' > /dev/tty
       read -r custom < /dev/tty || custom=""
       [ -n "$custom" ] || die "no path given."
-      DEST="$custom"
-      DEST2=""
+      DESTS=("$custom")
       ;;
     *) die "unrecognized choice: $answer" ;;
   esac
@@ -103,8 +110,7 @@ choose_dest() {
 # No destination option: ask, unless told to skip or there is no terminal.
 if [ "$DEST_SET" -eq 0 ]; then
   if [ "$ASSUME_YES" -eq 1 ] || [ ! -r /dev/tty ] || [ ! -w /dev/tty ]; then
-    DEST="$CLAUDE_DEST"
-    DEST2=""
+    DESTS=("$CLAUDE_DEST")
   else
     choose_dest
   fi
@@ -135,10 +141,21 @@ resolve_dest() {
   printf '%s\n' "$d"
 }
 
-DEST="$(resolve_dest "$DEST")"
-if [ -n "$DEST2" ]; then
-  DEST2="$(resolve_dest "$DEST2")"
-fi
+RESOLVED_DESTS=()
+for d in "${DESTS[@]}"; do
+  r="$(resolve_dest "$d")"
+  already=0
+  for existing in ${RESOLVED_DESTS[@]+"${RESOLVED_DESTS[@]}"}; do
+    if [ "$existing" = "$r" ]; then
+      already=1
+      break
+    fi
+  done
+  if [ "$already" -eq 0 ]; then
+    RESOLVED_DESTS+=("$r")
+  fi
+done
+DESTS=("${RESOLVED_DESTS[@]}")
 
 # A copy is ours if a previous --copy run recorded it in the manifest.
 is_owned_copy() {
@@ -266,10 +283,14 @@ install_into() {
 }
 
 ok=0
-install_into "$DEST" || ok=1
-if [ -n "$DEST2" ]; then
-  echo
-  install_into "$DEST2" || ok=1
-fi
+first=1
+for d in "${DESTS[@]}"; do
+  if [ "$first" -eq 1 ]; then
+    first=0
+  else
+    echo
+  fi
+  install_into "$d" || ok=1
+done
 
 exit "$ok"
