@@ -32,7 +32,7 @@ that get scenarios:
 edit them locally, and never add scenarios for them:
 
 `bro`, `domain-modeling`, `grill-with-docs`, `grilling`, `handoff`,
-`taste-to-checks`, `thermo-nuclear-code-quality-review`.
+`taste-to-checks`, `thermo-nuclear-code-quality-review`, `unslop`.
 
 ## skills/shared
 

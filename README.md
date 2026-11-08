@@ -37,6 +37,7 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 - `handoff` — write a note so another agent can pick up where you left off.
 - `bro` — restate the last message in plain words.
 - `taste-to-checks` — turn a repeated review correction into a check that runs on its own.
+- `unslop` — cut AI tells from any writing.
 
 **Docs**
 
