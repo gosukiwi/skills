@@ -16,7 +16,7 @@ Search the project's **open** issues before you draft. If one already covers the
 
 # Explore
 
-Build the issue one section per round, in this order. Each round is a short numbered list with no preamble, so the user can reference an item by number; wait for the user's reaction before the next.
+Build the issue one section per round, in this order. Start each round with its section heading (e.g. `### Problem`), followed by a short numbered list with no conversational preamble, so the user can reference an item by number; wait for the user's reaction before the next.
 
 1. **Problem** — what is wrong or missing and why it matters, linking the key code or docs.
 2. **Solution** — what is true when this is done, including limits the user set and what is excluded.
