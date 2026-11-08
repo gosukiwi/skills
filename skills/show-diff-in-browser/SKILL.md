@@ -1,6 +1,7 @@
 ---
 name: show-diff-in-browser
-description: Render git diffs (working tree, staged, commits, or specific files) in a standalone browser tab with syntax highlighting, word wrap, and unified/split views. Opens in a connected browser tool or outputs a clickable local file link.
+description: Render git diffs (working tree, staged, commits, or specific files) in a standalone browser tab with syntax highlighting, word wrap, and unified/split views. Opens via system open or a connected browser tool.
+disable-model-invocation: true
 ---
 
 Render a clean, formatted Git diff in the browser without pushing to GitHub or needing external services.
@@ -48,10 +49,11 @@ Features included in the generated HTML:
 
 Follow this precedence:
 
-1. **Connected Browser MCP** (e.g., Safari, Chrome, Playwright):
-   - Use `create_tab` or `navigate_to_url` with `file:///tmp/diff.html`.
+1. **System Command**:
+   - Run `open /tmp/diff.html` (macOS) or `xdg-open /tmp/diff.html` (Linux).
+   - If that succeeds, confirm to the user that the diff was opened in their default browser.
+2. **Connected Browser MCP** (if system command fails or environment is sandboxed):
+   - Use `create_tab` or `navigate_to_url` (Safari, Chrome, Playwright) with `file:///tmp/diff.html`.
    - Confirm to the user that the tab was opened/refreshed.
-2. **Terminal / Host Command**:
-   - If running unsandboxed, run `open /tmp/diff.html` (macOS) or `xdg-open /tmp/diff.html` (Linux).
 3. **Fallback Link**:
    - Always print the clickable Markdown link: `[View Diff in Browser](file:///tmp/diff.html)`.
