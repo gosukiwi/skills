@@ -27,7 +27,7 @@ Create a **new** issue that *is* this PR. Narrow the title if needed. Keep the r
 
 Keep it high-level and unambiguous. Success Criteria must be falsifiable. Out of Scope is drive-by and proximity work a later implementer could take for its own job — not the rest of the original request (that is the tail). Design is approach and decisions — not file paths or type dumps.
 
-Fold decisions already made in this session into Goal, Success Criteria, Out of Scope, and Design. Do not paste the conversation.
+The ticket is self-contained: fold every decision made in this session (including per-item or case-by-case rules) into Goal, Success Criteria, Out of Scope, or Design. A fresh session with no conversation history must be able to implement it without guessing. Do not paste conversational transcripts, but never omit agreed choices to keep the ticket short.
 
 Do not write a task list.
 

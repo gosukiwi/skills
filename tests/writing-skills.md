@@ -144,6 +144,7 @@ Annotations name the model the run used.
 | `slice-keeps-epic.md` | `slice` | **B** — new slice ticket + one leftover; close original pointing at both; no graph (Grok 4.6) |
 | `slice-edit-in-place.md` | `slice` | **B** — new ticket for the slice spec; do not replace the original body (Grok 4.6) |
 | `slice-close-before-tail.md` | `slice` | **B** — leftover ticket exists before close; close comment points at both (Grok 4.6) |
+| `slice-session-decisions-on-ticket.md` | `slice` | **B** — the ticket is self-contained and folds every decision made in the session into the issue body (gemini-flash-lite; RED: A, GREEN: B) |
 | `address-issue-fixes-slice.md` | `address-issue` | **B** — implement and close the slice ticket, not the original request (Grok 4.6) |
 | `address-issue-skip-interview.md` | `address-issue` | **B** — interview before scoping (guard: compliant on Grok 4.6) |
 | `address-issue-verify-before-review.md` | `address-issue` | **B** — get live evidence per criterion before Review (guard: compliant on deepseek-v4.1-flash; live RED: sessions `3a3f9e5c` and `bab760a2` skipped Verify before Review, while a fresh subagent re-read `implement` and stayed compliant) |
