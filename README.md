@@ -23,6 +23,7 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 - `correctness-review` — look over your changes for real bugs and weak tests.
 - `explain-finding` — explain a review finding in plain words, with code.
 - `review-loop` — fix the bugs a review finds in a loop, then the cleanups worth doing.
+- `show-diff-in-browser` — render git diffs in the browser with word wrap and unified/split views.
 - `thermo-nuclear-code-quality-review` — a very strict review for code that's hard to maintain.
 
 **Design**
