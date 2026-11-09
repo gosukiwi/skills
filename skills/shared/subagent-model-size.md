@@ -10,7 +10,7 @@ Use the installed skills directory and current harness key (e.g. `codex`,
 `claude-code`, `pi`). Run from the project root or pass `--project-root DIR`.
 Apply the returned JSON options through the host's dispatch tool; `{}` means
 leave model/reasoning unset. Report resolver errors or unsupported/rejected options and stop;
-never guess or map tiers directly to host enum names (such as `'pro'`), substitute IDs,
+never guess or map tiers directly to host enum names, substitute IDs,
 drop options, or calculate precedence yourself without resolver output.
 For configuration, use `setup-gosumode`.
 
