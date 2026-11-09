@@ -29,6 +29,5 @@ For configuration, use `setup-gosumode`.
 - When unsure, choose the smaller tier; bump after failure or clearly hard work.
 - Keep model IDs out of task breakdowns. Catalogs are not dispatch mappings;
   never probe IDs with throwaway workers.
-- Never guess or map tiers directly to host enum names like "pro" without resolver output; respect `{}` as unset/inherit.
 - An empty worker response is not model evidence: retry once on the session
   model, then report failure.
