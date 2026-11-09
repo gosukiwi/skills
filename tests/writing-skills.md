@@ -177,3 +177,5 @@ Annotations name the model the run used.
 | `subagent-model-size-mechanical-multiple-files.md` | `subagent-model-size` | **A** — the mechanical button pair uses small; the dialog focus pair uses medium (live RED: Codex session `01a19880-73ca-7b61-96a6-7d4f86c8b893` used medium for both pairs; fresh pre-change guard: A on gpt-6.1-sol, medium effort; user approved live evidence in place of a fresh failure; GREEN: A on gpt-6.1-sol, medium effort; table-only rerun: A) |
 | `subagent-model-size-dialog-focus.md` | `subagent-model-size` | **B** — unresolved focus integration uses medium for implementation and review (guard: B before and after on gpt-6.1-sol, medium effort; table-only rerun: B) |
 | `delegation-host-skills-path.md` | `shared/delegation.md` | **B** — resolve skills installed in Antigravity or Claude host skill directories (gemini-3.8-flash; RED: A, GREEN: B) |
+| `review-loop-unconfigured-tier-inherit.md` | `review-loop`, `subagent-model-size` | **B** — resolve the tier via shared/subagent-model-size.md and leave model unset / inherit when unconfigured instead of escalating to pro (gemini-3.8-flash) |
+
