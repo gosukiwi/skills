@@ -10,7 +10,8 @@ Use the installed skills directory and current harness key (e.g. `codex`,
 `claude-code`, `pi`). Run from the project root or pass `--project-root DIR`.
 Apply the returned JSON options through the host's dispatch tool; `{}` means
 leave model/reasoning unset. Report resolver errors or unsupported/rejected options and stop;
-never substitute IDs, drop options, or calculate precedence yourself.
+never guess or map tiers directly to host enum names (such as `'pro'`), substitute IDs,
+drop options, or calculate precedence yourself without resolver output.
 For configuration, use `setup-gosumode`.
 
 ## Tiers
@@ -28,5 +29,6 @@ For configuration, use `setup-gosumode`.
 - When unsure, choose the smaller tier; bump after failure or clearly hard work.
 - Keep model IDs out of task breakdowns. Catalogs are not dispatch mappings;
   never probe IDs with throwaway workers.
+- Never guess or map tiers directly to host enum names like "pro" without resolver output; respect `{}` as unset/inherit.
 - An empty worker response is not model evidence: retry once on the session
   model, then report failure.
