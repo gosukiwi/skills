@@ -10,7 +10,11 @@ Fetch the issue.
 
 # Size
 
-One issue is one PR: small enough for one agent session to hold the spec and later task coordination; shippable on its own; testable on its own. Work that exceeds any of these is more than one slice — slice 1 is a new issue.
+One issue is one PR: small enough for one agent session to hold the spec and later task coordination; shippable on its own; testable on its own. Work that exceeds any of these is more than one PR can hold. The rule measures; it does not decide: no issue is created and no original is closed on this rule's authority alone.
+
+# Ask before splitting
+
+An oversized request has two shapes — a slice plus a tail, or the whole request in one PR — and only the user picks between them. Before creating any issue, show both: slice 1's proposed scope with the bullets that stay out, versus everything in one PR. Recommend the split and say why; an open question that names no options and no recommendation is not this ask. Follow the answer as settled: accept → the tail below may be filed; whole request in one PR → slice 1 is the entire request and there is no tail; a split of the user's own → that split.
 
 # Slice issue
 
@@ -35,7 +39,7 @@ The original issue remains the request. The slice spec is not written onto it.
 
 # Peel the tail
 
-If anything from the original request does not fit slice 1, create **one** new issue (not a spec, just a problem statement). Put every leftover bullet on that one issue. First line of the body: `Cut when scoping #<slice-issue>.` No parent, no blocked-by, no `Fixes` links.
+If the user accepted the split and anything from the original request does not fit slice 1, create **one** new issue (not a spec, just a problem statement). Put every leftover bullet on that one issue. First line of the body: `Cut when scoping #<slice-issue>.` No parent, no blocked-by, no `Fixes` links.
 
 Keep the relevant metadata from the original issue (tags, assignees, etc), and add the "tail" tag (create if needed).
 

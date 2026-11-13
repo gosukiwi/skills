@@ -178,4 +178,5 @@ Annotations name the model the run used.
 | `subagent-model-size-dialog-focus.md` | `subagent-model-size` | **B** — unresolved focus integration uses medium for implementation and review (guard: B before and after on gpt-6.1-sol, medium effort; table-only rerun: B) |
 | `delegation-host-skills-path.md` | `shared/delegation.md` | **B** — resolve skills installed in Antigravity or Claude host skill directories (gemini-3.8-flash; RED: A, GREEN: B) |
 | `review-loop-unconfigured-tier-inherit.md` | `review-loop`, `subagent-model-size` | **B** — resolve the tier via shared/subagent-model-size.md and leave model unset / inherit when unconfigured instead of escalating to pro (gemini-3.8-flash) |
+| `slice-asks-before-splitting.md` | `slice` | **B** — before filing an oversized request, show the user both shapes (slice + tail, or the whole request in one PR) and recommend the split; the sizing rule never files alone (deepseek-v4.1-flash; RED: A, GREEN: B) |
 
