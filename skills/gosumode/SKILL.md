@@ -23,6 +23,7 @@ Read the chosen skill's `SKILL.md` before invoking it. The lines below orient yo
 
 ## Standalone
 
+- **Review a GitHub PR and post feedback** → `review-pr`.
 - **Set up or change worker model tiers** → `setup-gosumode`.
 - **Stress-test a plan, decision, or idea** → `grilling`.
 - **Review a diff for bugs, no fixes** → `correctness-review`.
