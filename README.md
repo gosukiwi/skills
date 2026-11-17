@@ -22,6 +22,7 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 
 - `correctness-review` — look over your changes for real bugs and weak tests.
 - `explain-finding` — explain a review finding in plain words, with code.
+- `prune-tests` — prune tests that guard no behavior.
 - `review-loop` — fix the bugs a review finds in a loop, then the cleanups worth doing.
 - `review-pr` — verify a GitHub PR, run parallel correctness and quality reviews, and post a confirmed plain-language review.
 - `show-diff-in-browser` — render git diffs in the browser with word wrap and unified/split views.
@@ -46,8 +47,8 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 - `tidy-up-agents-md` — split a bloated AGENTS.md into a short index plus linked pages.
 
 Most skills are mine. A few are mirrored from other repos — mattpocock/skills,
-cursor/plugins, and a guide from aihero.dev — and each mirrored skill has a
-`source.json` showing where it came from.
+cursor/plugins, caldoai/skills, and a guide from aihero.dev — and each mirrored
+skill has a `source.json` showing where it came from.
 
 ## Install
 
