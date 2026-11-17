@@ -1,0 +1,4 @@
+{
+  "description": "Prune tests that guard no behavior.",
+  "repo": "https://github.com/caldoai/skills/blob/main/skills/prune-tests/SKILL.md"
+}
