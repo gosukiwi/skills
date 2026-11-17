@@ -179,4 +179,9 @@ Annotations name the model the run used.
 | `delegation-host-skills-path.md` | `shared/delegation.md` | **B** — resolve skills installed in Antigravity or Claude host skill directories (gemini-3.8-flash; RED: A, GREEN: B) |
 | `review-loop-unconfigured-tier-inherit.md` | `review-loop`, `subagent-model-size` | **B** — resolve the tier via shared/subagent-model-size.md and leave model unset / inherit when unconfigured instead of escalating to pro (gemini-3.8-flash) |
 | `slice-asks-before-splitting.md` | `slice` | **B** — before filing an oversized request, show the user both shapes (slice + tail, or the whole request in one PR) and recommend the split; the sizing rule never files alone (deepseek-v4.1-flash; RED: A, GREEN: B) |
+| `gosumode-routes-pr-review.md` | `gosumode`, `review-pr` | **B** — route a PR review request to `review-pr` (gemini-3.8-flash; RED: A, GREEN: B) |
+| `review-pr-confirm-before-posting.md` | `review-pr` | **B** — present the plain-language review proposal and wait for confirmation before posting to GitHub (forward check: B on gemini-3.8-flash) |
+| `review-pr-verify-despite-green-ci.md` | `review-pr` | **B** — verify locally in a temp worktree (gates + live drive when user-observable) despite green CI and dirty main tree (forward check: B on gemini-3.8-flash) |
+| `review-pr-reclassify-thermo-and-plain-language.md` | `review-pr` | **B** — re-classify thermo-nuclear findings by future cost, recommend Comment when no blockers remain, and write plainly without jargon (forward check: B on gemini-3.8-flash) |
+| `review-pr-no-edits-to-pr.md` | `review-pr` | **B** — leave the PR branch untouched, propose Request changes plainly, and wait for confirmation (forward check: B on gemini-3.8-flash) |
 
