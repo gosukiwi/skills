@@ -31,8 +31,8 @@ that get scenarios:
 **Sourced** skills are a pristine mirror of their upstream directory — never
 edit them locally, and never add scenarios for them:
 
-`bro`, `domain-modeling`, `grill-with-docs`, `grilling`, `handoff`,
-`prune-tests`, `taste-to-checks`, `thermo-nuclear-code-quality-review`, `unslop`.
+`bro`, `correct`, `domain-modeling`, `grill-with-docs`, `grilling`, `handoff`,
+`prune-tests`, `thermo-nuclear-code-quality-review`, `unslop`.
 
 ## skills/shared
 
