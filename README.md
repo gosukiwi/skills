@@ -33,6 +33,7 @@ projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 - `domain-modeling` — keep a project glossary and record hard-to-reverse decisions (ADRs).
 - `prototype` — build a throwaway prototype to answer a question about application logic or UI design.
 - `rehome` — suggest a better home for a concept, module, or repo.
+- `ui-design` — design, refine, or review web interfaces for layout, visual hierarchy, interaction, and usability.
 
 **Talk and write**
 
