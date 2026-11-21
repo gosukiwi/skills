@@ -40,6 +40,9 @@ etc.). Local copies are replaced only when content actually changed; files that
 disappeared upstream are pruned. `source.json` itself is local metadata and is
 never overwritten. Skills without a `source.json` are left untouched.
 
+Updates run in batches of up to four skills, with one GitHub request at a time
+per skill. The script prints each skill's results together in directory order.
+
 After updating, run `bin/install` to sync the changes.
 
 Requires `curl` and `python3` (both preinstalled on macOS). The script checks
