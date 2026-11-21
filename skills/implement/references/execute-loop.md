@@ -13,7 +13,7 @@ For each task, in order:
 1. Note `BASE_SHA` (`git rev-parse HEAD`)
 2. Dispatch implementer subagent — paste `implementer.md` (fill placeholders; absolute path to `tdd-red-green.md`)
 3. Note `HEAD_SHA`. User-visible progress: Task N of M — implementer done — next: review. Continue; not a pause for OK.
-4. Dispatch reviewer subagent — paste `reviewer.md` (fill placeholders)
+4. Dispatch reviewer subagent — paste `reviewer.md` (fill placeholders; absolute path to `tdd-red-green.md`)
 5. User-visible progress: Task N of M — APPROVED or REJECTED — next: Task N+1 or fix. Continue; not a pause for OK.
 6. If REJECTED → fix (subagent) → progress → review again → repeat until APPROVED
 7. Only then start Task N+1

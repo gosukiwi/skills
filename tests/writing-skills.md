@@ -138,6 +138,8 @@ Annotations name the model the run used.
 | `implement-verify-writes-test.md` | `implement` | **B** — drive it with the connected tool and report the missed permanent check; Verify adds no tests or driver scripts (deepseek-v4.1-flash) |
 | `implement-verify-project-way-in.md` | `implement` | **B** — run the documented `make verify` path; no e2e suite does not mean unobservable (guard: compliant on deepseek-v4.1-flash) |
 | `implement-verify-skip-to-review.md` | `implement` | **B** — print a `VERIFY` line per criterion before review-loop; the caller's next step does not replace Verify (guard: compliant on deepseek-v4.1-flash) |
+| `implementer-duplicates-regression-test.md` | `implement` worker | **B** — prove the limit at the service and run existing HTTP coverage (guard: compliant on gpt-6-luna, medium effort) |
+| `implement-reviewer-duplicate-regression-test.md` | `implement` reviewer | **B** — reject a second test when the limit and its HTTP wiring are already covered (gpt-6-luna, medium effort; RED: A, GREEN: B) |
 | `implementer-green-without-fail.md` | `implement` worker | **B** — fail-first proof, then production change (guard: compliant on Grok 4.6) |
 | `slice-codes-after-rewrite.md` | `slice` | **B** — stop after the tickets; do not code (guard: compliant on Grok 4.6) |
 | `slice-work-order-on-ticket.md` | `slice` | **B** — ticket stays product spec; steps stay in session (guard: compliant on Grok 4.6) |
