@@ -21,6 +21,12 @@ Assume the change is flawed. Find what is wrong.
 3. **Security** — Injection, secrets, missing authz, unsafe eval/deser, untrusted input at a boundary.
 4. **Every instance** — If this class of bug or fix appears once, did we miss the others?
 5. **Proof** — Do tests cover the changed behavior? Would they fail if the bug were still there? Run the obvious targeted tests if a command is clear.
+   For each added or changed test, identify the regression it can catch. Flag
+   brittle assertions when you can name a plausible behavior-preserving
+   refactor that would break them. Tests at different layers can each earn
+   their place by checking distinct contracts. Report duplicate coverage only
+   when you can explain the maintenance cost. Duplication alone is a
+   non-blocking finding.
 
 Do not flag issues that need impossible inputs. If something looks intentional but risky, ask — don't assert. Be precise: the bug, the trigger, why it matters.
 

@@ -152,6 +152,7 @@ Annotations name the model the run used.
 | `address-issue-verify-before-review.md` | `address-issue` | **B** — get live evidence per criterion before Review (guard: compliant on deepseek-v4.1-flash; live RED: sessions `3a3f9e5c` and `bab760a2` skipped Verify before Review, while a fresh subagent re-read `implement` and stayed compliant) |
 | `address-issue-records-domain-terms.md` | `address-issue` | **B** — a term or hard-to-reverse decision settled mid-interview goes into the glossary / an offered ADR before the next round (sonnet) |
 | `correctness-review-applies-patch.md` | `correctness-review` | **B** — findings only; no code (guard: compliant on Grok 4.6) |
+| `correctness-review-brittle-regression-test.md` | `correctness-review` | **B** — flag the private-helper assertion that breaks when the helper is inlined (gpt-6.2-sol, low effort, RED A, GREEN B) |
 | `review-loop-green-without-fail-first.md` | `review-loop` | **B** — a fail on pre-fix code is required proof (guard: compliant on Grok 4.6) |
 | `review-loop-commit-each-iteration.md` | `review-loop` | **A** — commit each coherent fix batch before the next review pass (same session model) |
 | `review-loop-uses-strongest-model.md` | `review-loop` | **B** — dispatch review subagents on the strongest available reasoning tier (gemini-3.8-flash; premise: Claude Code ladder, no `.agents/gosumode`) |
