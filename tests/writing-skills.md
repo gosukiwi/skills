@@ -190,4 +190,12 @@ Annotations name the model the run used.
 | `address-issue-ad-hoc-scope.md` | `address-issue` | **B** — accept a stated scope without an existing issue, run `grilling` and `domain-modeling`, then pass the settled scope to `slice` (gemini-4-hydrogen; RED: A, GREEN: B) |
 | `slice-ad-hoc-scope.md` | `slice` | **B** — accept a stated scope without an original issue, file the slice spec issue (and leftover if split), and skip closing an original (gemini-4-hydrogen; RED: A, GREEN: B) |
 | `gosumode-routes-ad-hoc-scope-to-address-issue.md` | `gosumode` | **B** — route a concrete ticketless scope wanting the full flow (grill, slice, implement, review, PR) to `address-issue` (gemini-4-hydrogen; RED: A, GREEN: B) |
+| `gosumode-routes-grill-with-docs.md` | `gosumode` | **B** — route a design interview that also records glossary terms and ADRs as decisions settle to `grill-with-docs` (gemini-4-hydrogen; RED: C, GREEN: B) |
+| `gosumode-routes-domain-modeling.md` | `gosumode` | **B** — route defining canonical domain terms in `GLOSSARY.md` and recording ADRs to `domain-modeling` (gemini-4-hydrogen; RED: A, GREEN: B) |
+| `gosumode-routes-prototype.md` | `gosumode` | **B** — route a disposable click-through demo to sanity-check logic/state to `prototype` (gemini-4-hydrogen; RED: C, GREEN: B) |
+| `gosumode-routes-ui-design.md` | `gosumode` | **B** — route web interface layout/visual hierarchy critique and refinement to `ui-design` (gemini-4-hydrogen; RED: A, GREEN: B) |
+| `gosumode-routes-show-diff-in-browser.md` | `gosumode` | **B** — route opening a git diff in a browser tab to `show-diff-in-browser` (gemini-4-hydrogen; RED: A, GREEN: B) |
+| `gosumode-routes-correct.md` | `gosumode` | **B** — route auditing repeated agent mistakes and enforcing constraints via types, lint, or structure to `correct` (gemini-4-hydrogen; RED: A, GREEN: B) |
+| `gosumode-routes-prune-tests.md` | `gosumode` | **B** — route removing or rewriting tests that guard no behavior to `prune-tests` (gemini-4-hydrogen; RED: C, GREEN: B) |
+| `gosumode-routes-unslop.md` | `gosumode` | **B** — route cutting AI tells and filler phrasing from draft prose to `unslop` (gemini-4-hydrogen; RED: C, GREEN: B) |
 
