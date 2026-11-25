@@ -1,83 +1,103 @@
 # Skills
 
-My personal collection of agent skills, shared across my AI agents and
-projects. Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
+This repository holds the agent skills I share across my agents and projects.
+Each skill is a folder in [`skills/`](skills/) with a `SKILL.md`.
 
 ## What's inside
 
 ### Find a skill or set up your agent
 
-- `gosumode` — describe what you're trying to do; it points you at the right skill.
-- `setup-gosumode` — choose model tiers for your harnesses through a short setup wizard.
+- `gosumode` picks the right skill when you describe what you are trying to do.
+- `setup-gosumode` prompts you to set model tiers for your agents in
+  `.agents/gosumode.toml`.
 
 ### Shape and ship work
 
 **Think through an idea**
 
-- `grilling` — push back hard on a plan or idea.
-- `grill-with-docs` — push back on a design and write the glossary and ADRs as you go.
+- `grilling` questions your plan or idea to find weak spots.
+- `grill-with-docs` runs `grilling` on a design while updating the project
+  glossary and architecture decision records.
 
 **Take one step**
 
-- `create-issue` — turn an idea into a GitHub issue.
-- `slice` — cut an issue or stated scope down to one pull request and file the rest as a new issue.
-- `implement` — build a task in small steps, each one reviewed.
+- `create-issue` turns an idea into a GitHub issue.
+- `slice` limits an issue or stated scope to one pull request and files the
+  remaining work as a new issue.
+- `implement` builds a task in small steps and reviews each step with a
+  subagent.
 
-**Go from issue to pull request**
+**Turn an issue into a pull request**
 
-- `address-issue` — take an issue or stated scope from first discussion through to a pull request.
-- `yolo-issues` — run `address-issue` over a set of issues into one review branch, then open a single PR, accepting every recommendation.
+- `address-issue` runs an issue or stated scope through design questions,
+  slicing, implementation, review, and a pull request.
+- `yolo-issues` runs `address-issue` across a set of issues on one branch,
+  accepts every recommendation, and opens a single pull request.
 
-### Design the system or UI
+### Design the system or user interface
 
-- `domain-modeling` — keep a project glossary and record hard-to-reverse decisions (ADRs).
-- `prototype` — build a throwaway prototype to answer a question about application logic or UI design.
-- `rehome` — suggest a better home for a concept, module, or repo.
-- `ui-design` — design, refine, or review web interfaces for layout, visual hierarchy, interaction, and usability.
+- `domain-modeling` maintains a project glossary and records hard-to-reverse
+  architecture decisions.
+- `prototype` builds a throwaway prototype to test application logic or
+  interface design.
+- `rehome` proposes a better location for a concept, module, pull request, or
+  repository.
+- `ui-design` designs or reviews web interfaces for layout, visual hierarchy,
+  interaction, and usability.
 
 ### Review code or a pull request
 
-- `correctness-review` — look over your changes for real bugs and weak tests.
-- `thermo-nuclear-code-quality-review` — a very strict review for code that's hard to maintain.
-- `review-pr` — verify a GitHub PR, run parallel correctness and quality reviews, and post a confirmed plain-language review.
-- `review-loop` — fix the bugs a review finds in a loop, then the cleanups worth doing.
-- `show-diff-in-browser` — render git diffs in the browser with word wrap and unified/split views.
-- `explain-finding` — explain a review finding in plain words, with code.
+- `correctness-review` checks a diff for functional bugs, security issues,
+  intent fit, and weak tests.
+- `thermo-nuclear-code-quality-review` runs a strict maintainability review for
+  abstractions, large files, and complex conditionals.
+- `review-pr` checks out a GitHub pull request to verify it and runs
+  correctness and quality reviews in parallel. It posts a plain-language review
+  after you confirm.
+- `review-loop` fixes correctness findings in a loop, applies maintainability
+  fixes, and reports what remains.
+- `show-diff-in-browser` renders git diffs in a browser tab with word wrap and
+  unified or split views.
+- `explain-finding` explains a review finding in plain words with a short code
+  example.
 
-### Prevent repeat mistakes and maintain the repo
+### Prevent repeat mistakes and maintain the repository
 
-- `correct` — find mistakes agents keep repeating and prevent them with architecture, types, lint, or tests.
-- `prune-tests` — prune tests that guard no behavior.
-- `tidy-up-agents-md` — split a bloated AGENTS.md into a short index plus linked pages.
+- `correct` finds mistakes agents repeat and prevents them with architecture,
+  types, lint rules, or tests.
+- `prune-tests` removes tests that guard no behavior.
+- `tidy-up-agents-md` splits a long `AGENTS.md` into a short index with linked
+  pages.
 
-### Write, explain, or hand off
+### Writing and handoffs
 
-- `unslop` — cut AI tells from any writing.
-- `bro` — restate the last message in plain words.
-- `handoff` — write a note so another agent can pick up where you left off.
+- `unslop` removes AI writing patterns from text.
+- `bro` restates the last message in plain words without jargon.
+- `handoff` writes a handoff file so another agent can continue your session.
 
-Most skills are mine. A few are mirrored from other repos — mattpocock/skills,
-cursor/plugins, caldoai/skills, and a guide from aihero.dev — and each mirrored
-skill has a `source.json` showing where it came from.
+I wrote 14 of these skills, and `tidy-up-agents-md` adapts a guide from
+aihero.dev. Ten skills come from `mattpocock/skills`, `cursor/plugins`, and
+`caldoai/skills`, and each includes a `source.json` file with its upstream URL.
 
 ## Install
 
-Clone the repo, then run the install script — it asks where to put the skills:
-Claude Code's `~/.claude/skills`, other agents' `~/.agents/skills`,
-Antigravity CLI's `~/.gemini/antigravity-cli/skills`, or all of them.
+Clone this repository and run `bin/install`. `bin/install` asks where to place
+the skills: `~/.claude/skills` for Claude Code, `~/.agents/skills` for other
+agents, `~/.gemini/antigravity-cli/skills` for Antigravity CLI, or all three.
 
 ```sh
 git clone https://github.com/gosukiwi/skills.git ~/gosukiwi-skills
 ~/gosukiwi-skills/bin/install
 ```
 
-It only touches the skills it installs and leaves everything else alone, so
-running it again is safe. Run `bin/install --help` for the options.
+`bin/install` symlinks or copies only the skills from this repository and does
+not modify existing skills in the target directory, so running `bin/install`
+again is safe. Run `bin/install --help` to see all options.
 
-To update, `git pull` in the clone and run it again.
+To update, run `git pull` in `~/gosukiwi-skills` and run `bin/install` again.
 
-## Maintaining this repo
+## Maintaining this repository
 
-`bin/install` links `skills/` into an agent's skills directory, touching only
-the skills it installed. `bin/update` refreshes the skills that come from other
-people. See [AGENTS.md](AGENTS.md).
+`bin/install` symlinks `skills/` into an agent's skills directory and removes
+links whose source directory was deleted. `bin/update` downloads updates for
+skills that have a `source.json` file. See [AGENTS.md](AGENTS.md).
