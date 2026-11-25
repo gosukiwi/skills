@@ -5,14 +5,15 @@ leave everything else in the destination alone.
 
 ## bin/install
 
-Installs every entry in `skills/` (including `shared/`) into an agent's skills
-directory. With no destination option it asks where to install, defaulting to
-`~/.claude/skills` (Claude Code). `--claude`, `--agents` (`~/.agents/skills`),
+Installs every entry in `skills/` (including `shared/`) into one or more agent
+skills directories. With no destination option it asks where to install
+(accepting comma- or space-separated choices for multiple targets, defaulting to
+`~/.claude/skills`). `--claude`, `--agents` (`~/.agents/skills`),
 `--antigravity` / `--agy` (`~/.gemini/antigravity-cli/skills`), `--both`
 (`~/.claude/skills` and `~/.agents/skills`), `--all` (all three), and
-`--dest DIR` set the destination directly, and `-y` skips the prompt when there
-is no terminal. `--copy` copies instead of symlinking, and `--update` runs
-`git pull --ff-only` first.
+`--dest DIR` set the destination directly (and can be combined), and `-y` skips
+the prompt when there is no terminal. `--copy` copies instead of symlinking, and
+`--update` runs `git pull --ff-only` first.
 
 Claude Code discovers skills only one level deep and does not read
 `~/.agents/skills`, and Antigravity CLI uses `~/.gemini/antigravity-cli/skills`,
