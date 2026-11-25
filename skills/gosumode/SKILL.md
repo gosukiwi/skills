@@ -23,16 +23,35 @@ Read the chosen skill's `SKILL.md` before invoking it. The lines below orient yo
 
 ## Standalone
 
-- **Review a GitHub PR and post feedback** → `review-pr`.
-- **Set up or change worker model tiers** → `setup-gosumode`.
+### Design & explore
+
 - **Stress-test a plan, decision, or idea** → `grilling`.
+- **Stress-test a design and record glossary terms and ADRs as you go** → `grill-with-docs`.
+- **Define domain terminology (`GLOSSARY.md`) or record an ADR** → `domain-modeling`.
+- **Build a throwaway prototype to test logic or explore UI variations** → `prototype`.
+- **Design, refine, or critique a web interface** → `ui-design`.
+- **Find a better home for a concept, module, or repo** → `rehome`.
+
+### Review & inspect
+
+- **Review a GitHub PR and post feedback** → `review-pr`.
 - **Review a diff for bugs, no fixes** → `correctness-review`.
 - **Harsh maintainability pass** → `thermo-nuclear-code-quality-review`.
+- **Render a git diff in the browser** → `show-diff-in-browser`.
 - **Explain a review finding** → `explain-finding`.
-- **Find a better home for a concept** → `rehome`.
-- **Move context to a fresh session** → `handoff`.
+
+### Prevent mistakes & maintain
+
+- **Prevent repeated agent mistakes with architecture, types, lint, or tests** → `correct`.
+- **Remove or rewrite tests that guard no behavior** → `prune-tests`.
+- **Split a bloated `AGENTS.md`** → `tidy-up-agents-md`.
+
+### Write, explain, & session
+
+- **Cut AI tells from writing** → `unslop`.
 - **Restate the last message plainly** → `bro`.
-- **Split a bloated AGENTS.md** → `tidy-up-agents-md`.
+- **Move context to a fresh session** → `handoff`.
+- **Set up or change worker model tiers** → `setup-gosumode`.
 
 ## Route
 
