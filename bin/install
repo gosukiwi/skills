@@ -46,9 +46,10 @@ Options:
   -h, --help       Show this help
 
 With no destination option it asks where to install, defaulting to
-~/.claude/skills. Safe to re-run: it refreshes what it installed, skips any
-skill it didn't create, and prunes links whose source is gone from this repo.
-Nothing else in the destination is touched.
+~/.claude/skills. Destination options can be combined (e.g. --claude --agents).
+Safe to re-run: it refreshes what it installed, skips any skill it didn't
+create, and prunes links whose source is gone from this repo. Nothing else in
+the destination is touched.
 EOF
 }
 
@@ -80,7 +81,8 @@ done
 [ -d "$SKILLS_DIR" ] || die "couldn't find skills/ next to this script (looked in $REPO_ROOT)."
 
 choose_dest() {
-  local answer custom
+  local answer normalized choice custom old_noglob=0
+  local got_choice=0 custom_prompts=0
   {
     echo
     echo "Where should I install the skills?"
@@ -89,22 +91,44 @@ choose_dest() {
     echo "  3) $ANTIGRAVITY_DEST  (Antigravity CLI)"
     echo "  4) All of the above"
     echo "  5) A custom path"
-    printf 'Choose [1]: '
+    printf 'Choose (comma/space-separated, e.g. 1,2) [1]: '
   } > /dev/tty
   read -r answer < /dev/tty || answer=""
-  case "$answer" in
-    ""|1) DESTS=("$CLAUDE_DEST") ;;
-    2) DESTS=("$AGENTS_DEST") ;;
-    3) DESTS=("$ANTIGRAVITY_DEST") ;;
-    4) DESTS=("$CLAUDE_DEST" "$AGENTS_DEST" "$ANTIGRAVITY_DEST") ;;
-    5)
-      printf 'Path: ' > /dev/tty
-      read -r custom < /dev/tty || custom=""
-      [ -n "$custom" ] || die "no path given."
-      DESTS=("$custom")
-      ;;
-    *) die "unrecognized choice: $answer" ;;
-  esac
+
+  if [ -z "${answer//[[:space:]]/}" ]; then
+    DESTS=("$CLAUDE_DEST")
+    return
+  fi
+
+  DESTS=()
+  normalized="${answer//,/ }"
+  case $- in *f*) old_noglob=1 ;; esac
+  set -f
+  for choice in $normalized; do
+    got_choice=1
+    case "$choice" in
+      1) DESTS+=("$CLAUDE_DEST") ;;
+      2) DESTS+=("$AGENTS_DEST") ;;
+      3) DESTS+=("$ANTIGRAVITY_DEST") ;;
+      4) DESTS+=("$CLAUDE_DEST" "$AGENTS_DEST" "$ANTIGRAVITY_DEST") ;;
+      5) custom_prompts=$((custom_prompts + 1)) ;;
+      *)
+        [ "$old_noglob" -eq 0 ] && set +f
+        die "unrecognized choice: $choice"
+        ;;
+    esac
+  done
+  [ "$old_noglob" -eq 0 ] && set +f
+
+  [ "$got_choice" -eq 1 ] || die "unrecognized choice: $answer"
+
+  while [ "$custom_prompts" -gt 0 ]; do
+    printf 'Path: ' > /dev/tty
+    read -r custom < /dev/tty || custom=""
+    [ -n "$custom" ] || die "no path given."
+    DESTS+=("$custom")
+    custom_prompts=$((custom_prompts - 1))
+  done
 }
 
 # No destination option: ask, unless told to skip or there is no terminal.
