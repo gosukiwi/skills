@@ -1,20 +1,20 @@
 ---
 name: address-issue
-description: Take a GitHub issue from grilling through slice, implementation, review, and PR.
+description: Take a GitHub issue or stated scope from grilling through slice, implementation, review, and PR.
 disable-model-invocation: true
 ---
 
-The user gave you an issue to address. If they haven't, ask for one.
+The user gave you a GitHub issue or an ad-hoc scope to address. If neither was passed, ask for one.
 
 This skill runs other skills. Read `shared/delegation.md` from your skills directory (such as `~/.gemini/antigravity-cli/skills/`, `~/.agents/skills/`, `~/.claude/skills/`, or `.agents/skills/`) first, and resolve every skill below the way it describes.
 
 # Common Understanding
 
-Read the issue, then run the `grilling` and `domain-modeling` skills together: grill the design tree while the glossary and ADRs record what each round settles.
+If given an issue, read it; if given a stated scope, start from that text. Then run the `grilling` and `domain-modeling` skills together: grill the design tree while the glossary and ADRs record what each round settles.
 
 # Slice
 
-Run the `slice` skill on that issue.
+Run the `slice` skill on that issue or settled scope.
 
 # Implement
 

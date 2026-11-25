@@ -1,12 +1,12 @@
 ---
 name: slice
-description: Scope a GitHub issue to one PR — file a slice spec, peel leftover work onto a new issue, then close the original pointing at both. Use to slice an issue before implement.
+description: Scope a GitHub issue or stated brief to one PR — file a slice spec, peel leftover work onto a new issue, and close any original issue pointing at both. Use to slice work before implement.
 disable-model-invocation: true
 ---
 
-Requires a GitHub issue. If the caller did not pass one, ask and stop. Never implement.
+Accepts either a **GitHub issue** or an **ad-hoc scope/brief**. If neither was passed, ask and stop. Never implement.
 
-Fetch the issue.
+If given an issue, fetch it. If given a stated scope, work from that text — do not file a placeholder "original" issue for it.
 
 # Size
 
@@ -20,7 +20,7 @@ An oversized request has two shapes — a slice plus a tail, or the whole reques
 
 Review for inconsistencies and unresolved ambiguity. Don't guess: read the code to confirm, or ask the user when the code can't settle a product choice. Technical facts go in Design. Pre-write research does not replace this pass.
 
-Create a **new** issue that *is* this PR. Narrow the title if needed. Keep the relevant metadata from the old issue (tags, assignees, etc), and add the "slice" tag (create if needed). Body:
+Create a **new** issue that *is* this PR. Narrow the title if needed. When slicing an existing issue, keep its relevant metadata (tags, assignees, etc.); otherwise apply any relevant existing repo tags. Always add the "slice" tag (create if needed). Body:
 
 ```markdown
 ## Goal
@@ -35,22 +35,24 @@ The ticket is self-contained: fold every decision made in this session (includin
 
 Do not write a task list.
 
-The original issue remains the request. The slice spec is not written onto it.
+If an original issue exists, it remains the request; the slice spec is not written onto it.
 
 # Peel the tail
 
 If the user accepted the split and anything from the original request does not fit slice 1, create **one** new issue (not a spec, just a problem statement). Put every leftover bullet on that one issue. First line of the body: `Cut when scoping #<slice-issue>.` No parent, no blocked-by, no `Fixes` links.
 
-Keep the relevant metadata from the original issue (tags, assignees, etc), and add the "tail" tag (create if needed).
+When slicing an existing issue, keep its relevant metadata (tags, assignees, etc.); otherwise apply any relevant existing repo tags. Always add the "tail" tag (create if needed).
 
 If there is no tail, do not create an issue.
 
 # Close the original
 
-Close the original only after the slice issue exists, and after the leftover issue exists when there is a tail. Close as not planned. The close comment names each successor by role: `Slice to implement: #<slice>.` and, if a tail was filed, `Leftover: #<tail>.`
+If you sliced an existing issue, close the original only after the slice issue exists, and after the leftover issue exists when there is a tail. Close as not planned. The close comment names each successor by role: `Slice to implement: #<slice>.` and, if a tail was filed, `Leftover: #<tail>.`
 
 A close comment that omits the leftover while a tail exists is incomplete — file the leftover first.
 
+When slicing an ad-hoc scope, there is no original issue to close — skip this step.
+
 # Stop
 
-Report the slice issue URL, the remainder issue URL if you created one, and that the original is closed. Do not branch, implement, or open a PR.
+Report the slice issue URL, the remainder issue URL if you created one, and (if an original issue existed) that the original is closed. Do not branch, implement, or open a PR.

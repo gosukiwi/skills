@@ -13,12 +13,12 @@ Read the chosen skill's `SKILL.md` before invoking it. The lines below orient yo
 
 ## Main flow: idea → merged PR
 
-1. **Rough idea, no ticket** → `create-issue`. Explores with you and drafts a GitHub issue.
-2. **Have a GitHub issue** → `address-issue`. Runs the whole path: grilling, slice, implement, review, PR.
+1. **Rough idea to explore, no ticket** → `create-issue`. Explores with you and drafts a GitHub issue.
+2. **GitHub issue, or concrete scope for the full flow** → `address-issue`. Runs the whole path: grilling, slice, implement, review, PR.
    - Too big for one PR → `slice` first.
    - A set of issues, unattended, one PR → `yolo-issues`.
    - Only the code, no grilling or PR → `implement` with the issue.
-3. **Already-scoped brief, no issue** → `implement`. TDD tasks, each reviewed; no PR.
+3. **Already-scoped brief, code only (no grilling or PR)** → `implement`. TDD tasks, each reviewed; no PR.
 4. **Built branch, not reviewed** → `review-loop`. Fixes correctness findings, then the maintainability findings worth fixing.
 
 ## Standalone
