@@ -187,4 +187,7 @@ Annotations name the model the run used.
 | `review-pr-verify-despite-green-ci.md` | `review-pr` | **B** — verify locally in a temp worktree (gates + live drive when user-observable) despite green CI and dirty main tree (forward check: B on gemini-3.8-flash) |
 | `review-pr-reclassify-thermo-and-plain-language.md` | `review-pr` | **B** — re-classify thermo-nuclear findings by future cost, recommend Comment when no blockers remain, and write plainly without jargon (forward check: B on gemini-3.8-flash) |
 | `review-pr-no-edits-to-pr.md` | `review-pr` | **B** — leave the PR branch untouched, propose Request changes plainly, and wait for confirmation (forward check: B on gemini-3.8-flash) |
+| `address-issue-ad-hoc-scope.md` | `address-issue` | **B** — accept a stated scope without an existing issue, run `grilling` and `domain-modeling`, then pass the settled scope to `slice` (gemini-4-hydrogen; RED: A, GREEN: B) |
+| `slice-ad-hoc-scope.md` | `slice` | **B** — accept a stated scope without an original issue, file the slice spec issue (and leftover if split), and skip closing an original (gemini-4-hydrogen; RED: A, GREEN: B) |
+| `gosumode-routes-ad-hoc-scope-to-address-issue.md` | `gosumode` | **B** — route a concrete ticketless scope wanting the full flow (grill, slice, implement, review, PR) to `address-issue` (gemini-4-hydrogen; RED: A, GREEN: B) |
 
